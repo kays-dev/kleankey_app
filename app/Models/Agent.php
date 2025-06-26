@@ -36,4 +36,9 @@ class Agent extends Model
         return $this->hasMany(Service::class,'agent_id','agent_id');
     }
 
+    //Relation ManyToMany (un agent entretient au minimum un bien et au maximum plusieurs biens)
+    public function estates(){
+        return $this->belongsToMany(Estate::class,'agent_estate','estate_id','agent_id');
+    }
+
 }

@@ -79,4 +79,14 @@ class Estate extends Model
     public function zone(){
         return $this->belongsTo(Zone::class,'zone_id','zone_id');
     }
+
+    //Relation ManyToMany (un bien  est entretenu par au minimum un agent et au maximum plusieurs agents)
+    public function agents(){
+        return $this->belongsToMany(Agent::class,'agent_estate','agent_id','estate_id');
+    }
+
+    //Relation ManyToMany (un bien est appliqué à au minimum une prestation et au maximum plusieurs prestations)
+    public function services(){
+        return $this->belongsToMany(Service::class,'estate_service','service_id','estate_id');
+    }
 }
