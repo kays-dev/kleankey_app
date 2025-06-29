@@ -30,7 +30,7 @@
                     <li>
                         <div class="profile_box">
                             <div class="profile_box_name">
-                                <p>{{ $user->surname_user }} {{ str_pad($user->name_user, 1,'.', STR_PAD_RIGHT )}}</p>
+                                <p>{{-- $user->surname_user --}} {{-- str_pad($user->name_user, 1,'.', STR_PAD_RIGHT ) --}}</p>
                             </div>
                             <img src="" alt="flèche du menu déroulant" class="profile_box_arrow">
                         </div>
