@@ -1,3 +1,6 @@
+@extends('layouts.admin');
+
+@section('content')
 
 
     <section class="agents_create">
@@ -61,3 +64,5 @@
             </div>
         </div>
     </section>
+
+@endsection

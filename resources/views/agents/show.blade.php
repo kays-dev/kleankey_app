@@ -1,6 +1,6 @@
-<!-- @extends('layouts.admin');
+@extends('layouts.admin');
 
-@section('content') -->
+@section('content')
 
     <section class="agents_show">
         <div class="main_title">
@@ -75,4 +75,4 @@
         </div>
     </section>
 
-<!-- @endsection -->
+@endsection
