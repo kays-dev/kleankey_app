@@ -40,7 +40,7 @@ class AgentController extends Controller
             'address'=> 'required|string',
             'email'=> 'required|email',
             'phone'=> 'required|string',
-            'zone'=> 'required|integer',
+            'zone'=> 'required|string',
         ]);
 
         $agent = Agent::create([
@@ -92,7 +92,7 @@ class AgentController extends Controller
             'address'=> 'required|string',
             'email'=> 'required|email:rcf,spoof',
             'phone'=> 'required|string',
-            'zone'=> 'required|integer'
+            'zone'=> 'required|string'
         ]);
 
         Agent::update([

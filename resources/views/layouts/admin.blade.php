@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Propriétaires</title>
-    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header>
         <nav>
@@ -30,7 +31,8 @@
                     <li>
                         <div class="profile_box">
                             <div class="profile_box_name">
-                                <p>{{-- $user->surname_user --}} {{-- str_pad($user->name_user, 1,'.', STR_PAD_RIGHT ) --}}</p>
+                                <p>{{-- $user->surname_user --}} {{-- str_pad($user->name_user, 1,'.', STR_PAD_RIGHT )
+                                    --}}</p>
                             </div>
                             <img src="" alt="flèche du menu déroulant" class="profile_box_arrow">
                         </div>
@@ -61,6 +63,7 @@
             <img src="" alt="" class="kleanetklair_logo">
         </div>
     </footer>
-    
+
 </body>
+
 </html>
