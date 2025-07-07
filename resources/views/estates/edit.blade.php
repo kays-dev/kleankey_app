@@ -17,7 +17,7 @@
             <div class="inputs_list">
                 <p class="important">Vous pouvez modifier <strong>tous les champs</strong></p>
 
-                <form action="{{ route('estates.update.{$estate->estate_code}') }}" method="POST">
+                <form action="{{ route('estates.update',$estate->estate_code) }}" method="POST">
 
                     @csrf
 
