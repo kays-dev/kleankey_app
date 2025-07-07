@@ -18,7 +18,7 @@
                 <p class="important">Vous ne pouvez modifier que les champs suivants : <strong> Adresse, Adresse mail,
                         Numéro de téléphone</strong></p>
 
-                <form action="{{ route('agents.update.{$agent->owner_id}') }}" method="POST">
+                <form action="{{ route('agents.update.{$agent->agent_id}') }}" method="POST">
 
                     @csrf
 

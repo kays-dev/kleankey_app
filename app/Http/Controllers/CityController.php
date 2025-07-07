@@ -35,14 +35,14 @@ class CityController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=> 'required|string|uppercase',
+            'name'=> 'required|string',
             'postcode'=> 'required|string',
             'region'=> 'required|string',
-            'zone'=> 'required|string',
+            'zone'=> 'required|string|exists:zones,id',
         ]);
 
         $city = City::create([
-            'city_name'=> $request->input('name'),
+            'city_name'=> strtoupper($request->input('name')),
             'postcode'=> $request->input('postcode'),
             'region'=> $request->input('region'),
             'zone_id'=> $request->input('zone'),
@@ -81,14 +81,14 @@ class CityController extends Controller
         $city= City::where('city_code',$cityCode)->firstOrFail();
 
         $request->validate([
-            'name'=> 'required|string|uppercase',
+            'name'=> 'required|string',
             'postcode'=> 'required|string',
             'region'=> 'required|string',
             'zone'=> 'required|string',
         ]);
 
-        City::update([
-            'city_name'=> $request->input('name'),
+        $city->update([
+            'city_name'=> strtoupper($request->input('name')),
             'postcode'=> $request->input('postcode'),
             'region'=> $request->input('region'),
             'zone_id'=> $request->input('zone'),
