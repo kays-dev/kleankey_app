@@ -1,21 +1,14 @@
-@extends('layouts.admin');
+@extends('layouts.view')
 
-@section('content')
+@section('title', '{{ $estate->estate_code }}')
+@section('main_title', 'Consulter le bien — <strong>{{ $estate->estate_code }}</strong>')
 
-    <section class="estates_show">
-        <div class="main_title">
-            <h1>Consulter le bien — <strong>{{ $estate->estate_code }}</strong></h1>
-        </div>
-
-        <div>
-            <div class="page_main_actions">
+@section('page_actions')
                 <div class="return">
                     <a href="{{ route('estates.index') }}" class="return_to_list">Retour à la liste</a>
                 </div>
-            </div>
-
-            <div class="estate_details">
-
+                @endsection
+@section('details')
                 <h3 class="details_title">
                     Propriétaire
                 </h3>
@@ -69,9 +62,4 @@
                 <p class="details">
                     {{ $services->pluck('service_name')->implode(' | ') }}
                 </p>
-
-            </div>
-        </div>
-    </section>
-
 @endsection

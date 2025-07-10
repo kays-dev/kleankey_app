@@ -1,38 +1,26 @@
-@extends('layouts.admin');
+@extends('layouts.form')
 
-@section('content')
+@section('title', 'Nouveau secteur')
+@section('main_title', 'Ajouter un secteur')
 
+@section('page_actions')
+<div class="return">
+    <a href="{{ route('zones.index') }}" class="return_to_list">Retour à la liste</a>
+</div>
+@endsection
 
-    <section class="zones_create">
-        <div class="main_title">
-            <h1>Ajouter un secteur d'intervention</h1>
-        </div>
+@section('form')
+<form action="{{ route('zones.store') }}" method="POST">
 
-        <div>
-            <div class="page_main_actions">
-                <div class="return">
-                    <a href="{{ route('zones.index') }}" class="return_to_list">Retour à la liste</a>
-                </div>
-            </div>
+    @csrf
+    <label for="name" class="form_input_label">
+        Nom du secteur
+    </label>
+    <input type="text" class="form_input" name="name" id="name">
 
-            <div class="inputs_list">
-                <p class="important">Veuillez remplir tous les champs</p>
+    <button type="submit" class="form_submit">
+        Ajouter le secteur
+    </button>
 
-                <form action="{{ route('zones.store') }}" method="POST">
-
-                    @csrf
-                    <label for="name" class="form_input_label">
-                        Nom du secteur
-                    </label>
-                    <input type="text" class="form_input" name="name" id="name">
-
-                    <button type="submit" class="form_submit">
-                        Ajouter le secteur
-                    </button>
-
-                </form>
-            </div>
-        </div>
-    </section>
-
+</form>
 @endsection

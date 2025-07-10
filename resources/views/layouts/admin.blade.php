@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KleanKey app</title>
+    <title>@yield('title', 'KleanKey app')</title>
 </head>
 
 <body>
@@ -52,7 +52,17 @@
     </header>
 
     <main>
-        @yield('content')
+        <div class="main_title">
+            <h1>@yield('main_title', 'Tableau de bord')</h1>
+        </div>
+
+        <section>
+            <div class="page_main_actions">
+                @yield('page_actions')
+            </div>
+
+            @yield('content')
+        </section>
     </main>
 
     <footer>

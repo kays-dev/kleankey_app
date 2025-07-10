@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Agent;
-use App\Models\City;
-use App\Models\Estate;
 use App\Models\Zone;
 use Illuminate\Http\Request;
 
@@ -17,7 +14,6 @@ class ZoneController extends Controller
     {
 
         $zones=Zone::all();
-        
         $pagination=Zone::paginate(15);
 
         return view('zones.index', compact('zones', 'pagination'));
@@ -41,7 +37,7 @@ class ZoneController extends Controller
         ]);
 
         $zone = Zone::create([
-            'zone_name'=> $request->input('name'),
+            'zone_name'=> strtoupper($request->input('name')),
         ]);
 
         return redirect(route('zones.create'))->with('success', 'Secteur ' . $zone->zone_name . ' créé !');
@@ -67,7 +63,7 @@ class ZoneController extends Controller
     {
         $zone= Zone::findOrFail($id);
         
-        return view('zones.create', compact('zone'));
+        return view('zones.edit', compact('zone'));
     }
 
     /**
@@ -75,15 +71,17 @@ class ZoneController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $zone= Zone::findOrFail($id);
+
         $request->validate([
             'name'=> 'required|string:alpha_num',
         ]);
 
-        $zone = Zone::create([
+        $zone->update([
             'zone_name'=> $request->input('name'),
         ]);
 
-        return redirect(route('zones.create'))->with('success', 'Secteur ' . $zone->zone_name . ' modifié !');
+        return redirect(route('zones.show', $zone->zone_id))->with('success', 'Secteur ' . $zone->zone_name . ' modifié !');
     }
 
     /**
@@ -95,6 +93,6 @@ class ZoneController extends Controller
 
         $zone->delete();
 
-        return redirect(route('zones.index'))->with('success', 'Secteur '. $zone->zone_name . ' supprimé');
+        return redirect(route('zones.index'))->with('success', 'Secteur supprimé');
     }
 }

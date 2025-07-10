@@ -35,18 +35,18 @@ class AgentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'lname'=> 'required|string|uppercase',
+            'lname'=> 'required|string',
             'fname'=> 'required|string',
             'address'=> 'required|string',
             'email'=> 'required|email',
             'phone'=> 'required|string',
-            'zone'=> 'required|string',
+            'zone'=> 'required|string|exists:zones,zone_id',
         ]);
 
         $agent = Agent::create([
-            'agent_name'=> $request->input('lname'),
+            'agent_name'=> strtoupper($request->input('lname')),
             'agent_surname'=> $request->input('fname'),
-            'agent_address'=> $request->input('address'),
+            'agent_address'=> strtoupper($request->input('address')),
             'agent_mail'=> $request->input('email'),
             'agent_tel'=> $request->input('phone'),
             'zone_id'=> $request->input('zone'),
@@ -76,7 +76,7 @@ class AgentController extends Controller
         $zones= Zone::all();
         $estates= $agent->estates;
         
-        return view('agents.create', compact('zones','agent','estates'));
+        return view('agents.edit', compact('zones','agent','estates'));
     }
 
     /**
@@ -87,24 +87,24 @@ class AgentController extends Controller
         $agent= Agent::findOrFail($id);
         
         $request->validate([
-            'lname'=> 'required|string|uppercase',
+            'lname'=> 'required|string',
             'fname'=> 'required|string',
             'address'=> 'required|string',
-            'email'=> 'required|email:rcf,spoof',
+            'email'=> 'required|email:rcf,dns',
             'phone'=> 'required|string',
-            'zone'=> 'required|string'
+            'zone'=> 'required|string|exists:zones,zone_id'
         ]);
 
-        Agent::update([
-            'agent_address'=> $request->input('address'),
+        $agent->update([
+            'agent_name'=> strtoupper($request->input('lname')),
+            'agent_surname'=> $request->input('fname'),
+            'agent_address'=> strtoupper($request->input('address')),
             'agent_mail'=> $request->input('email'),
             'agent_tel'=> $request->input('phone'),
             'zone_id'=> $request->input('zone'),
         ]);
 
-        $agent->save();
-
-        return redirect(route('agent.show'))->with('success', 'Prestataire '. $agent->agent_surname .' ' . $agent->agent_name . ' modifié');
+        return redirect(route('agents.show',$agent->agent_id))->with('success', 'Prestataire '. $agent->agent_surname .' ' . $agent->agent_name . ' modifié');
     }
 
     /**
@@ -116,6 +116,6 @@ class AgentController extends Controller
 
         $agent->delete();
 
-        return redirect(route('agents.index'))->with('success', 'Prestataire '. $agent->agent_surname .' ' . $agent->agent_name . ' supprimé');
+        return redirect(route('agents.index'))->with('success', 'Prestataire supprimé');
     }
 }

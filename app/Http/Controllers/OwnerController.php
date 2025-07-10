@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Estate;
 use App\Models\Owner;
 use Illuminate\Http\Request;
 
@@ -34,7 +33,7 @@ class OwnerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'lname'=> 'required|string|uppercase',
+            'lname'=> 'required|string',
             'fname'=> 'required|string',
             'address'=> 'required|string',
             'email'=> 'required|email',
@@ -42,9 +41,9 @@ class OwnerController extends Controller
         ]);
 
         $owner= Owner::create([
-            'owner_name'=> $request->input('lname'),
+            'owner_name'=> strtoupper($request->input('lname')),
             'owner_surname'=> $request->input('fname'),
-            'owner_address'=> $request->input('address'),
+            'owner_address'=> strtoupper($request->input('address')),
             'owner_mail'=> $request->input('email'),
             'owner_tel'=> $request->input('phone'),
         ]);
@@ -84,22 +83,22 @@ class OwnerController extends Controller
         $owner= Owner::findOrFail($id);
         
         $request->validate([
-            'lname'=> 'required|string|uppercase',
+            'lname'=> 'required|string',
             'fname'=> 'required|string',
             'address'=> 'required|string',
-            'email'=> 'required|email:rcf,spoof',
+            'email'=> 'required|email:rcf,dns',
             'phone'=> 'required|string',
         ]);
 
         Owner::update([
-            'owner_address'=> $request->input('address'),
+            'owner_name'=>strtoupper($request->input('lname')),
+            'owner_surname'=>$request->input('fname'),
+            'owner_address'=> strtoupper($request->input('address')),
             'owner_mail'=> $request->input('email'),
             'owner_tel'=> $request->input('phone'),
         ]);
 
-        $owner->save();
-
-        return redirect(route('owners.show'))->with('success', 'Client '. $owner->owner_surname .' ' . $owner->owner_name . ' modifié');
+        return redirect(route('owners.show', $owner->owner_id))->with('success', 'Client '. $owner->owner_surname .' ' . $owner->owner_name . ' modifié');
     }
 
     /**
@@ -111,6 +110,6 @@ class OwnerController extends Controller
 
         $owner->delete();
 
-        return redirect(route('owners.index'))->with('success', 'Client '. $owner->owner_surname .' ' . $owner->owner_name . ' supprimé');
+        return redirect(route('owners.index'))->with('success', 'Client supprimé');
     }
 }

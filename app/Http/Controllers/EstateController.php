@@ -134,7 +134,7 @@ class EstateController extends Controller
         $estate->agents()->sync($request->input('agents'));
         $estate->services()->sync($request->input('services'));
 
-        return redirect(route('estates.show'))->with('success', 'Bien ' . $estate->estate_code . ' modifié !');
+        return redirect(route('estates.show', $estate->estate_code))->with('success', 'Bien ' . $estate->estate_code . ' modifié !');
     }
 
     /**

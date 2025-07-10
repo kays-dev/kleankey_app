@@ -27,7 +27,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        $services = service::all();
+        $services = Service::all();
         $types = ServiceType::cases();
         $agents = Agent::all();
         $estates = Estate::all();
@@ -45,7 +45,7 @@ class ServiceController extends Controller
             'type' => ['required|string', Rule::in(array_column(ServiceType::cases(), 'value'))],
             'description' => 'required|string',
             'duration' => 'required|date_format:H:i',
-            'agent' => 'string',
+            'agent' => 'exists:agents,agent_id',
             'estates' => 'array',
             'estates.*' => 'exists:estates,estate_id',
         ]);
@@ -60,7 +60,7 @@ class ServiceController extends Controller
 
         $service->estates()->attach($request->input('estates'));
 
-        return redirect(route('services/create'))->with('success', 'Prestation ' . $service->service_name . ' créée !');
+        return redirect(route('services.create'))->with('success', 'Prestation ' . $service->service_name . ' créée !');
     }
 
     /**
@@ -85,7 +85,7 @@ class ServiceController extends Controller
         $agents = Agent::all();
         $estates = Estate::all();
 
-        return view('services.create', compact('service', 'types', 'agents', 'estates'));
+        return view('services.edit', compact('service', 'types', 'agents', 'estates'));
     }
 
     /**
@@ -100,7 +100,7 @@ class ServiceController extends Controller
             'type' => ['required|string', Rule::in(array_column(ServiceType::cases(), 'value'))],
             'description' => 'required|string',
             'duration' => 'required|date_format:H:i',
-            'agent' => 'required|string',
+            'agent' => 'exists:agents,agent_id',
             'estates' => 'array',
             'estates.*' => 'exists:estates,estate_id',
         ]);
@@ -115,7 +115,7 @@ class ServiceController extends Controller
 
         $service->estates()->sync($request->input('estates'));
 
-        return redirect(route('services/create'))->with('success', 'Prestation ' . $service->service_name . ' modifiée !');
+        return redirect(route('services.show', $service->service_id))->with('success', 'Prestation ' . $service->service_name . ' modifiée !');
     }
 
     /**
@@ -127,6 +127,6 @@ class ServiceController extends Controller
 
         $service->delete();
 
-        return redirect(route('services/index'))->with('success', 'Prestation supprimée');
+        return redirect(route('services.index'))->with('success', 'Prestation supprimée');
     }
 }

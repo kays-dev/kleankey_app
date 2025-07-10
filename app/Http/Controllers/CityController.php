@@ -38,7 +38,7 @@ class CityController extends Controller
             'name'=> 'required|string',
             'postcode'=> 'required|string',
             'region'=> 'required|string',
-            'zone'=> 'required|string|exists:zones,id',
+            'zone'=> 'required|string|exists:zones,zone_id',
         ]);
 
         $city = City::create([
@@ -70,7 +70,7 @@ class CityController extends Controller
         $city= City::where('city_code',$cityCode)->firstOrFail();
         $zones= Zone::all();
         
-        return view('cities.create', compact('zones','city'));
+        return view('cities.edit', compact('zones','city'));
     }
 
     /**
@@ -84,7 +84,7 @@ class CityController extends Controller
             'name'=> 'required|string',
             'postcode'=> 'required|string',
             'region'=> 'required|string',
-            'zone'=> 'required|string',
+            'zone'=> 'required|string|exists:zones,zone_id',
         ]);
 
         $city->update([
@@ -94,7 +94,7 @@ class CityController extends Controller
             'zone_id'=> $request->input('zone'),
         ]);
 
-        return redirect(route('cities.show'))->with('success', 'Ville ' . $city->city_name . ' modifiée !');
+        return redirect(route('cities.show', $city->city_code))->with('success', 'Ville ' . $city->city_name . ' modifiée !');
     }
 
     /**
