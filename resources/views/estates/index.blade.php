@@ -39,4 +39,5 @@
     <td class="table_data">{{ $estate->agents->pluck('agent_surname')->implode(', ')}}</td>
     <x-data-actions-component :resource="'estates'" :item="$estate" primaryKey="estate_code"/>
 </tr>
+@endforeach
 @endsection

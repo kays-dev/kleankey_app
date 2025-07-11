@@ -1,6 +1,6 @@
 @extends('layouts.table')
 
-@section('title', 'Agents d'entretien')
+@section('title', "Agents d'entretien")
 @section('main_title', 'Liste des agents')
 
 @section('page_actions')
@@ -20,7 +20,7 @@
 <th class="table_title">Email</th>
 <th class="table_title">Téléphone</th>
 <th class="table_title">Biens affectés</th>
-@ensection
+@endsection
 
 @section('table_rows')
 @foreach ($agents as $agent)

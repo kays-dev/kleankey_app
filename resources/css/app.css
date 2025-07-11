@@ -5,32 +5,288 @@
     box-sizing: border-box;
 }
 
-:root{
-    --klean-blue: #00378F;
+:root {
+    --klean-blue: #00378f;
     --klean-wood: #401711;
-    --klean-air: #F5F5F5;
-    --klair-green: #B3ECAC;
-    --klair-green: #9CCCE7;
+    --klean-air: #f5f5f5;
+    --klair-green: #b3ecac;
+    --klair-blue: #9ccce7;
+}
+
+body {
+    background-color: var(--klean-air);
 }
 
 /* POLICES */
-html{
+html {
     font-size: 10px;
 }
 
-body{
-    font-family: 'Antic', Verdana, Helvetica, sans-serif;
+body,
+button,
+input {
+    font-family: "Antic", Verdana, Helvetica, sans-serif;
+    font-size: 1.5rem;
 }
 
-h1{
-    font-family: 'Playfair Display', Georgia, serif;
+h1 {
+    font-family: "Playfair Display", Georgia, serif;
     font-size: 6rem;
+    color: var(--klean-blue);
 }
 
-h2{
+h2 {
     font-size: 5rem;
 }
 
-h3{
+h3 {
     font-size: 4.5rem;
+}
+
+a,
+a:hover,
+a:active {
+    text-decoration: none;
+    color: var(--klean-air);
+}
+
+/* Listes */
+ul {
+    list-style-type: none;
+}
+
+/* Boutons */
+button {
+    cursor: pointer;
+    border: none;
+}
+
+/* Flexboxs */
+nav,
+.main_menu,
+.main_menu_title,
+.main_menu ul,
+.main_menu_item,
+.logo_box,
+.nav_actions,
+.profile_box,
+.profile_box_user,
+section,
+footer {
+    display: flex;
+}
+
+.main_menu,
+.main_menu_title,
+.main_menu ul,
+.main_menu_item,
+.logo_box,
+.profile_box,
+section {
+    flex-direction: column;
+}
+
+/* NAV */
+nav {
+    justify-content: space-between;
+    align-items: center;
+    padding: 2vh 5vw;
+    background-color: var(--klean-blue);
+    color: var(--klean-air);
+    height: 10vh;
+}
+
+.menu,
+.logo_box,
+.nav_actions {
+    width: 30%;
+}
+
+/* Menu déroulant */
+.menu_toggle {
+    background-color: transparent;
+    color: var(--klean-air);
+}
+
+.main_menu {
+    position: fixed;
+    top: 10vh;
+    bottom: 5vh;
+    left: -20vw;
+    width: 20vw;
+    background-color: var(--klean-air);
+    border-right: solid 0.1rem var(--klean-wood);
+    transition: 0.3s;
+    padding: 2vw;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main_menu ul {
+    width: 100%;
+    align-items: center;
+    gap: 3vh;
+}
+
+.main_menu_title h3 {
+    margin-bottom: 2vh;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 3rem;
+    color: var(--klean-wood);
+    font-weight: 400;
+    text-align: center;
+}
+
+.main_menu_item {
+    justify-content: center;
+    align-items: center;
+    background-color: var(--klair-blue);
+    box-shadow: inset -1px -1px 10px var(--klean-air);
+    border-radius: 1.5rem;
+    height: 6vh;
+    width: 70%;
+}
+
+.main_menu_links {
+    color: var(--klean-wood);
+    font-size: 1.8rem;
+}
+
+.main_menu_item:hover {
+    justify-content: flex-start;
+    background-color: var(--klean-wood);
+}
+
+.main_menu_item:hover .main_menu_links {
+    background-color: var(--klean-air);
+    color: var(--klean-wood);
+    border-radius: 0 0 1rem 1rem;
+    height: 70%;
+    width: 85%;
+    padding: 1vh 0.5vw 0 0.5vw;
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+/* .main_menu_item:active {
+    justify-content: center;
+    align-items: flex-end;
+    background-color: var(--klean-wood);
+}
+
+.main_menu_item:active .main_menu_links {
+    background-color: var(--klean-air);
+    color: var(--klean-wood);
+    border-radius: 1rem 0 0 1rem;
+    height: 70%;
+    width: 90%;
+    padding: 0 0.5vw 0 0.5vw;
+    font-size: 1.6rem;
+    text-align: center;
+} */
+
+.logout {
+    background-color: var(--klean-blue);
+    color: var(--klean-air);
+    width: 90%;
+    box-shadow: inset -1px -1px 10px var(--klean-air);
+    padding: 1.5vh 1vw;
+    border-radius: 5rem;
+    font-size: 1.8rem;
+}
+
+.logout:hover {
+    background-color: var(--klair-green);
+    color: var(--klean-blue);
+    box-shadow: inset -1px -1px 10px var(--klean-blue);
+}
+
+.main_menu.open {
+    left: 0;
+}
+
+/* Logo */
+.logo_box {
+    align-items: center;
+}
+
+/* Profil */
+.nav_actions {
+    justify-content: flex-end;
+    gap: 2vw;
+    height: 100%;
+}
+
+.notification_bell,
+.profile_icon {
+    width: 25%;
+    height: 100%;
+}
+
+.profile_box {
+    position: relative;
+    font-size: 1rem;
+    width: 15vw;
+}
+
+.profile_box_user {
+    justify-content: center;
+    align-items: center;
+    background-color: var(--klean-air);
+    height: 100%;
+    padding: 1vh;
+    gap: 1vh;
+    color: var(--klean-blue);
+}
+
+.profile_box_name {
+    background-color: var(--klean-blue);
+    height: 100%;
+    width: 80%;
+}
+
+.profile_toggle {
+    cursor: pointer;
+}
+
+.profile_options {
+    position: absolute;
+    top: 100%;
+    width: 15vw;
+    align-items: center;
+    display: none;
+}
+
+.profile_option {
+    background-color: var(--klean-air);
+    border-bottom: solid 0.1rem var(--klean-blue);
+    height: 4vh;
+    padding: 1vh;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.profile_options.open {
+    display: block;
+}
+
+/* MAIN */
+main {
+    transition: margin-left 0.3s ease;
+}
+
+main.shift {
+    margin-left: 20vw;
+}
+
+/* FOOTER */
+footer {
+    justify-content: center;
+    align-items: center;
+    background-color: var(--klean-blue);
+    position: fixed;
+    width: 100vw;
+    bottom: 0;
+    height: 5vh;
+    color: var(--klean-air);
 }

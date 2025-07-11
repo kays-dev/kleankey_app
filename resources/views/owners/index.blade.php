@@ -20,7 +20,7 @@
 <th class="table_title">Adresse</th>
 <th class="table_title">Email</th>
 <th class="table_title">Téléphone</th>
-@ensection
+@endsection
 
 @section('table_rows')
 @foreach ($owners as $owner)
