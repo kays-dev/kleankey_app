@@ -30,31 +30,7 @@
     <td class="table_data">{{ $city->postcode}}</td>
     <td class="table_data">{{ $city->region}}</td>
     <td class="table_data">{{ $city->zone->zone_name}}</td>
-    <td class="data_actions">
-
-        <div class="data_button">
-            <a href="{{ route( 'cities.show', $city->city_code) }}">
-                <img src="{{ asset('images/icons/view.svg') }}" alt="Consulter">
-            </a>
-        </div>
-
-        <div class="data_button">
-            <a href="{{ route('cities.edit', $city->city_code) }}">
-                <img src="{{ asset('images/icons/edit.svg') }}" alt="Modifier">
-            </a>
-        </div>
-
-        <div class="data_button">
-            <form action="{{ route('cities.destroy', $city->city_code) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn-delete" onclick="">
-                    <img src="{{ asset('images/icons/delete.svg') }}" alt="Supprimer">
-                </button>
-            </form>
-        </div>
-
-    </td>
+    <x-data-actions-component :resource="'cities'" :item="$city" primaryKey="city_code"/>
 </tr>
 @endforeach
 @endsection

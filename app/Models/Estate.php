@@ -57,9 +57,9 @@ class Estate extends Model
             //Extraction des 3 premier caractères
             if($owner){
 
-                $name_in_zone= strtoupper(substr($zone->zone_name, 0, 3));
-                $name= strtoupper(substr($owner->owner_name, 0, 3));
-                $surname= strtoupper(substr($owner->owner_surname, 0, 3));
+                $name_in_zone= mb_strtoupper(mb_substr($zone->zone_name, 0, 3),'UTF-8');
+                $name= mb_strtoupper(mb_substr($owner->owner_name, 0, 3), 'UTF-8');
+                $surname= mb_strtoupper(mb_substr($owner->owner_surname, 0, 3),'UTF-8');
                 $number_in_owner= $estate_model->getNextNumberInOwner($owner);
 
                 //Code finalisé

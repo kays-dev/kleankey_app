@@ -37,30 +37,6 @@
     <td class="table_data">{{ $estate->zone->zone_name}}</td>
 
     <td class="table_data">{{ $estate->agents->pluck('agent_surname')->implode(', ')}}</td>
-    <td class="data_actions">
-
-        <div class="data_button">
-            <a href="{{ route( 'cities.show', $city->city_code) }}">
-                <img src="{{ asset('images/icons/view.svg') }}" alt="Consulter">
-            </a>
-        </div>
-
-        <div class="data_button">
-            <a href="{{ route('cities.edit', $city->city_code) }}">
-                <img src="{{ asset('images/icons/edit.svg') }}" alt="Modifier">
-            </a>
-        </div>
-
-        <div class="data_button">
-            <form action="{{ route('cities.destroy', $city->city_code) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn-delete" onclick="">
-                    <img src="{{ asset('images/icons/delete.svg') }}" alt="Supprimer">
-                </button>
-            </form>
-        </div>
-
-    </td>
+    <x-data-actions-component :resource="'estates'" :item="$estate" primaryKey="estate_code"/>
 </tr>
 @endsection

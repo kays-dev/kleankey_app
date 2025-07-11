@@ -12,11 +12,10 @@ class OwnerController extends Controller
      */
     public function index()
     {
-        $owners=Owner::all();
-        $pagination=Owner::paginate(15);
+        $owners = Owner::all();
+        $pagination = Owner::paginate(15);
 
         return view('owners.index', compact('owners', 'pagination'));
-
     }
 
     /**
@@ -33,22 +32,22 @@ class OwnerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'lname'=> 'required|string',
-            'fname'=> 'required|string',
-            'address'=> 'required|string',
-            'email'=> 'required|email',
-            'phone'=> 'required|string',
+            'lname' => 'required|string',
+            'fname' => 'required|string',
+            'address' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'required|string',
         ]);
 
-        $owner= Owner::create([
-            'owner_name'=> strtoupper($request->input('lname')),
-            'owner_surname'=> $request->input('fname'),
-            'owner_address'=> strtoupper($request->input('address')),
-            'owner_mail'=> $request->input('email'),
-            'owner_tel'=> $request->input('phone'),
+        $owner = Owner::create([
+            'owner_name' => strtoupper($request->input('lname')),
+            'owner_surname' => $request->input('fname'),
+            'owner_address' => strtoupper($request->input('address')),
+            'owner_mail' => $request->input('email'),
+            'owner_tel' => $request->input('phone'),
         ]);
 
-        return redirect(route('owners.create'))->with('success','Client '. $owner->owner_surname .' ' . $owner->owner_name . ' créé');
+        return redirect(route('owners.create'))->with('success', 'Client ' . $owner->owner_surname . ' ' . $owner->owner_name . ' créé');
     }
 
     /**
@@ -56,11 +55,11 @@ class OwnerController extends Controller
      */
     public function show(string $id)
     {
-        $owner= Owner::findOrFail($id);
+        $owner = Owner::findOrFail($id);
 
-        $estates= $owner->estates;
+        $estates = $owner->estates;
 
-        return view('owners.show', compact('owner','estates'));
+        return view('owners.show', compact('owner', 'estates'));
     }
 
     /**
@@ -68,11 +67,11 @@ class OwnerController extends Controller
      */
     public function edit(string $id)
     {
-        $owner= Owner::findOrFail($id);
+        $owner = Owner::findOrFail($id);
 
-        $estates= $owner->estates;
+        $estates = $owner->estates;
 
-        return view('owners.edit', compact('owner','estates'));
+        return view('owners.edit', compact('owner', 'estates'));
     }
 
     /**
@@ -80,25 +79,25 @@ class OwnerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $owner= Owner::findOrFail($id);
-        
+        $owner = Owner::findOrFail($id);
+
         $request->validate([
-            'lname'=> 'required|string',
-            'fname'=> 'required|string',
-            'address'=> 'required|string',
-            'email'=> 'required|email:rcf,dns',
-            'phone'=> 'required|string',
+            'lname' => 'required|string',
+            'fname' => 'required|string',
+            'address' => 'required|string',
+            'email' => 'required|email:rcf,dns',
+            'phone' => 'required|string',
         ]);
 
         Owner::update([
-            'owner_name'=>strtoupper($request->input('lname')),
-            'owner_surname'=>$request->input('fname'),
-            'owner_address'=> strtoupper($request->input('address')),
-            'owner_mail'=> $request->input('email'),
-            'owner_tel'=> $request->input('phone'),
+            'owner_name' => mb_strtoupper($request->input('lname'), 'UTF-8'),
+            'owner_surname' => $request->input('fname'),
+            'owner_address' => mb_strtoupper($request->input('address'), 'UTF-8'),
+            'owner_mail' => $request->input('email'),
+            'owner_tel' => $request->input('phone'),
         ]);
 
-        return redirect(route('owners.show', $owner->owner_id))->with('success', 'Client '. $owner->owner_surname .' ' . $owner->owner_name . ' modifié');
+        return redirect(route('owners.show', $owner->owner_id))->with('success', 'Client ' . $owner->owner_surname . ' ' . $owner->owner_name . ' modifié');
     }
 
     /**
@@ -106,7 +105,7 @@ class OwnerController extends Controller
      */
     public function destroy(string $id)
     {
-        $owner= Owner::findOrFail($id);
+        $owner = Owner::findOrFail($id);
 
         $owner->delete();
 

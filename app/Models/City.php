@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
-use Str;
+use illuminate\Support\Str;
 use App\Models\Zone;
 
 class City extends Model
@@ -46,8 +46,8 @@ class City extends Model
             $city_model->city_id = (string) Str::uuid();
 
             //Extraction des 3 premier caractères
-            $city= strtoupper(substr($city_model->city_name, 0, 3));
-            $region= strtoupper(substr($city_model->region, 0, 3));
+            $city= mb_strtoupper(mb_substr($city_model->city_name, 0, 3), 'UTF-8');
+            $region= mb_strtoupper(mb_substr($city_model->region, 0, 3), 'UTF-8');
             $number_in_region= $city_model->getNextNumberInRegion($city_model->region);
 
             //Code finalisé

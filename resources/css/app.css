@@ -1,11 +1,36 @@
-@import 'tailwindcss';
+/* GLOBAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+:root{
+    --klean-blue: #00378F;
+    --klean-wood: #401711;
+    --klean-air: #F5F5F5;
+    --klair-green: #B3ECAC;
+    --klair-green: #9CCCE7;
+}
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+/* POLICES */
+html{
+    font-size: 10px;
+}
+
+body{
+    font-family: 'Antic', Verdana, Helvetica, sans-serif;
+}
+
+h1{
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 6rem;
+}
+
+h2{
+    font-size: 5rem;
+}
+
+h3{
+    font-size: 4.5rem;
 }

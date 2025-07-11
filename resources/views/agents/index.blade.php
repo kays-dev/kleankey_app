@@ -30,7 +30,7 @@
     <td class="table_data">{{ $agent->agent_mail}}</td>
     <td class="table_data">{{ $agent->agent_tel}}</td>
     <td class="table_data">{{ $agent->estates->estate_code}}</td>
-    <x-data-actions-component :resource="'agents'" :item="$agent" />
+    <x-data-actions-component :resource="'agents'" :item="$agent" primaryKey="agent_id"/>
 </tr>
 @endforeach
 @endsection

@@ -37,7 +37,7 @@ class ZoneController extends Controller
         ]);
 
         $zone = Zone::create([
-            'zone_name'=> strtoupper($request->input('name')),
+            'zone_name'=> mb_strtoupper($request->input('name'), 'UTF-8'),
         ]);
 
         return redirect(route('zones.create'))->with('success', 'Secteur ' . $zone->zone_name . ' créé !');
@@ -78,7 +78,7 @@ class ZoneController extends Controller
         ]);
 
         $zone->update([
-            'zone_name'=> $request->input('name'),
+            'zone_name'=> mb_strtoupper($request->input('name'), 'UTF-8'),
         ]);
 
         return redirect(route('zones.show', $zone->zone_id))->with('success', 'Secteur ' . $zone->zone_name . ' modifié !');

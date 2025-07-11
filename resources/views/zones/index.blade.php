@@ -35,7 +35,7 @@
     <td class="table_data">
         {{ $zone->cities->pluck('region')->unique()->implode(', ') }}
     </td>
-    <x-data-actions-component :resource="'zones'" :item="$zone" />
+    <x-data-actions-component :resource="'zones'" :item="$zone" primaryKey="zone_id"/>
 </tr>
 @endforeach
 @endsection

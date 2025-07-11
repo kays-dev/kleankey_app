@@ -42,7 +42,7 @@ class CityController extends Controller
         ]);
 
         $city = City::create([
-            'city_name'=> strtoupper($request->input('name')),
+            'city_name'=> mb_strtoupper(($request->input('name')), 'UTF-8'),
             'postcode'=> $request->input('postcode'),
             'region'=> $request->input('region'),
             'zone_id'=> $request->input('zone'),
@@ -88,7 +88,7 @@ class CityController extends Controller
         ]);
 
         $city->update([
-            'city_name'=> strtoupper($request->input('name')),
+            'city_name'=>  mb_strtoupper(($request->input('name')), 'UTF-8'),
             'postcode'=> $request->input('postcode'),
             'region'=> $request->input('region'),
             'zone_id'=> $request->input('zone'),
@@ -100,9 +100,9 @@ class CityController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $cityCode)
     {
-        $city= City::findOrFail($id);
+        $city= City::where('city_code',$cityCode)->firstOrFail();
 
         $city->delete();
 

@@ -50,7 +50,7 @@ class EstateController extends Controller
             'zone' => 'required|string|exists:zones,zone_id',
             'type' => ['required|string', Rule::in(array_column(EstateType::cases(), 'value'))],
             'rooms' => 'required|string',
-            'surface' => 'required|decimal:8,2',
+            'surface' => 'required|decimal:8,2|min:10',
             'agents' => 'array',
             'agents.*' => 'exists:agents,agent_id',
             'services' => 'array',
@@ -140,9 +140,9 @@ class EstateController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $estateCode)
     {
-        $estate= Estate::findOrFail($id);
+        $estate = Estate::where('estate_code',$estateCode)->firstOrFail();
 
         $estate->delete();
 

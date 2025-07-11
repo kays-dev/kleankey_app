@@ -30,7 +30,7 @@
     <td class="table_data">{{ $owner->owner_address}}</td>
     <td class="table_data">{{ $owner->owner_mail}}</td>
     <td class="table_data">{{ $owner->owner_tel}}</td>
-    <x-data-actions-component :resource="'owners'" :item="$owner" />
+    <x-data-actions-component :resource="'owners'" :item="$owner" primaryKey="owner_id"/>
 </tr>
 @endforeach
 @endsection
