@@ -1,0 +1,8 @@
+/* Flexboxs */
+.table_actions {
+    display: flex;
+}
+
+ /* {
+    flex-direction: column;
+} */

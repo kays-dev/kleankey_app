@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Antic&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/form.css', 'resources/js/form.js'])
 
 </head>
 
@@ -52,11 +53,10 @@
                         <img src="" alt="option de profil" class="profile_toggle" id="profile_toggle">
                     </div>
                     <ul class="profile_options" id="profile_options">
-                        <li class="profile_option"><a href=""></a></li>
-                        <li class="profile_option"><a href=""></a></li>
-                        <li class="profile_option"><a href=""></a></li>
-                        <li class="profile_option"><a href=""></a></li>
-                        <li class="profile_option"><a href=""></a></li>
+                        <li class="profile_option"><a href="">Profil KleanKey</a></li>
+                        <li class="profile_option"><a href="">Sécurité du compte</a></li>
+                        <li class="profile_option"><a href="">Confidentialité</a></li>
+                        <li class="profile_option"><a href="">Déconnexion</a></li>
                     </ul>
                 </div>
 
