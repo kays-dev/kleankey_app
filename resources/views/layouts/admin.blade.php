@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Antic&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @vite(['resources/css/form.css', 'resources/js/form.js'])
+    @vite(['resources/css/table.css', 'resources/js/table.js'])
+    @vite(['resources/css/view.css', 'resources/js/view.js'])
 
 </head>
 

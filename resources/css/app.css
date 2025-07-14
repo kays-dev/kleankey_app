@@ -40,11 +40,11 @@ h1 {
 }
 
 h2 {
-    font-size: 5rem;
+    font-size: 4rem;
 }
 
 h3 {
-    font-size: 4.5rem;
+    font-size: 3.5rem;
 }
 
 a,
@@ -52,6 +52,10 @@ a:hover,
 a:active {
     text-decoration: none;
     color: var(--klean-air);
+}
+
+img {
+    font-size: 1rem;
 }
 
 /* Listes */
@@ -63,6 +67,13 @@ ul {
 button {
     cursor: pointer;
     border: none;
+    background: none;
+}
+
+/* Images */
+img {
+    object-fit: cover;
+    cursor: pointer;
 }
 
 /* Flexboxs */
@@ -306,7 +317,7 @@ main.shift {
 }
 
 /* Titre de la page */
-.main_title{
+.main_title {
     justify-content: center;
     align-items: center;
     border-bottom: solid 0.5px var(--klair-green);
@@ -318,16 +329,18 @@ main.shift {
 /* Contenu de la page */
 section {
     margin: 10vh 10vw;
-    padding: 5vh;
+    padding: 10vh;
     box-shadow: inset -1px -1px 10px var(--klean-border);
     border-radius: 20px;
 }
 
-.page_main_actions{
+.page_main_actions {
     justify-content: flex-start;
     align-items: center;
     gap: 5vh;
-    margin-bottom: 3vh;
+    margin-bottom: 5vh;
+    height: 5vh;
+    width: 100%;
 }
 
 /* FOOTER */

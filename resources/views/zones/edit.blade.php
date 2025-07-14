@@ -1,12 +1,18 @@
 @extends('layouts.form')
 
-@section('title', 'Modification de {{ $zone->zone_name }}')
-@section('main_title', 'Modifier le secteur — <strong>{{ $zone->zone_name }}</strong>')
+@section('title', 'Modification de' . $zone->zone_name)
+@section('main_title', 'Modifier le secteur —' .  $zone->zone_name)
 
 @section('page_actions')
+<div class="return">
+    <a href="{{ route('zones.index') }}" class="return_to_list">Retour à la liste</a>
+</div>
+@endsection
+
+@section('form')
 <p class="important">Vous pouvez modifier <strong>tous les champs</strong></p>
 
-<form action="{{ route('zones.update',$zone->zone_id') }}" method="POST">
+<form action="{{ route('zones.update',$zone->zone_id) }}" method="POST">
 
     @csrf
 

@@ -1,7 +1,7 @@
 @extends('layouts.view')
 
-@section('title', '{{ $zone->zone_name }}')
-@section('main_title', 'Consulter le secteur d'intervention — <strong>{{ $zone->zone_name }}</strong>')
+@section("title", $zone->zone_name)
+@section("main_title", 'Consulter le secteur d'intervention —' . $zone->zone_name)
 
 @section('page_actions')
 <div class="return">
