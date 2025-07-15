@@ -38,7 +38,7 @@ class CityController extends Controller
             'name'=> 'required|string',
             'postcode'=> 'required|string',
             'region'=> 'required|string',
-            'zone'=> 'required|string|exists:zones,zone_id',
+            'zone'=> 'nullable|string|exists:zones,zone_id',
         ]);
 
         $city = City::create([
@@ -84,7 +84,7 @@ class CityController extends Controller
             'name'=> 'required|string',
             'postcode'=> 'required|string',
             'region'=> 'required|string',
-            'zone'=> 'required|string|exists:zones,zone_id',
+            'zone'=> 'nullable|string|exists:zones,zone_id',
         ]);
 
         $city->update([

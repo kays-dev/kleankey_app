@@ -51,9 +51,9 @@ class EstateController extends Controller
             'type' => ['required','string', Rule::in(array_column(EstateType::cases(), 'value'))],
             'rooms' => 'required|string',
             'surface' => 'required|decimal:8,2|min:10',
-            'agents' => 'array',
+            'agents' => 'nullable|array',
             'agents.*' => 'exists:agents,agent_id',
-            'services' => 'array',
+            'services' => 'nullable|array',
             'services.*' => 'exists:services,service_id',
         ]);
 
@@ -116,9 +116,9 @@ class EstateController extends Controller
             'type' => ['required','string', Rule::in(array_column(EstateType::cases(), 'value'))],
             'rooms' => 'required|string',
             'surface' => 'required|decimal:8,2',
-            'agents' => 'array',
+            'agents' => 'nullable|array',
             'agents.*' => 'exists:agents,agent_id',
-            'services' => 'array',
+            'services' => 'nullable|array',
             'services.*' => 'exists:services,service_id',
         ]);
 

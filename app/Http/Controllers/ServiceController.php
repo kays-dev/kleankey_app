@@ -43,10 +43,10 @@ class ServiceController extends Controller
         $request->validate([
             'name' => 'required|string',
             'type' => ['required', 'string', Rule::in(array_column(ServiceType::cases(), 'value'))],
-            'description' => 'required|string',
-            'duration' => 'required|date_format:H:i',
-            'agent' => 'exists:agents,agent_id',
-            'estates' => 'array',
+            'description' => 'nullable|string',
+            'duration' => 'nullable|date_format:H:i',
+            'agent' => 'nullable|exists:agents,agent_id',
+            'estates' => 'nullable|array',
             'estates.*' => 'exists:estates,estate_id',
         ]);
 
@@ -98,10 +98,10 @@ class ServiceController extends Controller
         $request->validate([
             'name' => 'required|string',
             'type' => ['required', 'string', Rule::in(array_column(ServiceType::cases(), 'value'))],
-            'description' => 'required|string',
-            'duration' => 'required|date_format:H:i',
-            'agent' => 'exists:agents,agent_id',
-            'estates' => 'array',
+            'description' => 'nullable|string',
+            'duration' => 'nullable|date_format:H:i',
+            'agent' => 'nullable|exists:agents,agent_id',
+            'estates' => 'nullable|array',
             'estates.*' => 'exists:estates,estate_id',
         ]);
 

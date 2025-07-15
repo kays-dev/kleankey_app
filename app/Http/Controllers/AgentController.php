@@ -40,7 +40,7 @@ class AgentController extends Controller
             'address' => 'required|string',
             'email' => 'required|email',
             'phone' => 'required|string',
-            'zone' => 'required|string|exists:zones,zone_id',
+            'zone' => 'nullable|string|exists:zones,zone_id',
         ]);
 
         $agent = Agent::create([
@@ -92,7 +92,7 @@ class AgentController extends Controller
             'address' => 'required|string',
             'email' => 'required|email:rcf,dns',
             'phone' => 'required|string',
-            'zone' => 'required|string|exists:zones,zone_id'
+            'zone' => 'nullable|string|exists:zones,zone_id'
         ]);
 
         $agent->update([
