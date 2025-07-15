@@ -76,7 +76,10 @@
         </label>
 
         <div class="input_box">
-            <input type="text" class="form_input" name="rooms" id="rooms">
+            <div class="form_input">
+                <span class="prefix">T </span>
+                <input type="number" name="rooms" id="rooms">
+            </div>
         </div>
     </div>
 

@@ -29,7 +29,7 @@ html {
 
 body,
 button,
-input {
+input, select {
     font-family: "Antic", Verdana, Helvetica, sans-serif;
     font-size: 1.5rem;
 }
