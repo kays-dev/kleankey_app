@@ -34,9 +34,9 @@
 
     <td class="table_data_first">{{ ucfirst($estate->estate_type) . ' | ' . $estate->rooms_number }}</td>
 
-    <td class="table_data">{{ $estate->zone->zone_name}}</td>
+    <td class="table_data">{{ $estate->zone?->zone_name ?? '--'}}</td>
 
-    <td class="table_data">{{ $estate->agents->pluck('agent_surname')->implode(', ')}}</td>
+    <td class="table_data">{{ $estate->agents?->pluck('agent_surname')->implode(', ') ?? '--'}}</td>
     <x-data-actions-component :resource="'estates'" :item="$estate" primaryKey="estate_code"/>
 </tr>
 @endforeach

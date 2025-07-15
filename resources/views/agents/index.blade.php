@@ -25,11 +25,11 @@
 @section('table_rows')
 @foreach ($agents as $agent)
 <tr class="table_content">
-    <td class="table_data">{{ $agent->zone->zone_name}}</td>
+    <td class="table_data">{{ $agent->zone?->zone_name ?? '--'}}</td>
     <td class="table_data_first">{{ $agent->agent_surname . ' ' . $agent->agent_name }}</td>
     <td class="table_data">{{ $agent->agent_mail}}</td>
     <td class="table_data">{{ $agent->agent_tel}}</td>
-    <td class="table_data">{{ $agent->estates->estate_code}}</td>
+    <td class="table_data">{{ $agent->estates?->estate_code ?? '--'}}</td>
     <x-data-actions-component :resource="'agents'" :item="$agent" primaryKey="agent_id"/>
 </tr>
 @endforeach

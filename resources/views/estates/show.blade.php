@@ -21,7 +21,7 @@
 
     <p class="detail">Surface (en m²) : <strong>{{ $estate->surface }} m²</strong></p>
 
-    <p class="detail">Secteur affecté : <strong>{{ $zone->zone_name }}</strong></p>
+    <p class="detail">Secteur affecté : <strong>{{ $zone?->zone_name ?? '--' }}</strong></p>
 </div>
 
 <div class="associated_details">
@@ -31,7 +31,7 @@
     <div class="datas_list">
         @foreach ($agents as $agent)
         <div class="list_item">
-            <p><strong>{{ $agent->agent_surname . ' ' . $agent->agent_name }}</strong></p>
+            <p><strong>{{ $agent?->agent_surname ?? '--' . ' ' . $agent?->agent_name ?? '--'}}</strong></p>
             <p>{{ $agent->zone }}</p>
         </div>
         @endforeach
@@ -45,8 +45,8 @@
     <div class="datas_list">
         @foreach ($services as $service)
         <div class="list_item">
-            <p><strong>{{ $service->service_name }}</strong></p>
-            <p>{{ $service->service_type }}</p>
+            <p><strong>{{ $service?->service_name ?? '--' }}</strong></p>
+            <p>{{ $service?->service_type ?? '--' }}</p>
         </div>
         @endforeach
     </div>

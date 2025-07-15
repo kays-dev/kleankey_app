@@ -49,7 +49,7 @@
 
         <div class="input_box">
             <select class="form_input" name="zone" id="zone">
-                <option value="{{ $estate->zone_id }}" selected>{{ $estate->zone->zone_name }}</option>
+                <option value="{{ $estate->zone_id ?? '' }}" selected>{{ $estate->zone?->zone_name ?? '--' }}</option>
                 @foreach ($zones as $zone )
                 <option value="{{ $zone->zone_id }}">{{ $zone->zone_name . " | " . $zone-> cities}}</option>
                 @endforeach
@@ -100,7 +100,7 @@
         <div class="input_box">
             <select class="form_input" name="agents[]" id="agents" multiple>
                 @foreach ($agents as $agent)
-                <option value="{{ $agent->agent_id }}" @selected(in_array($agent->agent_id, $estate->agents->pluck('agent_id')->toArray()))>
+                <option value="{{ $agent?->agent_id ?? '' }}" @selected(in_array($agent->agent_id, $estate->agents->pluck('agent_id')->toArray()))>
                     {{ $agent->agent_name . " | " . $agent->zone }}
                 </option>
                 @endforeach

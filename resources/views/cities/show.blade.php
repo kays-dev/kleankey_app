@@ -17,6 +17,6 @@
 
     <p class="detail">Région : <strong>{{ $city->region }}</strong></p>
 
-    <p class="detail">Secteur associé : <strong>{{ $zone->zone_name }}</strong></p>
+    <p class="detail">Secteur associé : <strong>{{ $zone?->zone_name ?? '--' }}</strong></p>
 </div>
 @endsection

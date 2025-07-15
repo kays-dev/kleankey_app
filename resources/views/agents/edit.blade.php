@@ -75,7 +75,7 @@
 
         <div class="input_box">
             <select type="text" class="form_input" name="zone" id="zone">
-                <option value="{{ $agent->zone }}" selected>{{ $agent->zone->zone_name . " | " . $agent->zone->cities }}</option>
+                <option value="{{ $agent->zone ?? '' }}" selected>{{ $agent->zone?->zone_name ?? '-' . " | " . $agent->zone?->cities ?? '-' }}</option>
                 @foreach ($zones as $zone )
                 <option value="{{ $zone->zone_id }}">{{ $zone->zone_name . " | " . $zone->cities->pluck()->('city_name')->implode(', ')}}</option>
                 @endforeach

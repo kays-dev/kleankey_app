@@ -27,7 +27,7 @@
 
     <td class="table_data">{{ ucfirst($service->service_type)}}</td>
 
-    <td class="table_data_first">{{ $service->duration }}</td>
+    <td class="table_data_first">{{ $service->duration? ?? '--' }}</td>
     <x-data-actions-component :resource="'services'" :item="$service" primaryKey="service_id"/>
 </tr>
 @endforeach

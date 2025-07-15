@@ -19,7 +19,7 @@
 
     <p class="detail">Numéro de téléphone : <strong>{{ $agent->agent_tel }}</strong></p>
 
-    <p class="detail">Zone attribuée : <strong>{{ $agent->zone->zone_name }}</strong></p>
+    <p class="detail">Zone attribuée : <strong>{{ $agent->zone?->zone_name ?? '--' }}</strong></p>
 </div>
 
 <div class="associated_details">
@@ -29,11 +29,11 @@
     <div class="datas_list">
         @foreach ($estates as $estate)
         <div class="list_item">
-            <p><strong>{{ $estate->estate_code }}</strong></p>
-            <p>{{ $estate->estate_type }}</p>
-            <p>{{ $estate->rooms_number }}</p>
-            <p>{{ $estate->estate_address }}</p>
-            <p>{{ $estate->services->pluck('service_name')->implode(', ') }}</p>
+            <p><strong>{{ $estate?->estate_code ?? '--' }}</strong></p>
+            <p>{{ $estate?->estate_type ?? '--' }}</p>
+            <p>{{ $estate?->rooms_number ?? '--' }}</p>
+            <p>{{ $estate?->estate_address ?? '--' }}</p>
+            <p>{{ $estate?->services?->pluck('service_name')->implode(', ') ?? '--' }}</p>
         </div>
         @endforeach
     </div>

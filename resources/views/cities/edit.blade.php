@@ -7,7 +7,7 @@
 <div class="return">
     <a href="{{ route('cities.index') }}" class="return_to_list">Retour à la liste</a>
 </div>
-@ensection
+@endsection
 
 @section('form')
 <p class="important">Vous pouvez modifier <strong>tous les champs</strong></p>
@@ -23,7 +23,7 @@
         </label>
 
         <div class="input_box">
-            <input type="text" class="form_input" name="name" id="name">
+            <input type="text" class="form_input" name="name" id="name" value="{{ $city->city_name }}">
         </div>
     </div>
 
@@ -33,7 +33,7 @@
         </label>
 
         <div class="input_box">
-            <input type="text" class="form_input" name="postcode" id="postcode">
+            <input type="text" class="form_input" name="postcode" id="postcode" value="{{ $city->postcode }}">
         </div>
     </div>
 
@@ -43,7 +43,7 @@
         </label>
 
         <div class="input_box">
-            <input type="text" class="form_input" name="region" id="region">
+            <input type="text" class="form_input" name="region" id="region" value="{{ $city->region }}">
         </div>
     </div>
 
@@ -54,7 +54,7 @@
 
         <div class="input_box">
             <select type="text" class="form_input" name="zone" id="zone">
-                <option value="{{ $city->zone }}" selected>{{ $city->zone->zone_name }}</option>
+                <option value="{{ $city->zone ?? '' }}" selected>{{ $city->zone?->zone_name ?? '--' }}</option>
                 @foreach ($zones as $zone )
                 <option value="{{ $zone->zone_id }}">{{ $zone->zone_name }}</option>
                 @endforeach

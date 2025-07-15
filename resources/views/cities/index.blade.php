@@ -29,7 +29,7 @@
     <td class="table_data">{{ $city->city_name}}</td>
     <td class="table_data">{{ $city->postcode}}</td>
     <td class="table_data">{{ $city->region}}</td>
-    <td class="table_data">{{ $city->zone->zone_name}}</td>
+    <td class="table_data">{{ $city->zone?->zone_name ?? '--'}}</td>
     <x-data-actions-component :resource="'cities'" :item="$city" primaryKey="city_code"/>
 </tr>
 @endforeach
