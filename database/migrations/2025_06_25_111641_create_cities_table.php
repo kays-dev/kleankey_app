@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamps();
 
             //Clé étrangère
-            $table->uuid('zone_id');
+            $table->uuid('zone_id')->nullable();
             $table->foreign('zone_id')->references('zone_id')->on('zones');
         });
     }

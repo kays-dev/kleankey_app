@@ -22,10 +22,10 @@ return new class extends Migration
             $table->timestamps();
 
             //Clés étrangères
-            $table->uuid('zone_id');
+            $table->uuid('zone_id')->nullable();
             $table->foreign('zone_id')->references('zone_id')->on('zones');
             
-            $table->uuid('owner_id');
+            $table->uuid('owner_id')->nullable();
             $table->foreign('owner_id')->references('owner_id')->on('owners');
         });
     }

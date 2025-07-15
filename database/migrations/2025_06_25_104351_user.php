@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('surname_user');
-            $table->enum('role_user',['admin','owner','agent'])->default('admin');
+            $table->enum('role_user',['owner','agent'])->default('owner');
             
         });
 

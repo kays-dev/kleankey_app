@@ -15,12 +15,12 @@ return new class extends Migration
             $table->uuid('service_id')->primary();
             $table->enum('service_type',['','conciergerie','ménage'])->default('');
             $table->string('service_name');
-            $table->string('description');
-            $table->time('duration');
+            $table->string('description')->nullable();
+            $table->time('duration')->nullable();
             $table->timestamps();
 
             //Clé étrangère
-            $table->uuid('agent_id');
+            $table->uuid('agent_id')->nullable();
             $table->foreign('agent_id')->references('agent_id')->on('agents');
         });
     }
