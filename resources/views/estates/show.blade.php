@@ -1,65 +1,54 @@
 @extends('layouts.view')
 
-@section('title', '{{ $estate->estate_code }}')
-@section('main_title', 'Consulter le bien — <strong>{{ $estate->estate_code }}</strong>')
+@section('title', $estate->estate_code)
+@section('main_title', 'Consulter le bien — ' . $estate->estate_code)
 
 @section('page_actions')
-                <div class="return">
-                    <a href="{{ route('estates.index') }}" class="return_to_list">Retour à la liste</a>
-                </div>
-                @endsection
+<div class="return">
+    <a href="{{ route('estates.index') }}" class="return_to_list">Retour à la liste</a>
+</div>
+@endsection
+
 @section('details')
-                <h3 class="details_title">
-                    Propriétaire
-                </h3>
-                <p class="details">{{ $owner->owner_name . ' ' . $owner->owner_surname }}</p>
+<div class="details">
+    <p class="detail">Propriétaire : <strong>{{ $owner->owner_name . ' ' . $owner->owner_surname }}</strong></p>
 
-                <h3 class="details_title">
-                    Adresse
-                </h3>
-                <p class="details">
-                    {{ $estate->estate_address }}
-                </p>
+    <p class="detail">Adresse du bien : <strong>{{ $estate->estate_address }}</strong></p>
 
-                <h3 class="details_title">
-                    Secteur affecté
-                </h3>
-                <p class="details">
-                    {{ $zone->zone_name }}
-                </p>
+    <p class="detail">Type de bien : <strong>{{ $estate->estate_type }}</strong></p>
 
-                <h3 class="details_title">
-                    Type de bien
-                </h3>
-                <p class="details">
-                    {{ $estate->estate_type }}
-                </p>
+    <p class="detail">Nombre de pièces : <strong>{{ $estate->rooms_number }}</strong></p>
 
-                <h3 class="details_title">
-                    Nombre de pièces
-                </h3>
-                <p class="details">
-                    {{ $estate->rooms_number }}
-                </p>
+    <p class="detail">Surface (en m²) : <strong>{{ $estate->surface }} m²</strong></p>
 
-                <h3 class="details_title">
-                    Surface (en m²)
-                </h3>
-                <p class="details">
-                    {{ $estate->surface }}
-                </p>
+    <p class="detail">Secteur affecté : <strong>{{ $zone->zone_name }}</strong></p>
+</div>
 
-                <h3 class="details_title">
-                    Agent.s intervenant
-                </h3>
-                <p class="details">
-                    {{ $agents->pluck('agent_surname')->implode(', ') }}
-                </p>
+<div class="associated_details">
+    <h3 class="details_title">
+        Agent.s intervenant.s
+    </h3>
+    <div class="datas_list">
+        @foreach ($agents as $agent)
+        <div class="list_item">
+            <p><strong>{{ $agent->agent_surname . ' ' . $agent->agent_name }}</strong></p>
+            <p>{{ $agent->zone }}</p>
+        </div>
+        @endforeach
+    </div>
+</div>
 
-                <h3 class="details_title">
-                    Prestations
-                </h3>
-                <p class="details">
-                    {{ $services->pluck('service_name')->implode(' | ') }}
-                </p>
+<div class="associated_details">
+    <h3 class="details_title">
+        Prestation.s
+    </h3>
+    <div class="datas_list">
+        @foreach ($services as $service)
+        <div class="list_item">
+            <p><strong>{{ $service->service_name }}</strong></p>
+            <p>{{ $service->service_type }}</p>
+        </div>
+        @endforeach
+    </div>
+</div>
 @endsection

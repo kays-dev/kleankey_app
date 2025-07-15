@@ -1,0 +1,74 @@
+/* Flexboxs */
+.inputs_list,
+.inputs_list form,
+.form_input_box {
+    display: flex;
+}
+
+.inputs_list,
+.inputs_list form {
+    flex-direction: column;
+}
+
+/* Informations du formulaire */
+.important {
+    color: var(--klean-info);
+    font-size: 1.5rem;
+}
+
+.important:first-of-type {
+    padding-top: 2vh;
+    border-top: dashed 2px var(--klean-line);
+}
+
+.important:last-of-type {
+    padding-bottom: 2vh;
+    margin-bottom: 5vh;
+    border-bottom: dashed 2px var(--klean-line);
+}
+
+/* Formulaire */
+.form_input_box {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2vw;
+    margin-bottom: 5vh;
+    height: 8vh;
+}
+
+.form_input_label {
+    color: var(--klean-wood);
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.input_box {
+    background-color: var(--klair-blue);
+    border-radius: 1.5rem;
+    height: 70%;
+    width: 20vw;
+    padding: 0.5vh;
+    box-shadow: inset -1px -1px 10px var(--klean-air);
+}
+
+.form_input {
+    border: none;
+    background-color: var(--klean-air);
+    border-radius: 1.2rem;
+    height: 100%;
+    min-width: 100%;
+    padding: 1vh;
+    color: var(--klean-wood);
+    font-size: 1.2rem;
+}
+
+.form_submit{
+    background-color: var(--klair-blue);
+    box-shadow: inset -1px -1px 10px var(--klean-air);
+    border-radius: 1.2rem;
+    height: 5vh;
+    width: fit-content;
+    padding: 1vh 1vw;
+    margin-top: 2vh;
+    color: var(--klean-wood);
+}

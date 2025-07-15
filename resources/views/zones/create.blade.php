@@ -13,10 +13,15 @@
 <form action="{{ route('zones.store') }}" method="POST">
 
     @csrf
-    <label for="name" class="form_input_label">
-        Nom du secteur
-    </label>
-    <input type="text" class="form_input" name="name" id="name">
+    <div class="form_input_box">
+        <label for="name" class="form_input_label">
+            Nom du secteur :
+        </label>
+
+        <div class="input_box">
+            <input type="text" class="form_input" name="name" id="name">
+        </div>
+    </div>
 
     <button type="submit" class="form_submit">
         Ajouter le secteur

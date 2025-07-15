@@ -13,30 +13,55 @@
 <form action="{{ route('owners.store') }}" method="POST">
 
     @csrf
-    <label for="lname" class="form_input_label">
-        Nom
-    </label>
-    <input type="text" class="form_input" name="lname" id="lname">
+    <div class="form_input_box">
+        <label for="lname" class="form_input_label">
+            Nom
+        </label>
 
-    <label for="fname" class="form_input_label">
-        Prénom
-    </label>
-    <input type="text" class="form_input" name="fname" id="fname">
+        <div class="input_box">
+            <input type="text" class="form_input" name="lname" id="lname">
+        </div>
+    </div>
 
-    <label for="address" class="form_input_label">
-        Adresse
-    </label>
-    <input type="text" class="form_input" name="address" id="address">
+    <div class="form_input_box">
+        <label for="fname" class="form_input_label">
+            Prénom
+        </label>
 
-    <label for="email" class="form_input_label">
-        Adresse mail
-    </label>
-    <input type="text" class="form_input" name="email" id="email">
+        <div class="input_box">
+            <input type="text" class="form_input" name="fname" id="fname">
+        </div>
+    </div>
 
-    <label for="phone" class="form_input_label">
-        Numéro de téléphone
-    </label>
-    <input type="text" class="form_input" name="phone" id="phone">
+    <div class="form_input_box">
+        <label for="address" class="form_input_label">
+            Adresse
+        </label>
+
+        <div class="input_box">
+            <input type="text" class="form_input" name="address" id="address">
+        </div>
+    </div>
+
+    <div class="form_input_box">
+        <label for="email" class="form_input_label">
+            Adresse mail
+        </label>
+
+        <div class="input_box">
+            <input type="text" class="form_input" name="email" id="email">
+        </div>
+    </div>
+
+    <div class="form_input_box">
+        <label for="phone" class="form_input_label">
+            Numéro de téléphone
+        </label>
+
+        <div class="input_box">
+            <input type="text" class="form_input" name="phone" id="phone">
+        </div>
+    </div>
 
     <button type="submit" class="form_submit">
         Ajouter le client

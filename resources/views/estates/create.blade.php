@@ -15,68 +15,108 @@
 <form action="{{ route('estates.store') }}" method="POST">
 
     @csrf
-    <label for="owner" class="form_input_label">
-        Propriétaire
-    </label>
-    <select type="checkbox" class="form_input" name="owner" id="owner">
-        <option value="default" selected>-- Veuillez sélectionner une option --</option>
-        @foreach ($owners as $owner )
-        <option value="{{ $owner->owner_id }}">{{ $owner->owner_surname . " " . $owner->owner_name}}</option>
-        @endforeach
-    </select>
+    <div class="form_input_box">
+        <label for="owner" class="form_input_label">
+            Propriétaire
+        </label>
 
-    <label for="address" class="form_input_label">
-        Adresse du bien
-    </label>
-    <input type="text" class="form_input" name="address" id="address">
+        <div class="input_box">
+            <select type="checkbox" class="form_input" name="owner" id="owner">
+                <option value="default" selected>-- Veuillez sélectionner une option --</option>
+                @foreach ($owners as $owner )
+                <option value="{{ $owner->owner_id }}">{{ $owner->owner_surname . " " . $owner->owner_name}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
 
-    <label for="zone" class="form_input_label">
-        Secteur affecté
-    </label>
-    <select type="text" class="form_input" name="zone" id="zone">
-        <option value="default" selected>-- Veuillez sélectionner une option --</option>
-        @foreach ($zones as $zone )
-        <option value="{{ $zone->zone_id }}">{{ $zone->zone_name . " | " . $zone->cities->pluck('city_name')->implode(', ')}}</option>
-        @endforeach
-    </select>
+    <div class="form_input_box">
+        <label for="address" class="form_input_label">
+            Adresse du bien
+        </label>
 
-    <label for="type" class="form_input_label">
-        Type de bien
-    </label>
-    <select type="text" class="form_input" name="type" id="type">
-        <option value="default" selected>-- Veuillez sélectionner une option --</option>
-        @foreach ($types as $type )
-        <option value="{{ $type->value }}">{{ $type->name }}</option>
-        @endforeach
-    </select>
+        <div class="input_box">
+            <input type="text" class="form_input" name="address" id="address">
+        </div>
+    </div>
 
-    <label for="rooms" class="form_input_label">
-        Nombre de pièces
-    </label>
-    <input type="text" class="form_input" name="rooms" id="rooms">
+    <div class="form_input_box">
+        <label for="zone" class="form_input_label">
+            Secteur affecté
+        </label>
 
-    <label for="surface" class="form_input_label">
-        Surface du bien (en m²)
-    </label>
-    <input type="number" step="0.01" class="form_input" name="surface" id="surface">
+        <div class="input_box">
+            <select type="text" class="form_input" name="zone" id="zone">
+                <option value="default" selected>-- Veuillez sélectionner une option --</option>
+                @foreach ($zones as $zone )
+                <option value="{{ $zone->zone_id }}">{{ $zone->zone_name . " | " . $zone->cities->pluck('city_name')->implode(', ')}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
 
-    <label for="agents[]" class="form_input_label">
-        Agent.s intervenant (plusieurs options sont possibles)
-    </label>
-    <select class="form_input" name="agents[]" id="agents" multiple>
-        @foreach ($agents as $agent)
-        <option value="{{ $agent->agent_id }}">{{ $agent->agent_name. " | " . $agent->zone->zone_name}}</option>
-        @endforeach
-    </select>
+    <div class="form_input_box">
+        <label for="type" class="form_input_label">
+            Type de bien
+        </label>
 
-    <label for="services[]" class="form_input_label">
-        Prestation.s
-    </label>
-    <select class="form_input" name="services[]" id="services" multiple>
-        @foreach ($services as $service)
-        <option value="{{ $service->service_id }}">{{ $service->service_name. " | " . $service->service_type}}</option>
-        @endforeach
-    </select>
+        <div class="input_box">
+            <select type="text" class="form_input" name="type" id="type">
+                <option value="default" selected>-- Veuillez sélectionner une option --</option>
+                @foreach ($types as $type )
+                <option value="{{ $type->value }}">{{ $type->name }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+
+    <div class="form_input_box">
+        <label for="rooms" class="form_input_label">
+            Nombre de pièces
+        </label>
+
+        <div class="input_box">
+            <input type="text" class="form_input" name="rooms" id="rooms">
+        </div>
+    </div>
+
+    <div class="form_input_box">
+        <label for="surface" class="form_input_label">
+            Surface du bien (en m²)
+        </label>
+
+        <div class="input_box">
+            <input type="number" step="0.01" class="form_input" name="surface" id="surface">
+        </div>
+    </div>
+
+    <div class="form_input_box">
+        <label for="agents[]" class="form_input_label">
+            Agent.s intervenant (plusieurs options sont possibles)
+        </label>
+
+        <div class="input_box">
+            <select class="form_input" name="agents[]" id="agents" multiple>
+                @foreach ($agents as $agent)
+                <option value="{{ $agent->agent_id }}">{{ $agent->agent_name. " | " . $agent->zone->zone_name}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+
+    <div class="form_input_box">
+        <label for="services[]" class="form_input_label">
+            Prestation.s
+        </label>
+
+        <div class="input_box">
+            <select class="form_input" name="services[]" id="services" multiple>
+                @foreach ($services as $service)
+                <option value="{{ $service->service_id }}">{{ $service->service_name. " | " . $service->service_type}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
 
     <button type="submit" class="form_submit">
         Ajouter le bien

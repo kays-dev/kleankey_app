@@ -1,7 +1,7 @@
 @extends('layouts.view')
 
 @section("title", $zone->zone_name)
-@section("main_title", 'Consulter le secteur d'intervention —' . $zone->zone_name)
+@section("main_title", "Consulter le secteur d'intervention — " . $zone->zone_name)
 
 @section('page_actions')
 <div class="return">
@@ -10,29 +10,28 @@
 @endsection
 
 @section('details')
-<p class="details">Nom : <strong>{{ $zone->zone_name }}</strong></p>
+<div class="details">
+    <p class="detail">Nom : <strong>{{ $zone->zone_name }}</strong></p>
 
-<p class="details">Nombre de villes : <strong>{{ $cities->count() }}</strong></p>
+    <p class="detail">Nombre de villes : <strong>{{ $cities->count() }}</strong></p>
 
-<p class="details">Nombre de biens : <strong>{{ $estates->count() }}</strong></p>
+    <p class="detail">Nombre de biens : <strong>{{ $estates->count() }}</strong></p>
 
-<p class="details">Nombre d'agents : <strong>{{ $agents->count() }}</strong></p>
+    <p class="detail">Nombre d'agents : <strong>{{ $agents->count() }}</strong></p>
+</div>
 
-<h3 class="details_zone_title">
-    Villes
-</h3>
-<table class="zone_cities_list">
-    <tr>
-        <th>Nom</th>
-        <th>Code postal</th>
-        <th>Région</th>
-    </tr>
-    @foreach ($cities as $city)
-    <tr>
-        <td>{{ $city->city_name }}</td>
-        <td>{{ $city->postcode }}</td>
-        <td>{{ $city->region }}</td>
-    </tr>
-    @endforeach
-</table>
+<div class="associated_details">
+    <h3 class="details_title">
+        Ville.s du secteur
+    </h3>
+    <div class="datas_list">
+        @foreach ($cities as $city)
+        <div class="list_item">
+            <p><strong>{{ $city->city_name }}</strong></p>
+            <p>{{ $city->region }}</p>
+            <p>{{ $city->postcode }}</p>
+        </div>
+        @endforeach
+    </div>
+</div>
 @endsection

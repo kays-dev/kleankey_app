@@ -1,7 +1,7 @@
 @extends('layouts.form')
 
-@section('title', 'Modification de {{ $owner->surname . ' ' . $owner->name  }}')
-@section('main_title', 'Modifier le propriétaire — <strong>{{ $owner->surname . ' ' . $owner->name  }}</strong>')
+@section('title', 'Modification de ' . $owner->surname . ' ' . $owner->name)
+@section('main_title', 'Modifier le propriétaire — ' . $owner->surname . ' ' . $owner->name)
 
 @section('page_actions')
 <div class="return">
@@ -18,50 +18,55 @@
     @csrf
 
     @method('PATCH')
-    <label for="lname" class="form_input_label">
-        Nom
-    </label>
-    <input type="text" class="form_input" name="lname" id="lname" value="{{ $owner->owner_name }}">
+    <div class="form_input_box">
+        <label for="lname" class="form_input_label">
+            Nom
+        </label>
 
-    <label for="fname" class="form_input_label">
-        Prénom
-    </label>
-    <input type="text" class="form_input" name="fname" id="fname" value="{{ $owner->owner_surname }}">
+        <div class="input_box">
+            <input type="text" class="form_input" name="lname" id="lname" value="{{ $owner->owner_name }}">
+        </div>
+    </div>
 
-    <label for="address" class="form_input_label">
-        Adresse
-    </label>
-    <input type="text" class="form_input" name="address" id="address" value="{{ $owner->owner_address }}">
+    <div class="form_input_box">
+        <label for="fname" class="form_input_label">
+            Prénom
+        </label>
 
-    <label for="email" class="form_input_label">
-        Adresse mail
-    </label>
-    <input type="text" class="form_input" name="email" id="email" value="{{ $owner->owner_mail }}">
+        <div class="input_box">
+            <input type="text" class="form_input" name="fname" id="fname" value="{{ $owner->owner_surname }}">
+        </div>
+    </div>
 
-    <label for="phone" class="form_input_label">
-        Numéro de téléphone
-    </label>
-    <input type="text" class="form_input" name="phone" id="phone" value="{{ $owner->owner_tel }}">
+    <div class="form_input_box">
+        <label for="address" class="form_input_label">
+            Adresse
+        </label>
 
-    <h3 class="form_input_label">
-        Liste des biens :
-    </h3>
-    <table class="owner_estate_list">
-        <tr>
-            <th>Code bien</th>
-            <th>Type</th>
-            <th>Nombre de pièces</th>
-            <th>Adresse</th>
-        </tr>
-        @foreach ($estates as $estate)
-        <tr>
-            <td>{{ $estate->estate_code }}</td>
-            <td>{{ $estate->estate_type }}</td>
-            <td>{{ $estate->room_number }}</td>
-            <td>{{ $estate->estate_address }}</td>
-        </tr>
-        @endforeach
-    </table>
+        <div class="input_box">
+            <input type="text" class="form_input" name="address" id="address" value="{{ $owner->owner_address }}">
+        </div>
+    </div>
+
+    <div class="form_input_box">
+        <label for="email" class="form_input_label">
+            Adresse mail
+        </label>
+
+        <div class="input_box">
+            <input type="text" class="form_input" name="email" id="email" value="{{ $owner->owner_mail }}">
+        </div>
+    </div>
+
+    <div class="form_input_box">
+        <label for="phone" class="form_input_label">
+            Numéro de téléphone
+        </label>
+
+        <div class="input_box">
+            <input type="text" class="form_input" name="phone" id="phone" value="{{ $owner->owner_tel }}">
+        </div>
+    </div>
 
     <button type="submit" class="form_submit">
         Modifier le client
