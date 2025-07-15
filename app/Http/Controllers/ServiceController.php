@@ -97,7 +97,7 @@ class ServiceController extends Controller
 
         $request->validate([
             'name' => 'required|string',
-            'type' => ['required|string', Rule::in(array_column(ServiceType::cases(), 'value'))],
+            'type' => ['required', 'string', Rule::in(array_column(ServiceType::cases(), 'value'))],
             'description' => 'required|string',
             'duration' => 'required|date_format:H:i',
             'agent' => 'exists:agents,agent_id',
