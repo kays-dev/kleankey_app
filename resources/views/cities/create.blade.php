@@ -50,7 +50,7 @@
 
         <div class="input_box">
             <select type="text" class="form_input" name="zone" id="zone">
-                <option value="default" selected>-- Veuillez sélectionner une option --</option>
+                <option value="" selected>-- Veuillez sélectionner une option --</option>
                 @foreach ($zones as $zone )
                 <option value="{{ $zone->zone_id }}">{{ $zone->zone_name }}</option>
                 @endforeach

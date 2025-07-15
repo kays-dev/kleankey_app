@@ -32,7 +32,7 @@
 
         <div class="input_box">
             <select class="form_input" name="type" id="type">
-                <option value="default" selected>-- Veuillez sélectionner une option --</option>
+                <option value="" selected>-- Veuillez sélectionner une option --</option>
                 @foreach ($types as $type )
                 <option value="{{ $type->value }}">{{ $type->name }}</option>
                 @endforeach
@@ -67,7 +67,7 @@
 
         <div class="input_box">
             <select class="form_input" name="agents" id="agents">
-                <option value="none" selected>-- Veuillez sélectionner une option --</option>
+                <option value="" selected>-- Veuillez sélectionner une option --</option>
                 @foreach ($agents as $agent)
                 <option value="{{ $agent->agent_id }}">{{ $agent->agent_name. " | " . $agent->zone->zone_name}}</option>
                 @endforeach
@@ -82,6 +82,7 @@
 
         <div class="input_box">
             <select class="form_input" name="estates[]" id="estates" multiple>
+                <option value="" selected>-- Veuillez sélectionner des options --</option>
                 @foreach ($estates as $estate)
                 <option value="{{ $estate->estate_id }}">{{ $estate->estate_code . " | " . $estate->estate_type}}</option>
                 @endforeach

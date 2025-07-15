@@ -100,6 +100,7 @@
 
         <div class="input_box">
             <select class="form_input" name="agents[]" id="agents" multiple>
+                <option value="" selected>-- Veuillez sélectionner des options --</option>
                 @foreach ($agents as $agent)
                 <option value="{{ $agent->agent_id }}">{{ $agent->agent_name. " | " . $agent->zone->zone_name}}</option>
                 @endforeach
@@ -114,6 +115,7 @@
 
         <div class="input_box">
             <select class="form_input" name="services[]" id="services" multiple>
+                <option value="" selected>-- Veuillez sélectionner des options --</option>
                 @foreach ($services as $service)
                 <option value="{{ $service->service_id }}">{{ $service->service_name. " | " . $service->service_type}}</option>
                 @endforeach
