@@ -85,11 +85,11 @@ class OwnerController extends Controller
             'lname' => 'required|string',
             'fname' => 'required|string',
             'address' => 'required|string',
-            'email' => 'required|email:rcf,dns',
+            'email' => 'required|email',
             'phone' => 'required|string',
         ]);
 
-        Owner::update([
+        $owner->update([
             'owner_name' => mb_strtoupper($request->input('lname'), 'UTF-8'),
             'owner_surname' => $request->input('fname'),
             'owner_address' => mb_strtoupper($request->input('address'), 'UTF-8'),

@@ -15,7 +15,7 @@
 
     <p class="detail">Adresse du bien : <strong>{{ $estate->estate_address }}</strong></p>
 
-    <p class="detail">Type de bien : <strong>{{ $estate->estate_type }}</strong></p>
+    <p class="detail">Type de bien : <strong>{{ ucfirst($estate->estate_type->value) }}</strong></p>
 
     <p class="detail">Nombre de pièces : <strong>{{ $estate->rooms_number }}</strong></p>
 
@@ -31,8 +31,8 @@
     <div class="datas_list">
         @foreach ($agents as $agent)
         <div class="list_item">
-            <p><strong>{{ $agent?->agent_surname ?? '--' . ' ' . $agent?->agent_name ?? '--'}}</strong></p>
-            <p>{{ $agent->zone }}</p>
+            <p class="item_detail"><strong>{{ $agent?->agent_surname ?? '' . ' ' . $agent?->agent_name ?? ''}}</strong></p>
+            <p class="item_detail">{{ $agent->zone }}</p>
         </div>
         @endforeach
     </div>
@@ -45,8 +45,8 @@
     <div class="datas_list">
         @foreach ($services as $service)
         <div class="list_item">
-            <p><strong>{{ $service?->service_name ?? '--' }}</strong></p>
-            <p>{{ $service?->service_type ?? '--' }}</p>
+            <p class="item_detail"><strong>{{ $service?->service_name ?? '' }}</strong></p>
+            <p class="item_detail">{{ ucfirst($service?->service_type->value ?? '') }}</p>
         </div>
         @endforeach
     </div>

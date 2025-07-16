@@ -1,7 +1,7 @@
 @extends('layouts.view')
 
 @section('title', $service->service__name)
-@section('main_title', 'Consulter la prestation — ' . $service->service__name . ' | ' . $service->service_type)
+@section('main_title', 'Consulter la prestation — ' . $service->service_name . ' | ' . ucfirst($service->service_type->value))
 
 @section('page_actions')
 <div class="return">
@@ -15,11 +15,11 @@
 
     <p class="detail">Type de prestation : <strong>{{ $service->service_type }}</strong></p>
 
+    <p class="detail">Durée recommandée : <strong>{{ $service->duration ?? '--'}} h</strong></p>
+
     <p class="detail">Description de la prestation : <strong>{{ $service->description ?? '--' }}</strong></p>
 
-    <p class="detail">Durée recommandée : <strong>{{ $service->duration ?? '--'}}</strong></p>
-
-    <p class="detail">Agent assigné : <strong>{{ $agent?->agent_surname ?? '--' . " " . $agent?->agent_name ?? '--'}}</strong></p>
+    <p class="detail">Agent assigné : <strong>{{ ($agent?->agent_surname ?? '--') . " " . ($agent?->agent_name ?? '--')}}</strong></p>
 </div>
 
 <div class="associated_details">
@@ -29,10 +29,10 @@
     <div class="datas_list">
         @foreach ($estates as $estate)
         <div class="list_item">
-            <p><strong>{{ $estate?->estate_code ?? '--' }}</strong></p>
-            <p>{{ $estate?->estate_type ?? '--' }}</p>
-            <p>{{ $estate?->rooms_number ?? '--'}}</p>
-            <p>{{ $estate?->estate_address ?? '--'}}</p>
+            <p class="item_detail">{{ $estate?->estate_code ?? '' }}</p>
+            <p class="item_detail">{{ $estate?->estate_address ?? ''}}</p>
+            <p class="item_detail">{{ ucfirst($estate?->estate_type->value ?? '') }}</p>
+            <p class="item_detail">T{{ $estate?->rooms_number ?? ''}}</p>
         </div>
         @endforeach
     </div>

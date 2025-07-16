@@ -26,17 +26,17 @@
 @section('table_rows')
 @foreach ($estates as $estate)
 <tr class="table_content">
-    <td class="table_data_first">{{ $estate->estate_code }}</td>
+    <td class="table_data code">{{ $estate->estate_code }}</td>
 
-    <td class="table_data">{{ $estate->owner->owner_surname . ' ' . $estate->owner->owner_name}}</td>
+    <td class="table_data name">{{ $estate->owner->owner_surname . ' ' . $estate->owner->owner_name}}</td>
 
-    <td class="table_data_first">{{ $estate->estate_address }}</td>
+    <td class="table_data address">{{ $estate->estate_address }}</td>
 
-    <td class="table_data_first">{{ ucfirst($estate->estate_type) . ' | ' . $estate->rooms_number }}</td>
+    <td class="table_data type">{{ ucfirst($estate->estate_type->value) . ' | ' . $estate->rooms_number }}</td>
 
-    <td class="table_data">{{ $estate->zone?->zone_name ?? '--'}}</td>
+    <td class="table_data name">{{ $estate->zone?->zone_name ?? '--'}}</td>
 
-    <td class="table_data">{{ $estate->agents?->pluck('agent_surname')->implode(', ') ?? '--'}}</td>
+    <td class="table_data type">{{ $estate->agents?->pluck('agent_surname')->implode(', ') ?? '--'}}</td>
     <x-data-actions-component :resource="'estates'" :item="$estate" primaryKey="estate_code"/>
 </tr>
 @endforeach

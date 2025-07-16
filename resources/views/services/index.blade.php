@@ -23,11 +23,11 @@
 @section('table_rows')
 @foreach ($services as $service)
 <tr class="table_content">
-    <td class="table_data_first">{{ $service->service_name }}</td>
+    <td class="table_data name">{{ $service->service_name }}</td>
 
-    <td class="table_data">{{ ucfirst($service->service_type)}}</td>
+    <td class="table_data type">{{ ucfirst($service->service_type->value)}}</td>
 
-    <td class="table_data_first">{{ $service->duration? ?? '--' }}</td>
+    <td class="table_data number">{{ $service->duration ?? '--' }} h</td>
     <x-data-actions-component :resource="'services'" :item="$service" primaryKey="service_id"/>
 </tr>
 @endforeach

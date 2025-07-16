@@ -1,7 +1,7 @@
 @extends('layouts.form')
 
-@section('title', 'Modification de ' . $owner->surname . ' ' . $owner->name)
-@section('main_title', 'Modifier le propriétaire — ' . $owner->surname . ' ' . $owner->name)
+@section('title', 'Modification de ' . $owner->owner_surname . ' ' . $owner->owner_name)
+@section('main_title', 'Modifier le propriétaire — ' . $owner->owner_surname . ' ' . $owner->owner_name)
 
 @section('page_actions')
 <div class="return">
@@ -13,7 +13,7 @@
 <p class="important">Vous ne pouvez modifier que les champs suivants : <strong> Adresse, Adresse mail,
         Numéro de téléphone</strong></p>
 
-<form action="{{ route('owners.update', $owner->owner_id') }}" method="POST">
+<form action="{{ route('owners.update', $owner->owner_id) }}" method="POST">
 
     @csrf
 

@@ -90,7 +90,7 @@ class AgentController extends Controller
             'lname' => 'required|string',
             'fname' => 'required|string',
             'address' => 'required|string',
-            'email' => 'required|email:rcf,dns',
+            'email' => 'required|email',
             'phone' => 'required|string',
             'zone' => 'nullable|string|exists:zones,zone_id'
         ]);

@@ -36,10 +36,11 @@ input, select {
 
 h1 {
     font-family: "Playfair Display", Georgia, serif;
-    font-size: 5rem;
+    font-size: 4.5rem;
     color: var(--klean-blue);
     font-weight: normal;
     letter-spacing: 0.5px;
+    text-align: center;
 }
 
 h2 {
@@ -332,7 +333,7 @@ main.shift {
 
 /* Contenu de la page */
 section {
-    margin: 10vh 10vw;
+    margin: 10vh 5vw;
     padding: 10vh;
     box-shadow: inset -1px -1px 10px var(--klean-border);
     border-radius: 20px;

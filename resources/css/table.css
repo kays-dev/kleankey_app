@@ -146,7 +146,7 @@ table {
     background-color: var(--klair-table);
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed;
+    /* table-layout: fixed; */
     white-space: normal;
     border-spacing: 0;
 }
@@ -174,7 +174,7 @@ tbody {
 }
 
 tr {
-    height: 10vh;
+    min-height: 10vh;
 }
 
 .table_data {
@@ -186,21 +186,37 @@ tr {
     color: var(--klean-wood);
     font-size: 1.5rem;
     height: 100%;
+    overflow-wrap: break-word;
 }
 
-.data_actions {
+.name,
+.tel,
+.number {
+    width: 15%;
+}
+
+.mail,
+.address,
+.type,
+.code {
+    width: 20%;
+}
+
+.data_actions.table_data {
     border-right: none;
+    overflow: hidden;
 }
 
 .data_buttons {
     justify-content: center;
     align-items: center;
     gap: 1vw;
+    width: 100%;
 }
 
 .data_button {
-    width: 5vw;
-    overflow: hidden;
+    width: 3rem;
+    height: 3rem;
     background-color: var(--klean-blue);
     box-shadow: inset -1px -1px 10px var(--klean-air);
     border-radius: 100rem;

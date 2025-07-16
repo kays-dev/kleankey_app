@@ -25,11 +25,11 @@
 @section('table_rows')
 @foreach ($cities as $city)
 <tr class="table_content">
-    <td class="table_data">{{ $city->city_code}}</td>
-    <td class="table_data">{{ $city->city_name}}</td>
-    <td class="table_data">{{ $city->postcode}}</td>
-    <td class="table_data">{{ $city->region}}</td>
-    <td class="table_data">{{ $city->zone?->zone_name ?? '--'}}</td>
+    <td class="table_data code">{{ $city->city_code}}</td>
+    <td class="table_data name">{{ $city->city_name}}</td>
+    <td class="table_data number">{{ $city->postcode}}</td>
+    <td class="table_data name">{{ $city->region}}</td>
+    <td class="table_data name">{{ $city->zone?->zone_name ?? '--'}}</td>
     <x-data-actions-component :resource="'cities'" :item="$city" primaryKey="city_code"/>
 </tr>
 @endforeach

@@ -1,7 +1,7 @@
 @extends('layouts.view')
 
-@section('title', $owner->surname . ' ' . $owner->name)
-@section('main_title', 'Consulter le propriétaire — ' . $owner->surname . ' ' . $owner->name)
+@section('title', $owner->owner_surname . ' ' . $owner->owner_name)
+@section('main_title', 'Consulter le propriétaire — ' . $owner->owner_surname . ' ' . $owner->owner_name)
 
 @section('page_actions')
 <div class="return">
@@ -27,10 +27,10 @@
     <div class="datas_list">
         @foreach ($estates as $estate)
         <div class="list_item">
-            <p><strong>{{ $estate?->estate_code ?? '--'}}</strong></p>
-            <p>{{ $estate?->estate_type ?? '--' }}</p>
-            <p>{{ $estate?->rooms_number ?? '--' }}</p>
-            <p>{{ $estate?->estate_address ?? '--' }}</p>
+            <p class="item_detail"><strong>{{ $estate?->estate_code ?? ''}}</strong></p>
+            <p class="item_detail">{{ ucfirst($estate?->estate_type->value ?? '') }}</p>
+            <p class="item_detail">T{{ $estate?->rooms_number ?? '' }}</p>
+            <p class="item_detail">{{ $estate?->estate_address ?? '' }}</p>
         </div>
         @endforeach
     </div>

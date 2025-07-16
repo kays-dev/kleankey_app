@@ -40,14 +40,26 @@
 }
 
 .datas_list{
-    justify-content: space-between;
     align-items: flex-start;
     gap: 5vw;
+    width: 100%;
 }
 
 .list_item{
-    justify-content: center;
-    align-items: center;
     padding: 2vh;
     border: solid 1px var(--klair-blue);
+    width: 30%;
+    gap: 1vh;
+}
+
+.item_detail{
+    width: 100%;
+    text-align: center;
+}
+
+.item_detail:first-of-type{
+    border-bottom: solid 1px var(--klair-blue) ;
+    padding-bottom: 2vh;
+    width: 100%;
+    text-align: center;
 }
