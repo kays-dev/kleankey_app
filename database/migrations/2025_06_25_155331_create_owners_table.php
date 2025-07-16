@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('owner_tel');
             $table->string('owner_address');
             $table->timestamps();
+
+            // Clé étrangère
+            $table->unsignedInteger('user_id')->nullable()->unique();
+            $table->foreign('user_id')->references('user_id')->on('users');
         });
     }
 

@@ -27,18 +27,26 @@ class Agent extends Model
     ];
 
     //Relation OneToMany (un agent est affecté à un et un seul secteur)
-    public function zone(){
-        return $this->belongsTo(Zone::class,'zone_id','zone_id');
+    public function zone()
+    {
+        return $this->belongsTo(Zone::class, 'zone_id', 'zone_id');
     }
 
     //Relation OneToMany (un agent effectue au minimum une prestation et au maximum plusieurs prestations)
-    public function services(){
-        return $this->hasMany(Service::class,'agent_id','agent_id');
+    public function services()
+    {
+        return $this->hasMany(Service::class, 'agent_id', 'agent_id');
     }
 
     //Relation ManyToMany (un agent entretient au minimum un bien et au maximum plusieurs biens)
-    public function estates(){
-        return $this->belongsToMany(Estate::class,'agent_estate','estate_id','agent_id');
+    public function estates()
+    {
+        return $this->belongsToMany(Estate::class, 'agent_estate', 'estate_id', 'agent_id');
     }
 
+    //Relation OneToOne (un agent d'entretien est associé à un et un seul utilisateur)
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
+    }
 }

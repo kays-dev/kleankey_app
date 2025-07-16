@@ -26,7 +26,14 @@ class Owner extends Model
     ];
 
     //Relation OneToMany (un propriétaire détient au minimum un bien et au maximum plusieurs biens)
-    public function estates(){
-        return $this->hasMany(Estate::class,'owner_id','owner_id');
+    public function estates()
+    {
+        return $this->hasMany(Estate::class, 'owner_id', 'owner_id');
+    }
+
+    //Relation OneToOne (un propriétaire est lié à un et un seul utilisateur)
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 }

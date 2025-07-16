@@ -27,10 +27,10 @@
     <div class="datas_list">
         @foreach ($estates as $estate)
         <div class="list_item">
-            <p><strong>{{ $estate->estate_code }}</strong></p>
-            <p>{{ $estate->estate_type }}</p>
-            <p>{{ $estate->rooms_number }}</p>
-            <p>{{ $estate->estate_address }}</p>
+            <p><strong>{{ $estate?->estate_code ?? '--'}}</strong></p>
+            <p>{{ $estate?->estate_type ?? '--' }}</p>
+            <p>{{ $estate?->rooms_number ?? '--' }}</p>
+            <p>{{ $estate?->estate_address ?? '--' }}</p>
         </div>
         @endforeach
     </div>

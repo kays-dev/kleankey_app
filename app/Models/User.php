@@ -13,22 +13,20 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    // Précision du nom de l'id pour éviter tout bug ou incompréhension de Eloquent
+    protected $primaryKey = 'user_id';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
     protected $fillable = [
-        'name_user',
-        'surname_user',
-        'mail_user',
-        'pwd_user',
-        'role_user'
-    ];
-
-    //Récupération de l'énum
-    protected $casts = [
-        'role_user'=> Role::class,
+        'user_name',
+        'user_surname',
+        'user_mail',
+        'user_pwd',
+        'role'
     ];
 
     /**
@@ -37,7 +35,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $hidden = [
-        'password',
+        'user_pwd',
         'remember_token',
     ];
 
@@ -46,11 +44,34 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
+    protected $casts =  [
+        //Récupération de l'énum
+        'role' => Role::class,
+        'email_verified_at' => 'datetime',
+        'user_pwd' => 'hashed',
+    ];
+
+    // Indique à Laravel d'utiliser user_mail pour le login
+    public function username(): string
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return 'user_mail';
+    }
+
+    // Indique à Laravel d'utiliser user_pwd pour le champ password du modèle Auth
+    public function getAuthPassword()
+    {
+        return $this->user_pwd;
+    }
+
+    //Relation OneToOne (un utilisateur est lié à un et un seul propriétaire)
+    public function owner()
+    {
+        return $this->hasOne(Owner::class, 'user_id', 'user_id');
+    }
+
+    //Relation OneToOne (un utilisateur est associé à un et un seul agent d'entretien)
+    public function agent()
+    {
+        return $this->hasOne(Agent::class, 'user_id', 'user_id');
     }
 }

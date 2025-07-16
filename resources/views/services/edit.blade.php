@@ -48,7 +48,7 @@
         </label>
 
         <div class="input_box">
-            <input type="textarea" class="form_input" name="description" id="description" value="{{ $service->description }}">
+            <input type="textarea" class="form_input" name="description" id="description" value="{{ $service->description ?? '' }}">
         </div>
     </div>
 
@@ -58,7 +58,7 @@
         </label>
 
         <div class="input_box">
-            <input type="time" class="form_input" name="duration" id="duration" value="{{ $service->duration }}">
+            <input type="time" class="form_input" name="duration" id="duration" value="{{ $service->duration ?? '' }}">
         </div>
     </div>
 
@@ -69,7 +69,7 @@
 
         <div class="input_box">
             <select class="form_input" name="agents" id="agents">
-                <option value="{{ $service->agent_id }}" selected>{{ $service->agent->agent_surname . " | " . $agent->agent->zone->zone_name }}</option>
+                <option value="{{ $service->agent_id ?? '' }}" selected>{{ $service->agent?->agent_surname ?? '--' . " | " . $agent->agent?->zone->zone_name ?? '--' }}</option>
                 @foreach ($agents as $agent)
                 <option value="{{ $agent->agent_id }}">{{ $agent->agent_name . " | " . $agent->zone->zone_name}}</option>
                 @endforeach
@@ -85,7 +85,7 @@
         <div class="input_box">
             <select class="form_input" name="estates[]" id="estates" multiple>
                 @foreach ($estates as $estate)
-                <option value="{{ $estate->estate_id }}" @selected(in_array($estate->estate_id, $service->estates->pluck('estate_id')->toArray()))>{{ $estate->estate_code . " | " . $estate->estate_type}}</option>
+                <option value="{{ $estate?->estate_id ?? '' }}" @selected(in_array($estate->estate_id, $service->estates->pluck('estate_id')->toArray()))>{{ $estate->estate_code . " | " . $estate->estate_type}}</option>
                 @endforeach
             </select>
         </div>

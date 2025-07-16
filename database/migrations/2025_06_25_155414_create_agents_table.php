@@ -20,9 +20,12 @@ return new class extends Migration
             $table->string('agent_address');
             $table->timestamps();
 
-            //Clé étrangère
+            //Clé étrangères
             $table->uuid('zone_id')->nullable();
             $table->foreign('zone_id')->references('zone_id')->on('zones');
+            
+            $table->unsignedInteger('user_id')->nullable()->unique();
+            $table->foreign('user_id')->references('user_id')->on('users');
         });
     }
 
