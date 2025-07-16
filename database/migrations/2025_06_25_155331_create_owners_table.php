@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamps();
 
             // Clé étrangère
-            $table->unsignedInteger('user_id')->nullable()->unique();
+            $table->unsignedBigInteger('user_id')->nullable()->unique();
             $table->foreign('user_id')->references('user_id')->on('users');
         });
     }

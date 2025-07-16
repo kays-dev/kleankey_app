@@ -24,7 +24,7 @@ return new class extends Migration
             $table->uuid('zone_id')->nullable();
             $table->foreign('zone_id')->references('zone_id')->on('zones');
             
-            $table->unsignedInteger('user_id')->nullable()->unique();
+            $table->unsignedBigInteger('user_id')->nullable()->unique();
             $table->foreign('user_id')->references('user_id')->on('users');
         });
     }

@@ -17,8 +17,8 @@ return new class extends Migration
 
             $table->primary(['agent_id','estate_id']);
 
-            $table->foreign('agent_id')->references('agent_id')->on('agents');
-            $table->foreign('estate_id')->references('estate_id')->on('estates');
+            $table->foreign('agent_id')->references('agent_id')->on('agents')->onDelete('cascade');
+            $table->foreign('estate_id')->references('estate_id')->on('estates')->onDelete('cascade');
 
             $table->timestamps();
         });

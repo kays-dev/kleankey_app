@@ -63,6 +63,16 @@ class User extends Authenticatable
         return $this->user_pwd;
     }
 
+    /**
+     * Get the e-mail address where password reset links are sent.
+     *
+     * @return string
+     */
+    public function getEmailForPasswordReset()
+    {
+        return $this->user_mail;
+    }
+
     //Relation OneToOne (un utilisateur est lié à un et un seul propriétaire)
     public function owner()
     {

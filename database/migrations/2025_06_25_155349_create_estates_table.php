@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('estate_code')->unique();
             $table->string('estate_address')->unique();
             $table->enum('estate_type',['','appartement','maison'])->default('');
-            $table->string('rooms_number');
-            $table->decimal('surface_m2', 8, 2)->nullable();
+            $table->integer('rooms_number');
+            $table->decimal('surface', 8, 2)->nullable();
             $table->timestamps();
 
             //Clés étrangères

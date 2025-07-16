@@ -41,7 +41,7 @@ class Agent extends Model
     //Relation ManyToMany (un agent entretient au minimum un bien et au maximum plusieurs biens)
     public function estates()
     {
-        return $this->belongsToMany(Estate::class, 'agent_estate', 'estate_id', 'agent_id');
+        return $this->belongsToMany(Estate::class, 'agent_estate', 'agent_id', 'estate_id');
     }
 
     //Relation OneToOne (un agent d'entretien est associé à un et un seul utilisateur)

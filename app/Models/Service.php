@@ -36,6 +36,6 @@ class Service extends Model
 
     //Relation ManyToMany (une prestation s'applique à au minimum un bien et au maximum plusieurs biens)
     public function estates(){
-        return $this->belongsToMany(Estate::class,'estate_service','estate_id','service_id');
+        return $this->belongsToMany(Estate::class,'estate_service','service_id','estate_id');
     }
 }
