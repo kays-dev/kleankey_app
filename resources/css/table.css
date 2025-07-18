@@ -191,14 +191,13 @@ tr {
 
 .name,
 .tel,
-.number {
+.number, .code {
     width: 15%;
 }
 
 .mail,
 .address,
-.type,
-.code {
+.type{
     width: 20%;
 }
 

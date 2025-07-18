@@ -7,31 +7,38 @@
     display: flex;
 }
 
-.details_list, .associated_details, .list_item {
+.details_list,
+.associated_details,
+.list_item {
     flex-direction: column;
 }
 
 /* Détails de l'objet */
-.details{
+.details {
     justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
     gap: 5vw;
-    margin-bottom: 5vh;
+    margin-bottom: 8vh;
 }
 
-.detail{
+.detail {
     color: var(--klean-wood);
 }
 
 /* Données associées */
-.associated_details{
+.associated_details {
     justify-content: center;
     align-items: center;
     gap: 2vw;
+    margin-bottom: 8vh;
 }
 
-.details_title{
+.associated_details:last-of-type {
+    margin-bottom: 0;
+}
+
+.details_title {
     color: var(--klean-wood);
     padding: 1vh 2vw;
     border: solid 1px var(--klair-green);
@@ -39,26 +46,26 @@
     text-align: center;
 }
 
-.datas_list{
+.datas_list {
     align-items: flex-start;
     gap: 5vw;
     width: 100%;
 }
 
-.list_item{
+.list_item {
     padding: 2vh;
     border: solid 1px var(--klair-blue);
     width: 30%;
     gap: 1vh;
 }
 
-.item_detail{
+.item_detail {
     width: 100%;
     text-align: center;
 }
 
-.item_detail:first-of-type{
-    border-bottom: solid 1px var(--klair-blue) ;
+.item_detail:first-of-type {
+    border-bottom: solid 1px var(--klair-blue);
     padding-bottom: 2vh;
     width: 100%;
     text-align: center;

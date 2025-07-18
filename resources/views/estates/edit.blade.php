@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    <div class="form_input_box">
+    <div class="form_input_box big_box">
         <label for="address" class="form_input_label">
             Adresse du bien
         </label>
@@ -51,7 +51,7 @@
             <select class="form_input" name="zone" id="zone">
                 <option value="{{ $estate->zone_id ?? '' }}" selected>{{ $estate->zone?->zone_name ?? '--' }}</option>
                 @foreach ($zones as $zone )
-                <option value="{{ $zone->zone_id }}">{{ $zone->zone_name . " | " . $zone-> cities}}</option>
+                <option value="{{ $zone->zone_id }}">{{ $zone->zone_name . " | " . $zone->cities->pluck('city_name')->implode(', ')}}</option>
                 @endforeach
             </select>
         </div>
@@ -64,7 +64,7 @@
 
         <div class="input_box">
             <select class="form_input" name="type" id="type">
-                <option value="{{ $estate->estate_type }}" selected>{{ ucfirst($estate->estate_type)}}</option>
+                <option value="{{ $estate->estate_type }}" selected>{{ ucfirst($estate->estate_type->value)}}</option>
                 @foreach ($types as $type )
                 <option value="{{ $type->value }}">{{ $type->name }}</option>
                 @endforeach
@@ -92,31 +92,37 @@
         </div>
     </div>
 
-    <div class="form_input_box">
+    <div class="form_input_box multiple">
         <label for="agents" class="form_input_label">
             Agent.s intervenant (plusieurs options sont possibles)
         </label>
 
         <div class="input_box">
-            <select class="form_input" name="agents[]" id="agents" multiple>
+            <div class="form_input multiple">
                 @foreach ($agents as $agent)
-                <option value="{{ $agent?->agent_id ?? '' }}" @selected(in_array($agent->agent_id, $estate->agents->pluck('agent_id')->toArray()))>
-                    {{ $agent->agent_name . " | " . $agent->zone }}
-                </option>
+                <label for="agent_{{ $agent->agent_id }}" class="checkbox_label">
+                    <input type="checkbox"
+                        class="checkbox"
+                        id="agent_{{ $agent->agent_id }}"
+                        name="agents[]"
+                        value="{{ $agent->agent_id }}"
+                        @checked(in_array($agent->agent_id, $estate->agents->pluck('agent_id')->toArray()))>
+                    {{ $agent->agent_name }} | {{ $agent->zone->zone_name }}
+                </label>
                 @endforeach
-            </select>
+            </div>
         </div>
     </div>
 
-    <div class="form_input_box">
+    <div class="form_input_box multiple">
         <label for="services[]" class="form_input_label">
             Prestation.s
         </label>
 
         <div class="input_box">
-            <select class="form_input" name="services[]" id="services" multiple>
+            <select class="form_input multiple" name="services[]" id="services" size="5" multiple>
                 @foreach ($services as $service)
-                <option value="{{ $service->service_id }}" @selected(in_array($service->service_id, $estate->services->pluck('service_id')->toArray()))>{{ $service->service_name. " | " . $service->service_type}}</option>
+                <option value="{{ $service->service_id }}" @selected(in_array($service->service_id, $estate->services->pluck('service_id')->toArray()))>{{ $service->service_name. " | " . ucfirst($service->service_type->value)}}</option>
                 @endforeach
             </select>
         </div>

@@ -11,7 +11,7 @@
 
 @section('details')
 <div class="details">
-    <p class="detail">Propriétaire : <strong>{{ $owner->owner_name . ' ' . $owner->owner_surname }}</strong></p>
+    <p class="detail">Propriétaire : <strong>{{ $owner->owner_surname . ' ' . $owner->owner_name }}</strong></p>
 
     <p class="detail">Adresse du bien : <strong>{{ $estate->estate_address }}</strong></p>
 
@@ -31,8 +31,8 @@
     <div class="datas_list">
         @foreach ($agents as $agent)
         <div class="list_item">
-            <p class="item_detail"><strong>{{ $agent?->agent_surname ?? '' . ' ' . $agent?->agent_name ?? ''}}</strong></p>
-            <p class="item_detail">{{ $agent->zone }}</p>
+            <p class="item_detail"><strong>{{ ($agent?->agent_surname ?? '') . ' ' . ($agent?->agent_name ?? '')}}</strong></p>
+            <p class="item_detail">{{ $agent->zone->zone_name }}</p>
         </div>
         @endforeach
     </div>

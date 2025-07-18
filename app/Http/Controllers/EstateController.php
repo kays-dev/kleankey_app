@@ -83,7 +83,7 @@ class EstateController extends Controller
         $agents = $estate->agents;
         $services = $estate->services;
 
-        return view('estates.show', compact('owner', 'zone', 'agents', 'services'));
+        return view('estates.show', compact('estate','owner', 'zone', 'agents', 'services'));
     }
 
     /**

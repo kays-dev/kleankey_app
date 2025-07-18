@@ -32,7 +32,7 @@
 
     <td class="table_data address">{{ $estate->estate_address }}</td>
 
-    <td class="table_data type">{{ ucfirst($estate->estate_type->value) . ' | ' . $estate->rooms_number }}</td>
+    <td class="table_data type">{{ ucfirst($estate->estate_type->value) . ' | T' . $estate->rooms_number }}</td>
 
     <td class="table_data name">{{ $estate->zone?->zone_name ?? '--'}}</td>
 
