@@ -66,7 +66,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => App\Models\User::class,
         ],
         'admins' => [
             'driver' => 'eloquent',
@@ -101,13 +101,13 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
-            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+            'table' => 'password_reset_tokens',
             'expire' => 60, //en minutes - expiration du token
             'throttle' => 60, //en secondes - 1 demande par minute max
         ],
         'admins' => [
             'provider' => 'admins',
-            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'admin_password_reset_tokens'),
+            'table' => 'admin_password_reset_tokens',
             'expire' => 60, //en minutes - expiration du token
             'throttle' => 60, //en secondes - 1 demande par minute max
         ],
