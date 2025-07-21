@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
+use App\Http\Controllers\Controller;
 
 class AdminAuthController extends Controller
 {
@@ -71,7 +72,7 @@ class AdminAuthController extends Controller
 
             $this->clearLoginAttempts($request); //Le nombre de tentatives de connexion retourne à 0
 
-            return redirect()->intended(route('admin.logged'));
+            return redirect()->intended(route('admin.dashboard'));
         }
 
         // Si l'authentification échoue, incrément du nombre de tentatives de connexion
@@ -82,13 +83,13 @@ class AdminAuthController extends Controller
         ]);
     }
 
-    // Confirmation de connexion de l'Admin
-    public function logged()
+    // Accès au tableau de bord de l'Admin
+    public function dashboard()
     {
         // Récupère l'Admin connecté
         $admin = Auth::guard('admin')->user();
 
-        return view('admin.summary', compact('admin'));
+        return view('admin.dashboard');
     }
 
     // Déconnexion : suppression de la session et accès à l'application refusé
@@ -101,11 +102,5 @@ class AdminAuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect(route('admin.login'));
-    }
-
-
-    public function dashboard()
-    {
-        return view('admin.dashboard');
     }
 }
