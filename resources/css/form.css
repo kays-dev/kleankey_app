@@ -1,0 +1,160 @@
+/* Flexboxs */
+.inputs_list,
+.inputs_list form,
+.form_input_box,
+.form_input,
+.form_input_label,
+.form_input_box.multiple,
+.form_input.multiple,
+.input_box,
+.checkbox_label {
+    display: flex;
+}
+
+.inputs_list,
+.form_input_box.multiple,
+.form_input.multiple {
+    flex-direction: column;
+}
+
+/* Informations du formulaire */
+.important {
+    color: var(--klean-info);
+    font-size: 1.5rem;
+}
+
+.important:first-of-type {
+    padding-top: 2vh;
+    border-top: dashed 2px var(--klean-line);
+}
+
+.important:last-of-type {
+    padding-bottom: 2vh;
+    margin-bottom: 5vh;
+    border-bottom: dashed 2px var(--klean-line);
+}
+
+/* Formulaire */
+.inputs_list form {
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 3vh;
+    width: 100%;
+}
+
+.form_input_box {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1vw;
+    min-height: 6vh;
+    width: calc(50% - 1.5vh);
+    height: auto;
+}
+
+.form_input_box.multiple {
+    align-items: flex-start;
+    width: 100%;
+    min-height: auto;
+}
+
+.form_input_box.big_box {
+    width: 100%;
+}
+
+.form_input_label {
+    color: var(--klean-wood);
+    font-size: 2rem;
+    font-weight: 500;
+    width: max-content;
+    min-width: 20vw;
+    align-items: center;
+    line-height: 1.2;
+}
+
+.input_box {
+    justify-content: center;
+    align-items: stretch;
+    flex: 1;
+    background-color: var(--klair-blue);
+    border-radius: 1.5rem;
+    min-height: 5vh;
+    padding: 0.6vh;
+    box-shadow: inset -1px -1px 10px var(--klean-air);
+}
+
+.form_input {
+    border: none;
+    background-color: var(--klean-air);
+    border-radius: 1.2rem;
+    outline: none;
+    min-height: 4vh;
+    width: 100%;
+    padding: 1vh;
+    color: var(--klean-wood);
+    font-size: 1.2rem;
+}
+
+.form_input input {
+    border: none;
+    background-color: var(--klean-air);
+    height: 100%;
+    width: 100%;
+    margin-left: 0.5vw;
+    color: var(--klean-wood);
+    font-size: 1.2rem;
+}
+
+.form_input_box.multiple .input_box {
+    align-items: flex-start; /* Changé de stretch à flex-start */
+    justify-content: flex-start; /* Changé de center à flex-start */
+    padding: 0.3vh; /* Réduit le padding pour les checkboxes */
+    min-height: auto; /* Permet l'adaptation au contenu */
+}
+
+.form_input.multiple{
+    min-height: auto; /* Changé de 15vh à auto pour s'adapter au contenu */
+    height: auto;
+    align-items: stretch;
+    padding: 0.5vh; /* Réduit le padding */
+    gap: 0.2vh; /* Réduit l'espacement entre les éléments */
+    justify-content: flex-start;
+}
+
+.checkbox_label {
+    min-height: auto; /* Changé de 3vh à auto */
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.3vh 0.5vh; /* Réduit le padding pour moins d'espacement */
+    gap: 0.5vw; /* Réduit l'espacement entre checkbox et texte */
+    border-radius: 0.5rem; /* Réduit le border-radius */
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+    font-size: 1.1rem; /* Légèrement plus petit */
+    color: var(--klean-wood);
+    margin: 0.1vh 0; /* Ajout d'une marge minimale */
+}
+
+.checkbox_label:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.checkbox {
+    width: 1.2rem; /* Légèrement plus petit */
+    height: 1.2rem;
+    flex-shrink: 0;
+    cursor: pointer;
+    accent-color: var(--klair-blue);
+}
+
+.form_submit {
+    background-color: var(--klair-blue);
+    box-shadow: inset -1px -1px 10px var(--klean-air);
+    border-radius: 1.2rem;
+    height: 5vh;
+    width: fit-content;
+    padding: 1vh 1vw;
+    margin-top: 2vh;
+    color: var(--klean-wood);
+}
