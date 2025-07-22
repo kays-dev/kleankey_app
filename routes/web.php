@@ -22,13 +22,6 @@ use App\Http\Controllers\User\Owner\OwnerServicesController;
 // =============== HOME
 // Route::get('/', [controller, 'function'])->name('homepage');
 
-// // Authentification User
-// Route::get('/login', [UserAuthController::class, 'login'])->name('user.login');
-// Route::post('/dologin', [UserAuthController::class, 'dologin'])->name('user.dologin');
-// Route::get('/register', [UserAuthController::class, 'register'])->name('user.login');
-// Route::post('/doregister', [UserAuthController::class, 'doregister'])->name('user.dologin');
-
-
 // =============== Routes Admin
 // Route::prefix('admin')->group(function () {
 
@@ -61,17 +54,34 @@ use App\Http\Controllers\User\Owner\OwnerServicesController;
 //     });
 
 //     Route::middleware(['auth', 'role'])->group(function () {
+
         // Routes rôle Owner
             // Route::middleware(['access.owner'])->group(function () {
-            //     Route::middleware(['this.owner.estate'])->group(function () {
-            //          Route::get('/my-estates', [UserEstateController::class, 'myEstates'])->name('user.my-estates');
-            //     });
+                    // Route::get('/my-estates', [OwnerEstatesController::class, 'index'])->name('client.estates');
+                    // Route::get('/my-services', [OwnerServicesController::class, 'index'])->name('client.services');
+
+                    // Route::middleware(['this.estate.owner'])->group(function () {
+                        // Route::get('/show/{estate}', [OwnerEstatesController::class, 'show'])->name('client.single.estate');
+                                    // });
+
+                    // Route::middleware(['this.estate.service'])->group(function () {
+                        // Route::get('/show/{service}', [OwnerServicesController::class, 'show'])->name('client.single.service');
+                                    // });
             // });
 
 
         // Routes rôle Agent
-            //     Route::middleware(['access.agent'])->group(function () {
-            //     Route::get('/my-estates', [UserEstateController::class, 'myEstates'])->name('user.my-estates');
+            // Route::middleware(['access.agent'])->group(function () {
+                    // Route::get('/estates', [AgentEstatesController::class, 'managing'])->name('user.tended.estates');
+                    // Route::get('/services', [AgentServicesController::class, 'planning'])->name('user.planned.services');
+
+                    // Route::middleware(['this.estate.agent'])->group(function () {
+                        // Route::get('/show/{estate}', [AgentEstatesController::class, 'show'])->name('user.this.tended.estate');
+                                    // });
+
+                    // Route::middleware(['this.service.agent'])->group(function () {
+                        // Route::get('/show/{service}', [AgentServicesController::class, 'show'])->name('user.this.planned.service');
+                                    // });
             // });
             
         // });

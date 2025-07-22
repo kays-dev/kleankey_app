@@ -7,10 +7,17 @@ use Illuminate\Foundation\Configuration\Middleware;
 // use Illuminate\Auth\Middleware\Authenticate as AuthenticateMiddleware;
 // use App\Http\Middleware\Auth\AuthenticateAdmin as AuthenticateAdminMiddleware;
 // use  App\Http\Middleware\Auth\RedirectIfAuthenticated as RedirectedMiddleware;
-use App\Http\Middleware\User\CheckRole as RoleMiddleware;
-use App\Http\Middleware\User\Agent\AccessToAgentOnly as AgentAccessMiddleware;
-use App\Http\Middleware\User\Owner\AccessToOwnerOnly as OwnerAccessMiddleware;
-use App\Http\Middleware\User\Owner\EstateBelongsToOwner;
+
+// use App\Http\Middleware\User\CheckRole as RoleMiddleware;
+
+// use App\Http\Middleware\User\Agent\AccessToAgentOnly as AgentAccessMiddleware;
+// use App\Http\Middleware\User\Agent\EstateHasThisAgent;
+// use App\Http\Middleware\User\Agent\ServiceBelongsToAgent;
+
+// use App\Http\Middleware\User\Owner\AccessToOwnerOnly as OwnerAccessMiddleware;
+// use App\Http\Middleware\User\Owner\EstateBelongsToOwner;
+// use App\Http\Middleware\User\Owner\ServiceHasThisEstateOwner;
+
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -30,7 +37,12 @@ return Application::configure(basePath: dirname(__DIR__))
         // =============== Middlewares d'accès aux ressources
         // $middleware->alias('access.agent', AgentAccessMiddleware::class); //autorise l'accès à un utilisateur de rôle 'agent'
         // $middleware->alias('access.owner', OwnerAccessMiddleware::class); //autorise l'accès à un utilisateur de rôle 'owner'
-        // $middleware->alias('this.owner.estate', EstateBelongsToOwner::class); //autorise l'accès à un bien seulement à l''owner' correspondant
+
+        // $middleware->alias('this.estate.owner', EstateBelongsToOwner::class); //autorise l'accès à un bien seulement à l''owner' correspondant
+        // $middleware->alias('this.service.agent', ServiceBelongsToAgent::class); //autorise l'accès à un service seulement à l''agent' correspondant
+
+        // $middleware->alias('this.estate.service', ServiceHasThisEstateOwner::class); //autorise l'accès à un service seulement à l''owner' du bien correspondant
+        // $middleware->alias('this.estate.agent', EstateHasThisAgent::class); //autorise l'accès à un bien seulement à l''agent' correspondant
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

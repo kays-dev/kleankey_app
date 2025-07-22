@@ -2,13 +2,13 @@
 
 namespace App\Http\Middleware\User\Owner;
 
-use App\Models\Owner;
 use Closure;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Owner;
 use Symfony\Component\HttpFoundation\Response;
 
-class EstateBelongsToOwner
+class ServiceHasThisEstateOwner
 {
     /**
      * Handle an incoming request.
@@ -21,14 +21,14 @@ class EstateBelongsToOwner
         $user = Auth::guard('web')->user();
 
         // Récupération de l'objet à vérifier
-        $estateCode = $request->route('estate');
+        $serviceId = $request->route('service');
 
         // Récupération de l'Owner associé au User authentifié
         $owner = Owner::where('user_id', $user->user_id)->first();
 
-        // Vérifie que l'estate est lié à l'Owner authentifié
-        if (!$owner || !$owner->estates->contains('estate_code', $estateCode)) {
-            abort(403, 'Vous ne pouvez pas accèder à ce bien');
+        // Vérifie que le service est lié à l'Agent authentifié
+        if (!$owner || !$owner->estates->services->contains('service_id', $serviceId)) {
+            abort(403, 'Vous ne pouvez pas accèder à cette prestation');
         }
         return $next($request);
     }
