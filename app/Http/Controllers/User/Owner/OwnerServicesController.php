@@ -4,6 +4,9 @@ namespace App\Http\Controllers\User\Owner;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Owner;
+use App\Models\Service;
+use Illuminate\Support\Facades\Auth;
 
 class OwnerServicesController extends Controller
 {
@@ -12,10 +15,16 @@ class OwnerServicesController extends Controller
      */
     public function index()
     {
-        $services = Service::all();
-        $pagination = Service::paginate(15);
+        $user = Auth::guard('web')->user();
+        $owner = Owner::where('owner_id', $user->owner)->firstOrFail();
 
-        return view('services.index', compact('services', 'pagination'));
+        $estates = $owner->estates;
+
+        $services = $estates->services;
+
+        $pagination = $services->paginate(15);
+
+        return view('user.owner.services.index', compact('user', 'estates', 'services', 'pagination'));
     }
 
     /**
@@ -23,10 +32,11 @@ class OwnerServicesController extends Controller
      */
     public function show(string $id)
     {
-        $service = Service::findOrFail($id);
+        $service = Service::where($id);
+
         $agent = $service->agent;
         $estates = $service->estates;
 
-        return view('services.show', compact('estates', 'agent', 'service'));
+        return view('user.owner.services.show', compact('estates', 'agent', 'service'));
     }
 }

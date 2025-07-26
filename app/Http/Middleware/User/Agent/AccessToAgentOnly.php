@@ -20,7 +20,7 @@ class AccessToAgentOnly
         $user= Auth::guard('web')->user();
 
         // Vérifie que le User a un rôle 'agent'
-        if(!$user || $user->role !== 'agent'){
+        if(!$user || $user->role->value !== 'agent'){
             abort(403, 'Vous n\' êtes pas autorisé à accèder à cette ressource');
         }
 

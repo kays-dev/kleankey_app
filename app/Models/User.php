@@ -48,13 +48,17 @@ class User extends Authenticatable
         //Récupération de l'énum
         'role' => Role::class,
         'email_verified_at' => 'datetime',
-        'user_pwd' => 'hashed',
     ];
 
     // Indique à Laravel d'utiliser user_mail pour le login
     public function username(): string
     {
         return 'user_mail';
+    }
+    // Indique à Laravel d'utiliser user_mail pour le login
+    public function getAuthIdentifierName()
+    {
+                return 'user_mail';
     }
 
     // Indique à Laravel d'utiliser user_pwd pour le champ password du modèle Auth

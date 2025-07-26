@@ -1,4 +1,10 @@
-@extends('layouts.admin')
+@php
+    $layout = $user->role->value === 'agent' || $user->role->value === 'owner'
+        ? 'layouts.user_menu'
+        : 'layouts.admin_menu';
+@endphp
+
+@extends($layout)
 
 @section('content')
 

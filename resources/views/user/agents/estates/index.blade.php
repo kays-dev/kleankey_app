@@ -7,11 +7,6 @@
 <div class="return">
     <a href="{{-- route('homepage') --}}" class="return_to_dashboard">Retour au tableau de bord</a>
 </div>
-<div class="add_data">
-    <div>
-        <a href="{{ route('estates.create') }}"><img src="" alt="ajouter un bien" class="page_actions_button"></a>
-    </div>
-</div>
 @endsection
 
 @section('table_headers')
@@ -36,8 +31,6 @@
 
     <td class="table_data name">{{ $estate->zone?->zone_name ?? '--'}}</td>
 
-    <td class="table_data type">{{ $estate->agents?->pluck('agent_surname')->implode(', ') ?? '--'}}</td>
-    <x-data-actions-component :resource="'estates'" :item="$estate" primaryKey="estate_code"/>
 </tr>
 @endforeach
 @endsection

@@ -5,34 +5,15 @@ namespace App\Http\Controllers\Auth;
 use App\Models\Agent;
 use App\Models\Owner;
 use App\Models\User;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class UserAuthController extends Controller
 {
-    // =============== GESTION DES TENTATIVES DE CONNEXION
-    use ThrottlesLogins;
 
-    // Limite de tentatives de connexion
-    protected function maxAttempts()
-    {
-        return 3; // 3 tentatives max
-    }
-
-    // Temps de blocage après 3 tentatives de connexion infructueuses
-    protected function decayMinutes()
-    {
-        return 10; // Bloqué pendant 10 minutes
-    }
-
-    // Clé unique pour identifier le User
-    protected function throttleKey(Request $request)
-    {
-        return strtolower($request->input('email')) . '|' . $request->ip();
-    }
 
     // =============== GESTION DE L'AUTHENTIFICATION
 
@@ -46,44 +27,35 @@ class UserAuthController extends Controller
     public function doLogin(Request $request)
     {
 
-        // Vérifie si le User est bloqué
-        if ($this->hasTooManyLoginAttempts($request)) {
-
-            $blockedTime = $this->limiter()->availableIn($this->throttleKey($request));
-            $this->fireLockoutEvent($request);
-
-            return back()->withErrors([
-                'user_mail' => 'Trop de tentatives. Réessayez dans ' . $blockedTime . ' secondes.',
-            ]);
-        }
-
         // Vérification et récupération des valeurs des inputs du formulaire de connexion
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required'
         ]);
 
+        // Debug des credentials envoyés à attempt()
+        $attemptCredentials = [
+            'user_mail' => $credentials['email'],
+            'password' => $credentials['password']
+        ];
+        Log::info('Attempt credentials: ', $attemptCredentials);
+
         // Authentifie le User
         if (Auth::guard('web')->attempt(
             [
                 'user_mail' => $credentials['email'],
-                'user_pwd' => $credentials['password']
+                'password' => $credentials['password']
             ],
             $request->boolean('remember') //Options "se souvenir de moi"
         )) {
 
             $request->session()->regenerate();
 
-            $this->clearLoginAttempts($request); //Le nombre de tentatives de connexion retourne à 0
-
             return redirect()->intended(route('user.logged'));
         }
 
-        // Si l'authentification échoue, incrément du nombre de tentatives de connexion
-        $this->incrementLoginAttempts($request);
-
         return back()->withErrors([
-            'user_mail' => 'Identifiants invalides.',
+            'email' => 'Identifiants invalides.',
         ]);
     }
 
@@ -121,10 +93,9 @@ class UserAuthController extends Controller
     {
         // Vérification et récupération des valeurs des inputs du formulaire d'inscription
         $validated = $request->validate([
-            'fname' => 'required|string|max:255',
-            'lname' => 'required|string|max:255',
             'email' => 'required|email|unique:users,user_mail',
-            'password' => 'required|confirmed|min:8',
+            'password' => 'required|confirmed:password_verification|min:8',
+            'password_verification' => 'required',
         ]);
 
         $email = $validated['email'];
@@ -152,10 +123,16 @@ class UserAuthController extends Controller
         // Détermine le rôle du User en fonction de la table d’origine
         $role = $owner ? 'owner' : 'agent';
 
+        // Détermine le nom du User en fonction de la table d’origine
+        $name = $owner ? $owner->owner_name : $agent->agent_name;
+
+        // Détermine le prénom du User en fonction de la table d’origine
+        $surname = $owner ? $owner->owner_surname : $agent->agent_surname;
+
         // Créer le compte utilisateur avec le rôle
         $user = User::create([
-            'user_name' => $validated['lname'],
-            'user_surname' => $validated['fname'],
+            'user_name' => $name,
+            'user_surname' => $surname,
             'user_mail' => $validated['email'],
             'user_pwd' => Hash::make($validated['password']),
             'role' => $role,

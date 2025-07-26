@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\User\Owner;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Models\Estate;
+use App\Models\Owner;
 
 class OwnerEstatesController extends Controller
 {
@@ -12,23 +15,28 @@ class OwnerEstatesController extends Controller
      */
     public function index()
     {
-        $estates = Estate::all();
-        $pagination = Estate::paginate(15);
+        $user = Auth::guard('web')->user();
+        $owner = Owner::where('owner_id', $user->owner)->firstOrFail();
 
-        return view('estates.index', compact('estates', 'pagination'));
+        $estates = $owner->estates;
+
+        $pagination = $estates->paginate(15);
+
+        return view('user.owner.estates.index', compact('user', 'estates', 'pagination'));
     }
-    
+
     /**
      * Display the specified resource.
      */
     public function show(string $estateCode)
     {
+        $user = Auth::guard('web')->user();
+
         $estate = Estate::where('estate_code', $estateCode)->firstOrFail();
         $owner = $estate->owner;
         $zone = $estate->zone;
-        $agents = $estate->agents;
         $services = $estate->services;
 
-        return view('estates.show', compact('estate', 'owner', 'zone', 'agents', 'services'));
+        return view('user.owner.estates.show', compact('user', 'estate', 'owner', 'zone', 'services'));
     }
 }

@@ -20,7 +20,7 @@ class AgentServicesController extends Controller
 
         $pagination = $services->paginate(15);
 
-        return view('services.index', compact('user', 'services', 'pagination'));
+        return view('user.agent.services.index', compact('user', 'services', 'pagination'));
     }
 
     /**
@@ -32,6 +32,6 @@ class AgentServicesController extends Controller
         $agent = $service->agent;
         $estates = $service->estates;
 
-        return view('services.show', compact('estates', 'agent', 'service'));
+        return view('user.agent.services.show', compact('estates', 'agent', 'service'));
     }
 }

@@ -21,10 +21,10 @@ class CheckRole
         $user= Auth::guard('web')->user();
 
         // Récupère tous les rôles existants dans l'enum
-        $roles= Role::cases();
+        $roles=array_map(fn($role) => $role->value, Role::cases());
 
         // Vérifie que le User a un rôle
-        if(!$user || !in_array($user->role, $roles)){
+        if(!$user || !in_array($user->role->value, $roles)){
             abort(403, 'Accès refusé');
         }
 

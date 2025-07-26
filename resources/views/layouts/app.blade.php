@@ -27,15 +27,7 @@
                         <img src="" alt="bulles de séparation">
                     </div>
                     <ul>
-                        <li class="main_menu_item">
-                            <a href="" class="main_menu_links">Tableau de bord</a>
-                        </li>
-                        <li class="main_menu_item"><a href="{{ route('services.index')}}" class="main_menu_links">Planning</a></li>
-                        <li class="main_menu_item"><a href="{{ route('estates.index')}}" class="main_menu_links">Biens</a></li>
-                        <li class="main_menu_item"><a href="{{ route('owners.index')}}" class="main_menu_links">Propriétaires</a></li>
-                        <li class="main_menu_item"><a href="{{ route('agents.index')}}" class="main_menu_links">Agents</a></li>
-                        <li class="main_menu_item"><a href="{{ route('zones.index')}}" class="main_menu_links">Secteurs</a>
-                        </li>
+                        @yield('menu')
                     </ul>
                     <button class="logout" id="logout">Déconnexion</button>
                 </div>
@@ -70,6 +62,16 @@
         <div class="main_title">
             <h1>@yield('main_title', 'Tableau de bord')</h1>
         </div>
+
+        @if ($errors->any())
+        <div class="mb-4 text-red-600">
+            <ul class="list-disc list-inside">
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
 
         <section>
             <div class="page_main_actions">
