@@ -1,10 +1,6 @@
 @php
-    $layout = $user->role->value === 'agent' || $user->role->value === 'owner'
-        ? 'layouts.user_menu'
-        : 'layouts.admin_menu';
+    $layout = 'layouts.admin_menu';
 @endphp
-
-@extends($layout)
 
 @extends($layout)
 

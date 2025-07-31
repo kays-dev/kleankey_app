@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Zone;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CityController extends Controller
 {
@@ -14,10 +15,10 @@ class CityController extends Controller
      */
     public function index()
     {
-        $cities=City::all();
-        $pagination=City::paginate(15);
+        $user = Auth::guard('web')->user();
+        $cities = City::paginate(15);
 
-        return view('admin.cities.index', compact('cities', 'pagination'));
+        return view('admin.cities.index', compact('cities', 'user'));
     }
 
     /**
@@ -25,9 +26,10 @@ class CityController extends Controller
      */
     public function create()
     {
-        $zones= Zone::all();
-        
-        return view('admin.cities.create', compact('zones'));
+        $user = Auth::guard('web')->user();
+        $zones = Zone::all();
+
+        return view('admin.cities.create', compact('zones', 'user'));
     }
 
     /**
@@ -36,17 +38,17 @@ class CityController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=> 'required|string',
-            'postcode'=> 'required|string',
-            'region'=> 'required|string',
-            'zone'=> 'nullable|string|exists:zones,zone_id',
+            'name' => 'required|string',
+            'postcode' => 'required|string',
+            'region' => 'required|string',
+            'zone' => 'nullable|string|exists:zones,zone_id',
         ]);
 
         $city = City::create([
-            'city_name'=> mb_strtoupper(($request->input('name')), 'UTF-8'),
-            'postcode'=> $request->input('postcode'),
-            'region'=> $request->input('region'),
-            'zone_id'=> $request->input('zone'),
+            'city_name' => mb_strtoupper(($request->input('name')), 'UTF-8'),
+            'postcode' => $request->input('postcode'),
+            'region' => $request->input('region'),
+            'zone_id' => $request->input('zone'),
         ]);
 
         return redirect(route('cities.create'))->with('success', 'Ville ' . $city->city_name . ' créée !');
@@ -57,10 +59,11 @@ class CityController extends Controller
      */
     public function show(string $cityCode)
     {
-        $city = City::where('city_code',$cityCode)->firstOrFail();
+        $user = Auth::guard('web')->user();
+        $city = City::where('city_code', $cityCode)->firstOrFail();
         $zone = $city->zone;
 
-        return view('admin.cities.show', compact('city', 'zone'));
+        return view('admin.cities.show', compact('city', 'zone', 'user'));
     }
 
     /**
@@ -68,10 +71,11 @@ class CityController extends Controller
      */
     public function edit(string $cityCode)
     {
-        $city= City::where('city_code',$cityCode)->firstOrFail();
-        $zones= Zone::all();
-        
-        return view('admin.cities.edit', compact('zones','city'));
+        $user = Auth::guard('web')->user();
+        $city = City::where('city_code', $cityCode)->firstOrFail();
+        $zones = Zone::all();
+
+        return view('admin.cities.edit', compact('zones', 'city', 'user'));
     }
 
     /**
@@ -79,20 +83,20 @@ class CityController extends Controller
      */
     public function update(Request $request, string $cityCode)
     {
-        $city= City::where('city_code',$cityCode)->firstOrFail();
+        $city = City::where('city_code', $cityCode)->firstOrFail();
 
         $request->validate([
-            'name'=> 'required|string',
-            'postcode'=> 'required|string',
-            'region'=> 'required|string',
-            'zone'=> 'nullable|string|exists:zones,zone_id',
+            'name' => 'required|string',
+            'postcode' => 'required|string',
+            'region' => 'required|string',
+            'zone' => 'nullable|string|exists:zones,zone_id',
         ]);
 
         $city->update([
-            'city_name'=>  mb_strtoupper(($request->input('name')), 'UTF-8'),
-            'postcode'=> $request->input('postcode'),
-            'region'=> $request->input('region'),
-            'zone_id'=> $request->input('zone'),
+            'city_name' =>  mb_strtoupper(($request->input('name')), 'UTF-8'),
+            'postcode' => $request->input('postcode'),
+            'region' => $request->input('region'),
+            'zone_id' => $request->input('zone'),
         ]);
 
         return redirect(route('cities.show', $city->city_code))->with('success', 'Ville ' . $city->city_name . ' modifiée !');
@@ -103,10 +107,10 @@ class CityController extends Controller
      */
     public function destroy(string $cityCode)
     {
-        $city= City::where('city_code',$cityCode)->firstOrFail();
+        $city = City::where('city_code', $cityCode)->firstOrFail();
 
         $city->delete();
 
-        return redirect(route('cities.index'))->with('success', 'Ville '. $city->city_name . ' supprimée');
+        return redirect(route('cities.index'))->with('success', 'Ville ' . $city->city_name . ' supprimée');
     }
 }

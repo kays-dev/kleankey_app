@@ -1,6 +1,11 @@
 @extends('layouts.auth')
 
 @section('title', 'Inscription')
+
+@section('connexion')
+    <x-auth-connection :route="'user.login'" :action="'Connexion'"/>
+@endsection
+
 @section('main_title', 'Bienvenue sur KleanKey !')
 
 @section('content')

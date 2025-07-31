@@ -7,11 +7,6 @@
 <div class="return">
     <a href="{{-- route('homepage') --}}" class="return_to_dashboard">Retour au tableau de bord</a>
 </div>
-<div class="add_data">
-    <div>
-        <a href="{{ route('services.create') }}"><img src="" alt="ajouter une prestation" class="page_actions_button"></a>
-    </div>
-</div>
 @endsection
 
 @section('table_headers')
@@ -28,7 +23,13 @@
     <td class="table_data type">{{ ucfirst($service->service_type->value)}}</td>
 
     <td class="table_data number">{{ $service->duration ?? '--' }} h</td>
-    <x-data-actions-component :resource="'services'" :item="$service" primaryKey="service_id"/>
-</tr>
+    <td class="data_actions table_data">
+        <div class="data_buttons">
+            <div class="data_button">
+                <a href="{{ route('user.this.planned.service', $service->service_id) }}">
+                    <img src="{{ asset('images/icons/view.svg') }}" alt="Consulter">
+                </a>
+            </div>
+    </td>
 @endforeach
 @endsection

@@ -41,7 +41,7 @@
                 <div class="profile_box">
                     <div class="profile_box_user">
                         <div class="profile_box_name">
-                            <p>{{-- $user->surname_user --}} {{-- str_pad($user->name_user, 1,'.', STR_PAD_RIGHT )
+                            <p>{{-- $user->user_surname --}} {{-- str_pad($user->user_name, 1,'.', STR_PAD_RIGHT )
                                         --}}</p>
                         </div>
                         <img src="" alt="option de profil" class="profile_toggle" id="profile_toggle">

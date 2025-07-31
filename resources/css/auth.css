@@ -91,13 +91,17 @@ section,
 .main_title,
 form,
 .form_input_box,
+.recap,
+.recap_box,
+.confirm_link,
 footer {
     display: flex;
 }
 
 .logo_box,
 form,
-section {
+section,
+.recap {
     flex-direction: column;
 }
 
@@ -249,8 +253,8 @@ form {
     box-shadow: inset -1px -1px 10px var(--klean-air);
 }
 
-.form_submit {
-    background-color: var(--klair-green);
+.form_submit, .confirm_link {
+    background-color: var(--klair-blue);
     box-shadow: inset -1px -1px 10px var(--klean-air);
     border-radius: 1.5rem;
     height: 6vh;
@@ -261,8 +265,41 @@ form {
     margin: 2vh;
 }
 
-.form_submit:hover {
-    background-color: var(--klair-blue);
+.form_submit:hover, .confirm_link:hover {
+    background-color: var(--klair-green);
+}
+
+/* Récap */
+.recap{
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 3vh;
+}
+
+.recap_box{
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    border: solid 1px var(--klean-wood);
+    padding: 2vh 1vw;
+    color: var(--klean-wood);
+}
+
+.recap_detail{
+    color: var(--klean-wood);
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.confirm_link{
+    align-items: center;
+    width:max-content;
+    font-size: 1.5rem;
+    margin: 5vh 0 0 0;
+}
+
+.confirm_link a{
+    color: var(--klean-wood);
 }
 
 /* FOOTER */

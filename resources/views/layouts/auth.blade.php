@@ -21,9 +21,7 @@
                 <div class="nav_arrow">
                     <img src="" alt="icône flèche droite">
                 </div>
-                <div class="nav_connect">
-                    <a href="{{ route('user.login') }}">Se connecter</a>
-                </div>
+                @yield('connexion')
                 <div class="nav_arrow">
                     <img src="" alt="icône flèche gauche">
                 </div>

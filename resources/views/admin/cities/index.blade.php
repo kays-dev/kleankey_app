@@ -3,6 +3,10 @@
 @section('title', 'Villes')
 @section('main_title', 'Liste des villes')
 
+@section('pages')
+    <x-page-navigation :table="$cities"/>
+@endsection
+
 @section('page_actions')
 <div class="return">
     <a href="{{ route('zones.index') }}" class="return_to_dashboard">Retour aux secteurs</a>

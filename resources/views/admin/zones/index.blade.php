@@ -3,6 +3,10 @@
 @section('title', 'Secteurs')
 @section('main_title', 'Liste des secteurs')
 
+@section('pages')
+    <x-page-navigation :table="$zones"/>
+@endsection
+
 @section('page_actions')
 <div class="return">
     <a href="{{-- route('homepage') --}}" class="return_to_dashboard">Retour au tableau de bord</a>

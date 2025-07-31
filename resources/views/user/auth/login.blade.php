@@ -1,6 +1,11 @@
 @extends('layouts.auth')
 
 @section('title', 'Connexion')
+
+@section('connexion')
+    <x-auth-connection :route="'user.register'" :action="'S\'inscrire'"/>
+@endsection
+
 @section('main_title', 'Ravie de vous revoir !')
 
 @section('content')

@@ -2,34 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Admin;
 use App\Http\Controllers\Controller;
 
 class AdminAuthController extends Controller
 {
-    // =============== GESTION DES TENTATIVES DE CONNEXION
-    use ThrottlesLogins;
-
-    // Limite de tentatives de connexion
-    protected function maxAttempts()
-    {
-        return 5; // 5 tentatives max
-    }
-
-    // Temps de blocage après 5 tentatives de connexion infructueuses
-    protected function decayMinutes()
-    {
-        return 15; // Bloqué pendant 15 minutes
-    }
-
-    // Clé unique pour identifier l' Admin
-    protected function throttleKey(Request $request)
-    {
-        return strtolower($request->input('email')) . '|' . $request->ip();
-    }
 
     // =============== GESTION DE L'AUTHENTIFICATION
 
@@ -42,17 +20,6 @@ class AdminAuthController extends Controller
     // Vérification en db de l'existence de l'Admin et authentification pour accès à l'application
     public function doLogin(Request $request)
     {
-        // Vérifier si l'Admin est bloqué
-        if ($this->hasTooManyLoginAttempts($request)) {
-
-            $blockedTime = $this->limiter()->availableIn($this->throttleKey($request));
-            $this->fireLockoutEvent($request);
-
-            return back()->withErrors([
-                'admin_mail' => 'Trop de tentatives. Réessayez dans ' . $blockedTime . ' secondes.',
-            ]);
-        }
-
         // Vérification et récupération des valeurs des inputs du formulaire de connexion
         $credentials = $request->validate([
             'email' => 'required|email',
@@ -63,24 +30,16 @@ class AdminAuthController extends Controller
         if (Auth::guard('admin')->attempt(
             [
                 'admin_mail' => $credentials['email'],
-                'admin_pwd' => $credentials['password']
+                'password' => $credentials['password']
             ],
             $request->boolean('remember') //Options "se souvenir de moi"
         )) {
 
             $request->session()->regenerate();
 
-            $this->clearLoginAttempts($request); //Le nombre de tentatives de connexion retourne à 0
-
-            return redirect()->intended(route('admin.dashboard'));
+            return redirect()->intended(route('zones.index'));
         }
 
-        // Si l'authentification échoue, incrément du nombre de tentatives de connexion
-        $this->incrementLoginAttempts($request);
-
-        return back()->withErrors([
-            'admin_mail' => 'Identifiants invalides.',
-        ]);
     }
 
     // Accès au tableau de bord de l'Admin
@@ -93,7 +52,7 @@ class AdminAuthController extends Controller
     }
 
     // Déconnexion : suppression de la session et accès à l'application refusé
-    public function doLogout(Request $request)
+    public function logout(Request $request)
     {
         // Déconnecte l'Admin connecté
         Auth::guard('admin')->logout();
