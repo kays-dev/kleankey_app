@@ -31,11 +31,11 @@
                         @yield('menu')
                     </ul>
                     @if(Auth::guard('admin'))
-                    <form action="{{ route('admin.logout')}}">
+                    <form action="{{ route('admin.logout')}}" class="menu_logout">
                         <button class="logout" id="logout">Déconnexion</button>
                     </form>
                     @else
-                    <form action="{{ route('user.logout')}}">
+                    <form action="{{ route('user.logout')}}" class="menu_logout">
                         <button class="logout" id="logout">Déconnexion</button>
                     </form>
                     @endif
@@ -50,8 +50,14 @@
                 <div class="profile_box">
                     <div class="profile_box_user">
                         <div class="profile_box_name">
-                            <p>{{-- $user->user_surname --}} {{-- str_pad($user->user_name, 1,'.', STR_PAD_RIGHT )
-                                        --}}</p>
+                            <p>@if(Auth::guard('admin'))
+                                {{ $admin->admin_surname }} {{ substr($admin->admin_name, 0, 1)
+                                        }}
+                                @else
+                                {{ $user->user_surname }} {{ substr($user->user_name, 0, 1)
+                                        }}
+                                @endif
+                            </p>
                         </div>
                         <img src="" alt="option de profil" class="profile_toggle" id="profile_toggle">
                     </div>
@@ -77,18 +83,19 @@
             <h1>@yield('main_title', 'Tableau de bord')</h1>
         </div>
 
-        @if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-        @endif
+        <div class="message">
+            @if(session('error'))
+            <div class="error alert">
+                {{ session('error') }}
+            </div>
+            @endif
 
-        @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
+            @if(session('success'))
+            <div class="success alert">
+                {{ session('success') }}
+            </div>
+            @endif
         </div>
-        @endif
-
 
         <section>
             <div class="page_main_actions">

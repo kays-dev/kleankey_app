@@ -7,13 +7,12 @@
  <div class="box">
      @yield('second-box')
  </div>
+  <div class="section">
+     @yield('coming-soon')
+ </div>
 
  <div class="pie_chart">
      @yield('pie-chart')
- </div>
-
- <div class="section">
-     @yield('coming-soon')
  </div>
 
  <div class="bar_chart">

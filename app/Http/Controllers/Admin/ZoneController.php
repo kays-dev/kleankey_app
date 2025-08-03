@@ -17,7 +17,7 @@ class ZoneController extends Controller
         $admin = Auth::guard('admin')->user();
         $zones = Zone::paginate(15);
 
-        return view('admin.zones.index', compact('zones', 'user', 'admin'));
+        return view('admin.zones.index', compact('zones', 'admin'));
     }
 
     /**

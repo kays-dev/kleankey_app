@@ -13,9 +13,9 @@
     --klair-green: #b3ecac;
     --klair-shadow: rgb(179, 236, 172, 0.5);
     --klair-blue: #9ccce7;
-    --klair-table: #CEE5F3;
-    --klean-info: #B1402F;
-    --klean-line: rgb(177, 64, 47,0.5);
+    --klair-table: #cee5f3;
+    --klean-info: #b1402f;
+    --klean-line: rgb(177, 64, 47, 0.5);
 }
 
 body {
@@ -29,7 +29,8 @@ html {
 
 body,
 button,
-input, select {
+input,
+select {
     font-family: "Antic", Verdana, Helvetica, sans-serif;
     font-size: 1.5rem;
 }
@@ -91,9 +92,11 @@ nav,
 .nav_actions,
 .profile_box,
 .profile_box_user,
+.profile_box_name,
 .profile_option,
 section,
 .main_title,
+.message,
 .page_main_actions,
 footer {
     display: flex;
@@ -207,11 +210,14 @@ nav {
     font-size: 1.6rem;
     text-align: center;
 } */
+.menu_form {
+    width: 90%;
+}
 
 .logout {
     background-color: var(--klean-blue);
     color: var(--klean-air);
-    width: 90%;
+    width: 100%;
     box-shadow: inset -1px -1px 10px var(--klean-air);
     padding: 1.5vh 1vw;
     border-radius: 5rem;
@@ -264,8 +270,15 @@ nav {
 
 .profile_box_name {
     background-color: var(--klean-blue);
+    justify-content: center;
+    align-items: center;
     width: 80%;
     height: 4vh;
+}
+
+.profile_box_name p {
+    color: var(--klean-air);
+    font-size: 1.2rem;
 }
 
 .profile_toggle {
@@ -356,17 +369,48 @@ section {
     border-radius: 1.2rem;
 }
 
-.add_data, .show_other_datas{
+.add_data,
+.show_other_datas {
     background-color: var(--klair-blue);
     padding: 1vh 2vw;
     box-shadow: inset -1px -1px 10px var(--klean-air);
     border-radius: 1.2rem;
 }
 
-.add_data a, .show_other_datas a{
+.add_data a,
+.show_other_datas a {
     color: var(--klean-wood);
 }
 
+.message {
+    justify-content: center;
+    align-items: center;
+}
+
+.alert {
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    width: 90vw;
+    margin: 1rem 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.error {
+    background-color: #ffe6e6;
+    color: var(--klean-info);
+    border: 1px solid #f3b6b6;
+}
+
+.success {
+    background-color: var(--klair-shadow);
+    color: var(--klean-wood);
+    border: 1px solid #a4e3c2;
+}
 
 /* FOOTER */
 footer {
