@@ -34,7 +34,7 @@
 
         <div class="input_box">
             <select class="form_input" name="type" id="type">
-                <option value="{{ $service->service_type }}" selected>{{ ucfirst($service->service_type) }}</option>
+                <option value="{{ $service->service_type->value }}" selected>{{ ucfirst($service->service_type->value) }}</option>
                 @foreach ($types as $type )
                 <option value="{{ $type->value }}">{{ $type->name }}</option>
                 @endforeach
@@ -48,7 +48,7 @@
         </label>
 
         <div class="input_box">
-            <input type="textarea" class="form_input" name="description" id="description" value="{{ $service->description ?? '' }}">
+            <textarea class="form_input" name="description" id="description">{{ $service->description ?? '' }}</textarea>
         </div>
     </div>
 
@@ -58,7 +58,7 @@
         </label>
 
         <div class="input_box">
-            <input type="time" class="form_input" name="duration" id="duration" value="{{ $service->duration ?? '' }}">
+            <input type="time" class="form_input" name="duration" id="duration" value=""{{ old('duration', $service->duration) }}"">
         </div>
     </div>
 
@@ -68,10 +68,10 @@
         </label>
 
         <div class="input_box">
-            <select class="form_input" name="agents" id="agents">
-                <option value="{{ $service->agent_id ?? '' }}" selected>{{ $service->agent?->agent_surname ?? '--' . " | " . $agent->agent?->zone->zone_name ?? '--' }}</option>
+            <select class="form_input" name="agent" id="agent">
+                <option value="{{ $service->agent_id ?? '' }}" selected>{{ ($service->agent?->agent_surname ?? '--') . " " . ($service->agent?->agent_name ?? '--') . " | " . ($service->agent?->zone->zone_name ?? '--') }}</option>
                 @foreach ($agents as $agent)
-                <option value="{{ $agent->agent_id }}">{{ $agent->agent_name . " | " . $agent->zone->zone_name}}</option>
+                <option value="{{ $agent->agent_id }}">{{ $agent->agent_surname . " " . $agent->agent_name . " | " . $agent->zone->zone_name}}</option>
                 @endforeach
             </select>
         </div>
@@ -85,7 +85,7 @@
         <div class="input_box">
             <select class="form_input" name="estates[]" id="estates" multiple>
                 @foreach ($estates as $estate)
-                <option value="{{ $estate?->estate_id ?? '' }}" @selected(in_array($estate->estate_id, $service->estates->pluck('estate_id')->toArray()))>{{ $estate->estate_code . " | " . $estate->estate_type}}</option>
+                <option value="{{ $estate?->estate_id ?? '' }}" @selected(in_array($estate->estate_id, $service->estates->pluck('estate_id')->toArray()))>{{ $estate->estate_code . " | " . ucfirst($estate->estate_type->value)}}</option>
                 @endforeach
             </select>
         </div>

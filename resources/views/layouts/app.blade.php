@@ -12,6 +12,7 @@
     @vite(['resources/css/form.css', 'resources/js/form.js'])
     @vite(['resources/css/table.css', 'resources/js/table.js'])
     @vite(['resources/css/view.css', 'resources/js/view.js'])
+    @vite(['resources/css/dashboard.css', 'resources/js/dashboard.js'])
 
 </head>
 
@@ -29,7 +30,15 @@
                     <ul>
                         @yield('menu')
                     </ul>
-                    <button class="logout" id="logout">Déconnexion</button>
+                    @if(Auth::guard('admin'))
+                    <form action="{{ route('admin.logout')}}">
+                        <button class="logout" id="logout">Déconnexion</button>
+                    </form>
+                    @else
+                    <form action="{{ route('user.logout')}}">
+                        <button class="logout" id="logout">Déconnexion</button>
+                    </form>
+                    @endif
                 </div>
             </div>
             <div class="logo_box">
@@ -50,7 +59,12 @@
                         <li class="profile_option"><a href="">Profil KleanKey</a></li>
                         <li class="profile_option"><a href="">Sécurité du compte</a></li>
                         <li class="profile_option"><a href="">Confidentialité</a></li>
-                        <li class="profile_option"><a href="">Déconnexion</a></li>
+                        @if(Auth::guard('admin'))
+                        <li class="profile_option"><a href="{{ route('admin.logout')}}">Déconnexion</a></li>
+                        @else
+                        <li class="profile_option"><a href="{{ route('user.logout')}}">Déconnexion</a></li>
+                        @endif
+
                     </ul>
                 </div>
 
@@ -63,15 +77,18 @@
             <h1>@yield('main_title', 'Tableau de bord')</h1>
         </div>
 
-        @if ($errors->any())
-        <div class="mb-4 text-red-600">
-            <ul class="list-disc list-inside">
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+        @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
         </div>
         @endif
+
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+
 
         <section>
             <div class="page_main_actions">
@@ -89,6 +106,7 @@
         <img src="" alt="" class="kleanetklair_logo">
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 
 </html>

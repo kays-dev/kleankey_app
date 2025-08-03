@@ -84,7 +84,7 @@
             <select class="form_input" name="estates[]" id="estates" multiple>
                 <option value="" selected>-- Veuillez sélectionner des options --</option>
                 @foreach ($estates as $estate)
-                <option value="{{ $estate->estate_id }}">{{ $estate->estate_code . " | " . $estate->estate_type}}</option>
+                <option value="{{ $estate->estate_id }}">{{ $estate->estate_code . " | " . ucfirst($estate->estate_type->value)}}</option>
                 @endforeach
             </select>
         </div>

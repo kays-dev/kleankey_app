@@ -1,6 +1,6 @@
 @extends('layouts.view')
 
-@section('title', $service->service__name)
+@section('title', $service->service_name)
 @section('main_title', 'Consulter la prestation — ' . $service->service_name . ' | ' . ucfirst($service->service_type->value))
 
 @section('page_actions')

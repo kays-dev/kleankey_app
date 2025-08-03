@@ -2,7 +2,7 @@
 
 @section('menu')
 <li class="main_menu_item">
-    <a href="" class="main_menu_links">Tableau de bord</a>
+    <a href="{{route('admin.dashboard')}}" class="main_menu_links">Tableau de bord</a>
 </li>
 <li class="main_menu_item"><a href="{{ route('services.index')}}" class="main_menu_links">Planning</a></li>
 <li class="main_menu_item"><a href="{{ route('estates.index')}}" class="main_menu_links">Biens</a></li>

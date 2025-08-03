@@ -9,7 +9,7 @@
 
 @section('page_actions')
 <div class="return">
-    <a href="{{-- route('homepage') --}}" class="return_to_dashboard">Retour au tableau de bord</a>
+    <a href="{{ route('admin.dashboard') }}" class="return_to_dashboard">Retour au tableau de bord</a>
 </div>
 <div class="add_data">
     <div>

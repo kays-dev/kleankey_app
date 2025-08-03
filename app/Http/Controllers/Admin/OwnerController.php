@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Owner;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class OwnerController extends Controller
 {
@@ -13,10 +14,10 @@ class OwnerController extends Controller
      */
     public function index()
     {
-        $owners = Owner::all();
-        $pagination = Owner::paginate(15);
+        $admin = Auth::guard('admin')->user();
+        $owners = Owner::paginate(15);
 
-        return view('admin.owners.index', compact('owners', 'pagination'));
+        return view('admin.owners.index', compact('owners', 'admin'));
     }
 
     /**
@@ -24,7 +25,8 @@ class OwnerController extends Controller
      */
     public function create()
     {
-        return view('admin.owners.create');
+        $admin = Auth::guard('admin')->user();
+        return view('admin.owners.create', compact('admin'));
     }
 
     /**
@@ -32,23 +34,27 @@ class OwnerController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'lname' => 'required|string',
-            'fname' => 'required|string',
-            'address' => 'required|string',
-            'email' => 'required|email',
-            'phone' => 'required|string',
-        ]);
+        try {
+            $request->validate([
+                'lname' => 'required|string',
+                'fname' => 'required|string',
+                'address' => 'required|string',
+                'email' => 'required|email',
+                'phone' => 'required|string',
+            ]);
 
-        $owner = Owner::create([
-            'owner_name' => strtoupper($request->input('lname')),
-            'owner_surname' => $request->input('fname'),
-            'owner_address' => strtoupper($request->input('address')),
-            'owner_mail' => $request->input('email'),
-            'owner_tel' => $request->input('phone'),
-        ]);
+            $owner = Owner::create([
+                'owner_name' => strtoupper($request->input('lname')),
+                'owner_surname' => $request->input('fname'),
+                'owner_address' => strtoupper($request->input('address')),
+                'owner_mail' => $request->input('email'),
+                'owner_tel' => $request->input('phone'),
+            ]);
 
-        return redirect(route('owners.create'))->with('success', 'Client ' . $owner->owner_surname . ' ' . $owner->owner_name . ' créé');
+            return redirect(route('owners.create'))->with('success', 'Client ' . $owner->owner_surname . ' ' . $owner->owner_name . ' créé');
+        } catch (\Exception $e) {
+            return back()->withInput()->with('error', 'Erreur lors de la création du client : ' . $e->getMessage());
+        }
     }
 
     /**
@@ -56,11 +62,12 @@ class OwnerController extends Controller
      */
     public function show(string $id)
     {
+        $admin = Auth::guard('admin')->user();
         $owner = Owner::findOrFail($id);
 
         $estates = $owner->estates;
 
-        return view('admin.owners.show', compact('owner', 'estates'));
+        return view('admin.owners.show', compact('owner', 'estates', 'admin'));
     }
 
     /**
@@ -68,11 +75,12 @@ class OwnerController extends Controller
      */
     public function edit(string $id)
     {
+        $admin = Auth::guard('admin')->user();
         $owner = Owner::findOrFail($id);
 
         $estates = $owner->estates;
 
-        return view('admin.owners.edit', compact('owner', 'estates'));
+        return view('admin.owners.edit', compact('owner', 'estates', 'admin'));
     }
 
     /**
@@ -80,25 +88,29 @@ class OwnerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $owner = Owner::findOrFail($id);
+        try {
+            $owner = Owner::findOrFail($id);
 
-        $request->validate([
-            'lname' => 'required|string',
-            'fname' => 'required|string',
-            'address' => 'required|string',
-            'email' => 'required|email',
-            'phone' => 'required|string',
-        ]);
+            $request->validate([
+                'lname' => 'required|string',
+                'fname' => 'required|string',
+                'address' => 'required|string',
+                'email' => 'required|email',
+                'phone' => 'required|string',
+            ]);
 
-        $owner->update([
-            'owner_name' => mb_strtoupper($request->input('lname'), 'UTF-8'),
-            'owner_surname' => $request->input('fname'),
-            'owner_address' => mb_strtoupper($request->input('address'), 'UTF-8'),
-            'owner_mail' => $request->input('email'),
-            'owner_tel' => $request->input('phone'),
-        ]);
+            $owner->update([
+                'owner_name' => mb_strtoupper($request->input('lname'), 'UTF-8'),
+                'owner_surname' => $request->input('fname'),
+                'owner_address' => mb_strtoupper($request->input('address'), 'UTF-8'),
+                'owner_mail' => $request->input('email'),
+                'owner_tel' => $request->input('phone'),
+            ]);
 
-        return redirect(route('owners.show', $owner->owner_id))->with('success', 'Client ' . $owner->owner_surname . ' ' . $owner->owner_name . ' modifié');
+            return redirect(route('owners.show', $owner->owner_id))->with('success', 'Client ' . $owner->owner_surname . ' ' . $owner->owner_name . ' modifié');
+        } catch (\Exception $e) {
+            return back()->withInput()->with('error', 'Erreur lors de la modification : ' . $e->getMessage());
+        }
     }
 
     /**
@@ -106,10 +118,13 @@ class OwnerController extends Controller
      */
     public function destroy(string $id)
     {
-        $owner = Owner::findOrFail($id);
+        try {
+            $owner = Owner::findOrFail($id);
+            $owner->delete();
 
-        $owner->delete();
-
-        return redirect(route('owners.index'))->with('success', 'Client supprimé');
+            return redirect(route('owners.index'))->with('success', 'Client supprimé');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erreur lors de la suppression : ' . $e->getMessage());
+        }
     }
 }

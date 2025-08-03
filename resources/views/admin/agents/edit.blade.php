@@ -1,7 +1,7 @@
 @extends('layouts.form')
 
 @section('title', 'Modification de ' . $agent->surname . ' ' . $agent->name)
-@section('main_title', 'Modifier l'agent — ' .$agent->surname . ' ' . $agent->name)
+@section('main_title', 'Modifier l\'agent — ' .$agent->surname . ' ' . $agent->name)
 
 @section('page_actions')
 <div class="return">

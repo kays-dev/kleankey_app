@@ -9,36 +9,29 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $services = Service::all();
-        $pagination = Service::paginate(15);
+        $admin = Auth::guard('admin')->user();
+        $services = Service::paginate(15);
 
-        return view('admin.services.index', compact('services', 'pagination'));
+        return view('admin.services.index', compact('services', 'admin'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
+        $admin = Auth::guard('admin')->user();
         $services = Service::all();
         $types = ServiceType::cases();
         $agents = Agent::all();
         $estates = Estate::all();
 
-        return view('admin.services.create', compact('services', 'types', 'agents', 'estates'));
+        return view('admin.services.create', compact('services', 'types', 'agents', 'estates', 'admin'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -51,51 +44,46 @@ class ServiceController extends Controller
             'estates.*' => 'exists:estates,estate_id',
         ]);
 
-        $service = Service::create([
-            'service_name' => $request->input('name'),
-            'service_type' => $request->input('type'),
-            'description' => $request->input('description'),
-            'duration' => $request->input('duration'),
-            'agent_id' => $request->input('agent'),
-        ]);
+        try {
+            $service = Service::create([
+                'service_name' => $request->input('name'),
+                'service_type' => $request->input('type'),
+                'description' => $request->input('description'),
+                'duration' => $request->input('duration'),
+                'agent_id' => $request->input('agent'),
+            ]);
 
-        $service->estates()->attach($request->input('estates'));
+            $service->estates()->attach($request->input('estates'));
 
-        return redirect(route('services.create'))->with('success', 'Prestation ' . $service->service_name . ' créée !');
+            return redirect(route('services.create'))->with('success', 'Prestation ' . $service->service_name . ' créée !');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erreur lors de la création : ' . $e->getMessage());
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
+        $admin = Auth::guard('admin')->user();
         $service = Service::findOrFail($id);
         $agent = $service->agent;
         $estates = $service->estates;
 
-        return view('admin.services.show', compact('estates', 'agent', 'service'));
+        return view('admin.services.show', compact('estates', 'agent', 'service', 'admin'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        $service= Service::findOrFail($id);
+        $admin = Auth::guard('admin')->user();
+        $service = Service::findOrFail($id);
         $types = ServiceType::cases();
         $agents = Agent::all();
         $estates = Estate::all();
 
-        return view('admin.services.edit', compact('service', 'types', 'agents', 'estates'));
+        return view('admin.services.edit', compact('service', 'types', 'agents', 'estates', 'admin'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        $service= Service::findOrFail($id);
-
         $request->validate([
             'name' => 'required|string',
             'type' => ['required', 'string', Rule::in(array_column(ServiceType::cases(), 'value'))],
@@ -106,28 +94,34 @@ class ServiceController extends Controller
             'estates.*' => 'exists:estates,estate_id',
         ]);
 
-        $service->update([
-            'service_name' => $request->input('name'),
-            'service_type' => $request->input('type'),
-            'description' => $request->input('description'),
-            'duration' => $request->input('duration'),
-            'agent_id' => $request->input('agent'),
-        ]);
+        try {
+            $service = Service::findOrFail($id);
 
-        $service->estates()->sync($request->input('estates'));
+            $service->update([
+                'service_name' => $request->input('name'),
+                'service_type' => $request->input('type'),
+                'description' => $request->input('description'),
+                'duration' => $request->input('duration'),
+                'agent_id' => $request->input('agent'),
+            ]);
 
-        return redirect(route('services.show', $service->service_id))->with('success', 'Prestation ' . $service->service_name . ' modifiée !');
+            $service->estates()->sync($request->input('estates'));
+
+            return redirect(route('services.show', $service->service_id))->with('success', 'Prestation ' . $service->service_name . ' modifiée !');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erreur lors de la modification : ' . $e->getMessage());
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        $service= Service::findOrFail($id);
+        try {
+            $service = Service::findOrFail($id);
+            $service->delete();
 
-        $service->delete();
-
-        return redirect(route('services.index'))->with('success', 'Prestation supprimée');
+            return redirect(route('services.index'))->with('success', 'Prestation supprimée');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erreur lors de la suppression : ' . $e->getMessage());
+        }
     }
 }

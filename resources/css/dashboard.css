@@ -1,0 +1,70 @@
+.box {
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.numbers {
+    font-size: 2em;
+    color: #002e84;
+}
+
+.chart_title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    margin: 20px 0 10px;
+}
+
+.chart {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+.legend {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.chart_buttons button {
+    margin: 5px;
+    padding: 8px 12px;
+    border: none;
+    background-color: #002e84;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.bar_chart_box {
+    max-width: 600px;
+}
+
+.sub_section {
+    margin-top: 15px;
+}
+
+.sub_section h4 {
+    font-weight: bold;
+    margin-bottom: 5px;
+}

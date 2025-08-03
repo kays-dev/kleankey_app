@@ -38,7 +38,6 @@ class UserAuthController extends Controller
             'user_mail' => $credentials['email'],
             'password' => $credentials['password']
         ];
-        Log::info('Attempt credentials: ', $attemptCredentials);
 
         // Authentifie le User
         if (Auth::guard('web')->attempt(

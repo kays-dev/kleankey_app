@@ -14,10 +14,10 @@ class ZoneController extends Controller
      */
     public function index()
     {
-        $user = Auth::guard('web')->user();
+        $admin = Auth::guard('admin')->user();
         $zones = Zone::paginate(15);
 
-        return view('admin.zones.index', compact('zones', 'user'));
+        return view('admin.zones.index', compact('zones', 'user', 'admin'));
     }
 
     /**
@@ -25,8 +25,8 @@ class ZoneController extends Controller
      */
     public function create()
     {
-        $user = Auth::guard('web')->user();
-        return view('admin.zones.create', compact('user'));
+        $admin = Auth::guard('admin')->user();
+        return view('admin.zones.create', compact('admin'));
     }
 
     /**
@@ -35,28 +35,33 @@ class ZoneController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string:alpha_num',
+            'name' => 'required|string|alpha_num',
         ]);
 
-        $zone = Zone::create([
-            'zone_name' => mb_strtoupper($request->input('name'), 'UTF-8'),
-        ]);
+        try {
+            $zone = Zone::create([
+                'zone_name' => mb_strtoupper($request->input('name'), 'UTF-8'),
+            ]);
 
-        return redirect(route('zones.create'))->with('success', 'Secteur ' . $zone->zone_name . ' créé !');
+            return redirect(route('zones.create'))->with('success', 'Secteur ' . $zone->zone_name . ' créé !');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erreur lors de la création du secteur : ' . $e->getMessage());
+        }
     }
+
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        $user = Auth::guard('web')->user();
+        $admin = Auth::guard('admin')->user();
         $zone = Zone::findOrFail($id);
         $cities = $zone->cities;
         $estates = $zone->estates;
         $agents = $zone->agents;
 
-        return view('admin.zones.show', compact('zone', 'cities', 'estates', 'agents', 'user'));
+        return view('admin.zones.show', compact('zone', 'cities', 'estates', 'agents', 'admin'));
     }
 
     /**
@@ -64,10 +69,10 @@ class ZoneController extends Controller
      */
     public function edit(string $id)
     {
-        $user = Auth::guard('web')->user();
+        $admin = Auth::guard('admin')->user();
         $zone = Zone::findOrFail($id);
 
-        return view('admin.zones.edit', compact('zone', 'user'));
+        return view('admin.zones.edit', compact('zone', 'admin'));
     }
 
     /**
@@ -75,28 +80,36 @@ class ZoneController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $zone = Zone::findOrFail($id);
-
         $request->validate([
-            'name' => 'required|string:alpha_num',
+            'name' => 'required|string|alpha_num',
         ]);
 
-        $zone->update([
-            'zone_name' => mb_strtoupper($request->input('name'), 'UTF-8'),
-        ]);
+        try {
+            $zone = Zone::findOrFail($id);
 
-        return redirect(route('zones.show', $zone->zone_id))->with('success', 'Secteur ' . $zone->zone_name . ' modifié !');
+            $zone->update([
+                'zone_name' => mb_strtoupper($request->input('name'), 'UTF-8'),
+            ]);
+
+            return redirect(route('zones.show', $zone->zone_id))->with('success', 'Secteur ' . $zone->zone_name . ' modifié !');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erreur lors de la mise à jour : ' . $e->getMessage());
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        $zone = Zone::findOrFail($id);
+        try {
+            $zone = Zone::findOrFail($id);
+            $zone->delete();
 
-        $zone->delete();
-
-        return redirect(route('zones.index'))->with('success', 'Secteur supprimé');
+            return redirect(route('zones.index'))->with('success', 'Secteur supprimé');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Erreur lors de la suppression : ' . $e->getMessage());
+        }
     }
 }

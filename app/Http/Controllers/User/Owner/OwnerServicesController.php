@@ -32,11 +32,12 @@ class OwnerServicesController extends Controller
      */
     public function show(string $id)
     {
+                $user = Auth::guard('web')->user();
         $service = Service::where($id);
 
         $agent = $service->agent;
         $estates = $service->estates;
 
-        return view('user.owner.services.show', compact('estates', 'agent', 'service'));
+        return view('user.owner.services.show', compact('estates', 'agent', 'service', 'user'));
     }
 }

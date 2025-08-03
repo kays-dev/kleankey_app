@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\UserAuthController;
 
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AgentController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\EstateController;
@@ -18,6 +17,7 @@ use App\Http\Controllers\User\Agent\AgentServicesController;
 
 use App\Http\Controllers\User\Owner\OwnerEstatesController;
 use App\Http\Controllers\User\Owner\OwnerServicesController;
+use App\Models\Admin;
 
 // =============== HOME
 // Route::get('/', [controller, 'function'])->name('homepage');
@@ -35,6 +35,7 @@ Route::prefix('admin')->group(function () {
 
     // Routes protégées admin
     Route::middleware(['authAdmin'])->group(function () {
+        Route::get('/dashboard', [AdminAuthController::class, 'dashboard'])->name('admin.dashboard');
         Route::resource('owners', OwnerController::class);
         Route::resource('agents', AgentController::class);
         Route::resource('zones', ZoneController::class);

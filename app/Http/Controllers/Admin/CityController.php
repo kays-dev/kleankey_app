@@ -15,10 +15,10 @@ class CityController extends Controller
      */
     public function index()
     {
-        $user = Auth::guard('web')->user();
+        $admin = Auth::guard('admin')->user();
         $cities = City::paginate(15);
 
-        return view('admin.cities.index', compact('cities', 'user'));
+        return view('admin.cities.index', compact('cities', 'admin'));
     }
 
     /**
@@ -26,10 +26,10 @@ class CityController extends Controller
      */
     public function create()
     {
-        $user = Auth::guard('web')->user();
+        $admin = Auth::guard('admin')->user();
         $zones = Zone::all();
 
-        return view('admin.cities.create', compact('zones', 'user'));
+        return view('admin.cities.create', compact('zones', 'admin'));
     }
 
     /**
@@ -37,21 +37,25 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string',
-            'postcode' => 'required|string',
-            'region' => 'required|string',
-            'zone' => 'nullable|string|exists:zones,zone_id',
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string',
+                'postcode' => 'required|string',
+                'region' => 'required|string',
+                'zone' => 'nullable|string|exists:zones,zone_id',
+            ]);
 
-        $city = City::create([
-            'city_name' => mb_strtoupper(($request->input('name')), 'UTF-8'),
-            'postcode' => $request->input('postcode'),
-            'region' => $request->input('region'),
-            'zone_id' => $request->input('zone'),
-        ]);
+            $city = City::create([
+                'city_name' => mb_strtoupper($request->input('name'), 'UTF-8'),
+                'postcode' => $request->input('postcode'),
+                'region' => $request->input('region'),
+                'zone_id' => $request->input('zone'),
+            ]);
 
-        return redirect(route('cities.create'))->with('success', 'Ville ' . $city->city_name . ' créée !');
+            return redirect(route('cities.create'))->with('success', 'Ville ' . $city->city_name . ' créée !');
+        } catch (\Exception $e) {
+            return back()->withInput()->with('error', 'Une erreur est survenue lors de la création : ' . $e->getMessage());
+        }
     }
 
     /**
@@ -59,11 +63,11 @@ class CityController extends Controller
      */
     public function show(string $cityCode)
     {
-        $user = Auth::guard('web')->user();
+        $admin = Auth::guard('admin')->user();
         $city = City::where('city_code', $cityCode)->firstOrFail();
         $zone = $city->zone;
 
-        return view('admin.cities.show', compact('city', 'zone', 'user'));
+        return view('admin.cities.show', compact('city', 'zone', 'admin'));
     }
 
     /**
@@ -71,11 +75,11 @@ class CityController extends Controller
      */
     public function edit(string $cityCode)
     {
-        $user = Auth::guard('web')->user();
+        $admin = Auth::guard('admin')->user();
         $city = City::where('city_code', $cityCode)->firstOrFail();
         $zones = Zone::all();
 
-        return view('admin.cities.edit', compact('zones', 'city', 'user'));
+        return view('admin.cities.edit', compact('zones', 'city', 'admin'));
     }
 
     /**
@@ -83,23 +87,27 @@ class CityController extends Controller
      */
     public function update(Request $request, string $cityCode)
     {
-        $city = City::where('city_code', $cityCode)->firstOrFail();
+        try {
+            $city = City::where('city_code', $cityCode)->firstOrFail();
 
-        $request->validate([
-            'name' => 'required|string',
-            'postcode' => 'required|string',
-            'region' => 'required|string',
-            'zone' => 'nullable|string|exists:zones,zone_id',
-        ]);
+            $request->validate([
+                'name' => 'required|string',
+                'postcode' => 'required|string',
+                'region' => 'required|string',
+                'zone' => 'nullable|string|exists:zones,zone_id',
+            ]);
 
-        $city->update([
-            'city_name' =>  mb_strtoupper(($request->input('name')), 'UTF-8'),
-            'postcode' => $request->input('postcode'),
-            'region' => $request->input('region'),
-            'zone_id' => $request->input('zone'),
-        ]);
+            $city->update([
+                'city_name' =>  mb_strtoupper($request->input('name'), 'UTF-8'),
+                'postcode' => $request->input('postcode'),
+                'region' => $request->input('region'),
+                'zone_id' => $request->input('zone'),
+            ]);
 
-        return redirect(route('cities.show', $city->city_code))->with('success', 'Ville ' . $city->city_name . ' modifiée !');
+            return redirect(route('cities.show', $city->city_code))->with('success', 'Ville ' . $city->city_name . ' modifiée !');
+        } catch (\Exception $e) {
+            return back()->withInput()->with('error', 'Une erreur est survenue lors de la modification : ' . $e->getMessage());
+        }
     }
 
     /**
@@ -107,10 +115,15 @@ class CityController extends Controller
      */
     public function destroy(string $cityCode)
     {
-        $city = City::where('city_code', $cityCode)->firstOrFail();
+        try {
+            $city = City::where('city_code', $cityCode)->firstOrFail();
+            $cityName = $city->city_name;
 
-        $city->delete();
+            $city->delete();
 
-        return redirect(route('cities.index'))->with('success', 'Ville ' . $city->city_name . ' supprimée');
+            return redirect(route('cities.index'))->with('success', 'Ville ' . $cityName . ' supprimée');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Une erreur est survenue lors de la suppression : ' . $e->getMessage());
+        }
     }
 }

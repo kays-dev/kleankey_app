@@ -37,9 +37,12 @@ class AdminAuthController extends Controller
 
             $request->session()->regenerate();
 
-            return redirect()->intended(route('zones.index'));
+            return redirect()->intended(route('admin.dashboard'));
         }
-
+        
+        return back()->withErrors([
+            'email' => 'Identifiants invalides.',
+        ]);
     }
 
     // Accès au tableau de bord de l'Admin

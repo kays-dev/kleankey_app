@@ -6,7 +6,7 @@ use Illuminate\Foundation\Configuration\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as AuthenticateMiddleware;
 use App\Http\Middleware\Auth\AuthenticateAdmin as AuthenticateAdminMiddleware;
-// use  App\Http\Middleware\Auth\RedirectIfAuthenticated as RedirectedMiddleware;
+use  App\Http\Middleware\Auth\RedirectIfAuthenticated as RedirectedMiddleware;
 
 use App\Http\Middleware\User\CheckRole as RoleMiddleware;
 

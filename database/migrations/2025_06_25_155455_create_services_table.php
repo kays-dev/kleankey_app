@@ -21,7 +21,7 @@ return new class extends Migration
 
             //Clé étrangère
             $table->uuid('agent_id')->nullable();
-            $table->foreign('agent_id')->references('agent_id')->on('agents');
+            $table->foreign('agent_id')->references('agent_id')->on('agents')->onDelete('set null');
         });
     }
 
