@@ -229,3 +229,251 @@ tr {
 .data_button form {
     background: none;
 }
+
+/* ==========================================
+   TABLE.CSS - MEDIA QUERIES RESPONSIVE
+   ========================================== */
+
+/* ==========================================
+   MOBILE LARGE - 480px+
+   ========================================== */
+
+@media screen and (min-width: 480px) {
+    .sort,
+    .filter {
+        width: 45%;
+        font-size: 1.5rem;
+    }
+
+    .search_bar input {
+        font-size: 1.2rem;
+        padding: 0.8vh;
+    }
+
+    .table_title {
+        font-size: 1.3rem;
+        padding: 1.2vh 0.8vh;
+    }
+
+    .table_data {
+        font-size: 1.1rem;
+        padding: 1.2vh 0.8vh;
+    }
+
+    .data_button {
+        width: 2.3rem;
+        height: 2.3rem;
+    }
+}
+
+/* ==========================================
+   TABLET - 768px+
+   ========================================== */
+
+@media screen and (min-width: 768px) {
+    /* TABLE ACTIONS */
+    .table_actions {
+        flex-direction: row;
+        align-items: center;
+        height: 5vh;
+        gap: 3vh;
+        margin-bottom: 6vh;
+    }
+
+    .pages {
+        width: 20%;
+        justify-content: flex-start;
+    }
+
+    .previous_page,
+    .next_page {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .page_number {
+        width: 6rem;
+        margin: 0 0.5vw;
+    }
+
+    .sort,
+    .filter {
+        width: auto;
+        min-width: 12vw;
+        padding: 1.5vh 2vh;
+        font-size: 1.6rem;
+    }
+
+    .search {
+        width: auto;
+        flex: 1;
+        margin-left: 2vw;
+        max-width: 30vw;
+    }
+
+    .search_bar {
+        padding: 0.8vh;
+    }
+
+    .search_bar input {
+        font-size: 1.3rem;
+        padding: 0.8vh 1vh;
+    }
+
+    /* TABLE */
+    table {
+        min-width: auto;
+    }
+
+    .table_title {
+        font-size: 1.6rem;
+        height: 7vh;
+        padding: 1.5vh 1vh;
+    }
+
+    .table_data {
+        font-size: 1.3rem;
+        padding: 1.8vh 1vh;
+        border-top: solid 0.8rem var(--klair-table);
+        border-bottom: solid 0.8rem var(--klair-table);
+    }
+
+    /* DATA BUTTONS */
+    .data_buttons {
+        gap: 1vw;
+    }
+
+    .data_button {
+        width: 2.8rem;
+        height: 2.8rem;
+    }
+
+    /* COLUMN WIDTHS - TABLET */
+    .name,
+    .tel,
+    .number,
+    .code {
+        width: 18%;
+    }
+
+    .mail,
+    .address,
+    .type {
+        width: 25%;
+    }
+
+    .data_actions.table_data {
+        width: 15%;
+    }
+}
+
+/* ==========================================
+   DESKTOP - 1024px+
+   ========================================== */
+
+@media screen and (min-width: 1024px) {
+    /* TABLE ACTIONS */
+    .table_actions {
+        gap: 5vh;
+        margin-bottom: 8vh;
+    }
+
+    .pages {
+        width: 10%;
+    }
+
+    .sort,
+    .filter {
+        width: 10vw;
+        padding: 2vh;
+        font-size: 1.8rem;
+    }
+
+    .search {
+        max-width: 25vw;
+    }
+
+    .search_bar input {
+        font-size: 1.2rem;
+        padding: 0.5vh;
+    }
+
+    /* TABLE */
+    .table_title {
+        font-size: 1.8rem;
+        height: 8vh;
+        padding: 1vh;
+    }
+
+    .table_data {
+        font-size: 1.5rem;
+        padding: 2vh;
+        border-top: solid 1rem var(--klair-table);
+        border-bottom: solid 1rem var(--klair-table);
+    }
+
+    /* DATA BUTTONS */
+    .data_button {
+        width: 3rem;
+        height: 3rem;
+        padding: 1vh;
+    }
+
+    /* COLUMN WIDTHS - DESKTOP (Original) */
+    .name,
+    .tel,
+    .number,
+    .code {
+        width: 15%;
+    }
+
+    .mail,
+    .address,
+    .type {
+        width: 20%;
+    }
+
+    .data_actions.table_data {
+        width: 10%;
+    }
+}
+
+/* ==========================================
+   LARGE DESKTOP - 1440px+
+   ========================================== */
+
+@media screen and (min-width: 1440px) {
+    .table {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .table_actions {
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 8vh;
+    }
+
+    .search {
+        max-width: 350px;
+    }
+
+    /* Ajustement des colonnes pour très larges écrans */
+    .name,
+    .tel,
+    .number,
+    .code {
+        width: 12%;
+    }
+
+    .mail,
+    .address,
+    .type {
+        width: 18%;
+    }
+}
+
+/* ==========================================
+   XL DESKTOP - 1920px+
+   

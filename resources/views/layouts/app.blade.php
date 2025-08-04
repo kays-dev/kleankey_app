@@ -12,7 +12,6 @@
     @vite(['resources/css/form.css', 'resources/js/form.js'])
     @vite(['resources/css/table.css', 'resources/js/table.js'])
     @vite(['resources/css/view.css', 'resources/js/view.js'])
-    @vite(['resources/css/dashboard.css', 'resources/js/dashboard.js'])
 
 </head>
 
@@ -25,7 +24,6 @@
                 <div class="main_menu" id="main_menu">
                     <div class="main_menu_title">
                         <h3>Menu</h3>
-                        <img src="" alt="bulles de séparation">
                     </div>
                     <ul>
                         @yield('menu')

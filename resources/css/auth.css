@@ -313,3 +313,319 @@ footer {
     height: 5vh;
     color: var(--klean-air);
 }
+
+/* ==========================================
+   AUTH.CSS - MEDIA QUERIES RESPONSIVE
+   ========================================== */
+
+/* ==========================================
+   MOBILE LARGE - 480px+
+   ========================================== */
+
+@media screen and (min-width: 480px) {
+    html {
+        font-size: 8.5px;
+    }
+
+    .main_title {
+        max-width: 60vw;
+    }
+
+    section {
+        max-width: 60vw;
+        padding: 7vh 6vw;
+    }
+
+    .nav_connect {
+        font-size: 1.3rem;
+        padding: 1.2vh 2.5vw;
+    }
+}
+
+/* ==========================================
+   TABLET - 768px+
+   ========================================== */
+
+@media screen and (min-width: 768px) {
+    html {
+        font-size: 9px;
+    }
+
+    /* NAVIGATION */
+    nav {
+        padding: 2vh 4vw;
+        height: 9vh;
+    }
+
+    .logo_box,
+    .nav_actions {
+        width: 25%;
+    }
+
+    /* MAIN */
+    .main_title {
+        max-width: 55vw;
+        padding: 2.5vh 3vw;
+        margin: 4vh auto;
+    }
+
+    section {
+        max-width: 55vw;
+        padding: 7vh 6vw;
+    }
+
+    /* FORMS */
+    .form_input_box {
+        flex-direction: row;
+        align-items: center;
+        gap: 2vw;
+    }
+
+    .form_input_box.remember,
+    .form_input_box.link,
+    .form_input_box.cta {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form_input_label {
+        width: 35%;
+        min-width: 15vw;
+        font-size: 1.8rem;
+    }
+
+    .input_box {
+        flex: 1;
+        min-height: 4.5vh;
+    }
+
+    .form_input {
+        font-size: 1.3rem;
+    }
+
+    .form_submit,
+    .confirm_link {
+        width: auto;
+        min-width: 15vw;
+        font-size: 1.6rem;
+    }
+
+    /* RECAP */
+    .recap_box {
+        padding: 2.5vh 2vw;
+    }
+
+    .recap_detail {
+        font-size: 1.4rem;
+    }
+}
+
+/* ==========================================
+   DESKTOP - 1024px+
+   ========================================== */
+
+@media screen and (min-width: 1024px) {
+    html {
+        font-size: 10px; /* Taille originale */
+    }
+
+    /* NAVIGATION */
+    nav {
+        height: 10vh;
+        padding: 2vh 5vw;
+    }
+
+    .logo_box,
+    .nav_actions {
+        width: 30%;
+    }
+
+    /* MAIN */
+    .main_title {
+        max-width: 50vw;
+        padding: 2vh 2vw;
+        margin: 5vh auto;
+    }
+
+    section {
+        max-width: 50vw;
+        padding: 6vh 5vw;
+    }
+
+    /* TYPOGRAPHY */
+    h1 {
+        font-size: 4.5rem;
+    }
+
+    h2 {
+        font-size: 4rem;
+    }
+
+    h3 {
+        font-size: 3rem;
+    }
+
+    /* FORMS */
+    .form_input_box {
+        min-height: 6vh;
+    }
+
+    .form_input_label {
+        font-size: 2rem;
+        min-width: 10vw;
+    }
+
+    .form_input {
+        min-height: 4vh;
+        font-size: 1.2rem;
+    }
+
+    .form_submit,
+    .confirm_link {
+        height: 6vh;
+        width: 20vw;
+        font-size: 1.8rem;
+        margin: 2vh;
+    }
+
+    /* NAV ACTIONS */
+    .nav_connect {
+        font-size: 1.2rem;
+        padding: 1vh 2vw;
+    }
+
+    /* RECAP */
+    .recap_detail {
+        font-size: 1.5rem;
+    }
+
+    /* FOOTER */
+    footer {
+        height: 5vh;
+    }
+}
+
+/* ==========================================
+   LARGE DESKTOP - 1440px+
+   ========================================== */
+
+@media screen and (min-width: 1440px) {
+    .main_title,
+    section {
+        max-width: 45vw;
+    }
+
+    .form_input_box {
+        gap: 1.5vw;
+    }
+
+    .form_input_label {
+        min-width: 8vw;
+    }
+}
+
+/* ==========================================
+   XL DESKTOP - 1920px+
+   ========================================== */
+
+@media screen and (min-width: 1920px) {
+    html {
+        font-size: 11px;
+    }
+
+    .main_title,
+    section {
+        max-width: 40vw;
+    }
+}
+
+/* ==========================================
+   TRÈS PETITS ÉCRANS - 0-479px
+   ========================================== */
+
+@media screen and (max-width: 479px) {
+    html {
+        font-size: 7px;
+    }
+
+    /* NAVIGATION */
+    nav {
+        height: 7vh;
+        padding: 1vh 3vw;
+        flex-direction: column;
+        gap: 1vh;
+    }
+
+    .logo_box,
+    .nav_actions {
+        width: 100%;
+    }
+
+    /* MAIN */
+    h1 {
+        font-size: 2.5rem;
+        line-height: 1.1;
+    }
+
+    .main_title {
+        max-width: 90vw;
+        padding: 2vh 3vw;
+        margin: 2vh auto;
+    }
+
+    section {
+        max-width: 90vw;
+        padding: 4vh 4vw;
+        margin: 0 auto;
+    }
+
+    /* FORMS */
+    .form_input_box {
+        gap: 0.5vh;
+        min-height: auto;
+    }
+
+    .form_input_label {
+        font-size: 1.4rem;
+    }
+
+    .input_box {
+        min-height: 5vh;
+        padding: 0.8vh;
+    }
+
+    .form_input {
+        font-size: 1.2rem;
+        padding: 1.2vh;
+    }
+
+    .form_submit,
+    .confirm_link {
+        height: 5vh;
+        width: 100%;
+        font-size: 1.4rem;
+        margin: 1vh 0;
+    }
+
+    /* NAV ACTIONS */
+    .nav_connect {
+        font-size: 1.1rem;
+        padding: 1vh 3vw;
+        margin: 0.5vh 0;
+    }
+
+    /* RECAP */
+    .recap_box {
+        padding: 2vh 2vw;
+    }
+
+    .recap_detail {
+        font-size: 1.2rem;
+    }
+
+    /* FOOTER */
+    footer {
+        height: 4vh;
+        font-size: 1rem;
+    }
+}
