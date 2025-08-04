@@ -29,7 +29,7 @@
     <td class="table_data name">{{ $agent->agent_surname . ' ' . $agent->agent_name }}</td>
     <td class="table_data mail">{{ $agent->agent_mail}}</td>
     <td class="table_data tel">{{ $agent->agent_tel}}</td>
-    <td class="table_data code">{{ $agent->estates?->estate_code ?? '--'}}</td>
+    <td class="table_data code">{{ $agent->estates?->pluck('estate_code')->implode(', ') ?? '--'}}</td>
     <x-data-actions-component :resource="'agents'" :item="$agent" primaryKey="agent_id"/>
 </tr>
 @endforeach

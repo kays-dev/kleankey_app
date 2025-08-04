@@ -1,7 +1,7 @@
 @extends('layouts.form')
 
-@section('title', 'Modification de ' . $agent->surname . ' ' . $agent->name)
-@section('main_title', 'Modifier l\'agent — ' .$agent->surname . ' ' . $agent->name)
+@section('title', 'Modification de ' . $agent->agent_surname . ' ' . $agent->agent_name)
+@section('main_title', 'Modifier l\'agent — ' .$agent->agent_surname . ' ' . $agent->agent_name)
 
 @section('page_actions')
 <div class="return">
@@ -24,7 +24,7 @@
         </label>
 
         <div class="input_box">
-            <input type="text" class="form_input" name="lname" id="lname" value="{{ $agent->owner_name }}" readonly>
+            <input type="text" class="form_input" name="lname" id="lname" value="{{ $agent->agent_name }}" readonly>
         </div>
     </div>
 
@@ -34,7 +34,7 @@
         </label>
 
         <div class="input_box">
-            <input type="text" class="form_input" name="fname" id="fname" value="{{ $agent->owner_surname }}" readonly>
+            <input type="text" class="form_input" name="fname" id="fname" value="{{ $agent->agent_surname }}" readonly>
         </div>
     </div>
 
@@ -44,7 +44,7 @@
         </label>
 
         <div class="input_box">
-            <input type="text" class="form_input" name="address" id="address" value="{{ $agent->owner_address }}">
+            <input type="text" class="form_input" name="address" id="address" value="{{ $agent->agent_address }}">
         </div>
     </div>
 
@@ -54,7 +54,7 @@
         </label>
 
         <div class="input_box">
-            <input type="text" class="form_input" name="email" id="email" value="{{ $agent->owner_mail }}">
+            <input type="text" class="form_input" name="email" id="email" value="{{ $agent->agent_mail }}">
         </div>
     </div>
 
@@ -64,7 +64,7 @@
         </label>
 
         <div class="input_box">
-            <input type="text" class="form_input" name="phone" id="phone" value="{{ $agent->owner_tel }}">
+            <input type="text" class="form_input" name="phone" id="phone" value="{{ $agent->agent_tel }}">
         </div>
     </div>
 
@@ -77,7 +77,7 @@
             <select type="text" class="form_input" name="zone" id="zone">
                 <option value="{{ $agent->zone ?? '' }}" selected>{{ $agent->zone?->zone_name ?? '-' . " | " . $agent->zone?->cities ?? '-' }}</option>
                 @foreach ($zones as $zone )
-                <option value="{{ $zone->zone_id }}">{{ $zone->zone_name . " | " . $zone->cities->pluck()->('city_name')->implode(', ')}}</option>
+                <option value="{{ $zone->zone_id }}">{{ $zone->zone_name . " | " . $zone->cities->pluck('city_name')->implode(', ')}}</option>
                 @endforeach
             </select>
         </div>

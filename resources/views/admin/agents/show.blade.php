@@ -1,7 +1,7 @@
 @extends('layouts.view')
 
-@section('title', $agent->surname . ' ' . $agent->name)
-@section('main_title', 'Consulter l'agent d'entretien — ' . $agent->surname . ' ' . $agent->name)
+@section('title', $agent->surname . ' ' . $agent->agent_name)
+@section('main_title', "Consulter l'agent d'entretien — " . $agent->agent_surname . ' ' . $agent->agent_name)
 
 @section('page_actions')
 <div class="return">
