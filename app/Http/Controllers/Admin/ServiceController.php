@@ -9,6 +9,7 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use App\Models\Owner;
 use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
@@ -28,8 +29,9 @@ class ServiceController extends Controller
         $types = ServiceType::cases();
         $agents = Agent::all();
         $estates = Estate::all();
+        $owners= Owner::all();
 
-        return view('admin.services.create', compact('services', 'types', 'agents', 'estates', 'admin'));
+        return view('admin.services.create', compact('services', 'types', 'agents', 'estates', 'admin', 'owners'));
     }
 
     public function store(Request $request)

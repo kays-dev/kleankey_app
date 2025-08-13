@@ -11,13 +11,13 @@
 
 @section('details')
 <div class="details">
-    <p class="detail">Nom complet : <strong>{{ $owner->owner_name . ' ' . $owner->owner_surname }}</strong></p>
+    <p class="detail">Nom contact : <strong>{{ $owner->owner_name . ' ' . $owner->owner_surname }}</strong></p>
 
     <p class="detail">Adresse : <strong>{{ $owner->owner_address }}</strong></p>
 
     <p class="detail">Adresse mail : <strong>{{ $owner->owner_mail }}</strong></p>
 
-    <p class="detail">Numéro de téléphone : <strong>{{ $owner->owner_tel }}</strong></p>
+    <p class="detail">Téléphone : <strong>{{ $owner->owner_tel }}</strong></p>
 </div>
 
 <div class="associated_details">

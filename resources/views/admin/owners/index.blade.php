@@ -15,8 +15,8 @@
 @endsection
 
 @section('table_headers')
-<th class="table_title">Prénom</th>
 <th class="table_title">Nom</th>
+<th class="table_title">Prénom</th>
 <th class="table_title">Adresse</th>
 <th class="table_title">Email</th>
 <th class="table_title">Téléphone</th>
@@ -25,8 +25,8 @@
 @section('table_rows')
 @foreach ($owners as $owner)
 <tr class="table_content">
-    <td class="table_data name">{{ $owner->owner_surname}}</td>
     <td class="table_data name">{{ $owner->owner_name}}</td>
+    <td class="table_data name">{{ $owner->owner_surname}}</td>
     <td class="table_data address">{{ $owner->owner_address}}</td>
     <td class="table_data mail">{{ $owner->owner_mail}}</td>
     <td class="table_data tel">{{ $owner->owner_tel}}</td>

@@ -15,21 +15,21 @@
 @endsection
 
 @section('table_headers')
-<th class="table_title">Secteur</th>
-<th class="table_title">Nom complet</th>
+<th class="table_title">Nom</th>
+<th class="table_title">Prénom</th>
 <th class="table_title">Email</th>
 <th class="table_title">Téléphone</th>
-<th class="table_title">Biens affectés</th>
+<th class="table_title">Secteur</th>
 @endsection
 
 @section('table_rows')
 @foreach ($agents as $agent)
 <tr class="table_content">
-    <td class="table_data name">{{ $agent->zone?->zone_name ?? '--'}}</td>
-    <td class="table_data name">{{ $agent->agent_surname . ' ' . $agent->agent_name }}</td>
+    <td class="table_data name">{{ $agent->agent_name }}</td>
+    <td class="table_data name">{{ $agent->agent_surname}}</td>
     <td class="table_data mail">{{ $agent->agent_mail}}</td>
     <td class="table_data tel">{{ $agent->agent_tel}}</td>
-    <td class="table_data code">{{ $agent->estates?->pluck('estate_code')->implode(', ') ?? '--'}}</td>
+    <td class="table_data name">{{ $agent->zone?->zone_name ?? '--'}}</td>
     <x-data-actions-component :resource="'agents'" :item="$agent" primaryKey="agent_id"/>
 </tr>
 @endforeach

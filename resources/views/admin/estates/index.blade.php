@@ -20,7 +20,7 @@
 <th class="table_title">Adresse </th>
 <th class="table_title">Caractéristiques</th>
 <th class="table_title">Secteur</th>
-<th class="table_title">Prestataire affecté</th>
+<th class="table_title">Agent affecté</th>
 @endsection
 
 @section('table_rows')

@@ -11,15 +11,15 @@
 
 @section('details')
 <div class="details">
-    <p class="detail">Intitulé de la prestation : <strong>{{ $service->service_name }}</strong></p>
+    <p class="detail"><strong>Intitulé de la prestation :</strong> {{ $service->service_name }}</p>
 
-    <p class="detail">Type de prestation : <strong>{{ $service->service_type }}</strong></p>
+    <p class="detail"><strong>Type de prestation :</strong> {{ $service->service_type }}</p>
 
-    <p class="detail">Durée recommandée : <strong>{{ $service->duration ?? '--'}} h</strong></p>
+    <p class="detail"><strong>Durée recommandée :</strong> {{ $service->duration ?? '--'}} h</p>
 
-    <p class="detail">Description de la prestation : <strong>{{ $service->description ?? '--' }}</strong></p>
+    <p class="detail"><strong>Description de la prestation :</strong> {{ $service->description ?? '--' }}</p>
 
-    <p class="detail">Agent assigné : <strong>{{ ($agent?->agent_surname ?? '--') . " " . ($agent?->agent_name ?? '--')}}</strong></p>
+    <p class="detail"><strong>Agent assigné :</strong> {{ ($agent?->agent_surname ?? '--') . " " . ($agent?->agent_name ?? '--')}}</p>
 </div>
 
 <div class="associated_details">

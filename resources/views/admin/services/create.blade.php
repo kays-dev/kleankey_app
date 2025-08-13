@@ -16,6 +16,21 @@
 
     @csrf
     <div class="form_input_box">
+        <label for="owner" class="form_input_label">
+            Propriétaire concerné
+        </label>
+
+        <div class="input_box">
+            <select class="form_input" name="owner" id="owner">
+                <option value="" selected>-- Veuillez sélectionner une option --</option>
+                @foreach ($owners as $owner )
+                <option value="{{ $owner->owner_id }}">{{ $owner->owner_surname . ' ' . $owner->owner_name }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+
+    <div class="form_input_box">
         <label for="name" class="form_input_label">
             Intitulé de la prestation
         </label>

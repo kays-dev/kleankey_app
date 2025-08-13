@@ -108,21 +108,6 @@
         </div>
     </div>
 
-    <div class="form_input_box">
-        <label for="services[]" class="form_input_label">
-            Prestation.s
-        </label>
-
-        <div class="input_box">
-            <select class="form_input" name="services[]" id="services" multiple>
-                <option value="" selected>-- Veuillez sélectionner des options --</option>
-                @foreach ($services as $service)
-                <option value="{{ $service->service_id }}">{{ $service->service_name. " | " . $service->service_type}}</option>
-                @endforeach
-            </select>
-        </div>
-    </div>
-
     <button type="submit" class="form_submit">
         Ajouter le bien
     </button>
