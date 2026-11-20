@@ -68,7 +68,7 @@ Le projet a été mené de bout en bout : maquettage, modélisation MERISE (dict
 
 ## 👥 AUTEURE
 
-Développé par **Krystal Babel** ([@kays-dev](https://github.com/kays-dev)) dans le cadre de la formation Développeur Web et Web Mobile — SIMPLON.CO, 2025.
+Développé par **Krystal** ([@kays-dev](https://github.com/kays-dev)) dans le cadre de la formation Développeur Web et Web Mobile — SIMPLON.CO, 2025.
 
 ## 📜 LICENSE
 
